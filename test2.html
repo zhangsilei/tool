@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	<div>
+		<span>aaa</span>
+		<p>
+			<h6>
+				小标题
+			</h6>
+			<img src="./2.jpg" alt="">
+			<div>
+				<p>
+					<h6>
+						小标题
+					</h6>
+					<img src="./2.jpg" alt="">
+					<div>
+						<p>
+							<h6> 
+								小标题
+							</h6>
+							<img src="./2.jpg" alt=""> 
+							<div>
+								test
+							</div>
+						</p>
+					</div>
+				</p>
+			</div>
+		</p>
+		<span>ddd</span>
+		<span>ccc</span>
+		<span>bbb</span> 
+		<span>eee</span>
+		<span>fff</span>
+	</div>
+	<div>
+		<span>aaa</span>
+		<p>
+			<h6>
+				小标题
+			</h6>
+			<img src="./2.jpg" alt="">
+			<div>
+				<p>
+					<h6>
+						小标题
+					</h6>
+					<img src="./2.jpg" alt="">
+					<div>
+						<p>
+							<h6>
+								小标题
+							</h6>
+							<img src="./2.jpg" alt="">
+							<div>
+								test
+							</div>
+						</p>
+					</div>
+				</p>
+			</div>
+		</p>
+		<span>ddd</span>
+		<span>ccc</span>
+		<span>bbb</span>
+		<span>eee</span>
+		<span>fff</span>
+	</div>
+	<div>
+		<span>aaa</span>
+		<p>
+			<h6>
+				小标题
+			</h6>
+			<img src="./2.jpg" alt="">
+			<div>
+				<p>
+					<h6>
+						小标题
+					</h6>
+					<img src="./2.jpg" alt="">
+					<div>
+						<p>
+							<h6>
+								小标题
+							</h6>
+							<img src="./2.jpg" alt="">
+							<div>
+								test
+							</div>
+						</p>
+					</div>
+				</p>
+			</div>
+		</p>
+		<span>ddd</span>
+		<span>ccc</span>
+		<span>bbb</span>
+		<span>eee</span>
+		<span>fff</span>
+	</div>
+	<div>
+		<span>aaa</span>
+		<p>
+			<h6>
+				小标题
+			</h6>
+			<img src="./2.jpg" alt="">
+			<div>
+				<p>
+					<h6>
+						小标题
+					</h6>
+					<img src="./2.jpg" alt="">
+					<div>
+						<p>
+							<h6>
+								小标题
+							</h6>
+							<img src="./2.jpg" alt="">
+							<div>
+								test
+							</div>
+						</p>
+					</div>
+				</p>
+			</div>
+		</p>
+		<span>ddd</span>
+		<span>ccc</span>
+		<span>bbb</span>
+		<span>eee</span>
+		<span>fff</span>
+	</div>
+	<div>
+		<span>aaa</span>
+		<p>
+			<h6>
+				小标题
+			</h6>
+			<img src="./2.jpg" alt="">
+			<div>
+				<p>
+					<h6>
+						小标题
+					</h6>
+					<img src="./2.jpg" alt="">
+					<div>
+						<p>
+							<h6>
+								小标题
+							</h6>
+							<img src="./2.jpg" alt="">
+							<div>
+								test
+							</div>
+						</p>
+					</div>
+				</p>
+			</div>
+		</p>
+		<span>ddd</span> 
+		<span>ccc</span>
+		<span>bbb</span>
+		<span>eee</span>
+		<span>fff</span> 
+	</div>
+	<div>
+		<h3 class="d">this is title...</h3> 
+	</div>
+	<script type="text/javascript" src="./dep/jquery.js"></script>
+	<script> 
+		window.onload = function() {
+			var date = new Date();
+			var strat = date.getTime();
+			console.log(strat);
+			for (var i = 0; i < 100000; i++) {
+				var ele = $('.d');  
+			}
+			console.log(ele);  
+			var offset = new Date().getTime() - strat;
+			console.log('消耗时间：' + offset + 'ms');
+		}
+	</script>
+</body>
+</html>
