@@ -256,7 +256,7 @@
 		} else {
 			type == 'html' ? node.innerHTML = str : node.innerText = str;
 			return pack(node);
-		}
+		} 
 	}
 
 	/**
