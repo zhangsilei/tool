@@ -39,10 +39,10 @@ function ele(eleKey) {
     /**
      * 遍历查询节点   
      * @param  {String} queryKey  根据哪种方式查询节点：class/name/tag
-     * @return {ToolElement/ToolElements}  tool对象    
+     * @return {ToolElement}  tool对象    
      * @description 目前查询器的效率低于jQuery3~4倍左右(10w级的节点数查询)，暂时无优化思路。。瓶颈。。   
      */
-    function traverse(queryKey) {
+    function _traverse(queryKey) {
         var allEles = document.getElementsByTagName('*'),
             elesArr = [];
         for (var i = 0, len = allEles.length; i < len; i++) {
@@ -74,15 +74,15 @@ function ele(eleKey) {
 
         } else if (sign == '.') { //class 
 
-            return traverse('class');
+            return _traverse('class');
 
         } else if (sign == '~') { // name
 
-            return traverse('name');
+            return _traverse('name');
 
         } else { // tag 
 
-            return traverse('tag');
+            return _traverse('tag');
 
         }
     } else {
@@ -99,17 +99,11 @@ function ele(eleKey) {
 
 /**
  * 将原生节点封装成ToolElement
- * @param  {Element} node 原生节点
- * @return {ToolElement}      ToolElement对象
+ * @param  {Array} nodes 原生节点集，可以为空数组。
+ * @return {ToolElement} tool对象
  */
 function pack(nodes) {
-    // console.log(nodes)
-    // var toolElements = [];
-    // for (var i = 0, len = nodes.length; i < len; i++) {
-    //     toolElements.push(nodes[i]);
-    // }
     return new ToolElement(nodes);
-    // return new ToolElement(toolElements);
 }
 
 /**
@@ -138,7 +132,7 @@ function _appendChild(parent, str) {
  * @param  {Array} nodes 原生节点集
  * @return {Array/ToolElement}      get操作时返回字符串数组，set时返回tool对象
  */
-function htmlAndText(type, str, nodes) {
+function _htmlAndText(type, str, nodes) {
     var result = [];
     for (var i = 0, len = nodes.length; i < len; i++) {
         if (!str && str != '') {
@@ -158,7 +152,7 @@ function htmlAndText(type, str, nodes) {
  * @param  {Element} node 原生节点
  * @return {ToolElement}      tool对象
  */
-function beforeAndAfter(type, str, node) {
+function _beforeAndAfter(type, str, node) {
     var parent = node.parentNode,
         charStart = -1,
         charEnd = -1,
@@ -193,7 +187,7 @@ function beforeAndAfter(type, str, node) {
     }
 }
 
-function prevAndNext(type, nodes) {
+function _prevAndNext(type, nodes) {
     var result = [];
     for (var i = 0, len = nodes.length; i < len; i++) {
         var node = nodes[i];
@@ -209,19 +203,25 @@ function prevAndNext(type, nodes) {
 
 /*************************************************************
  *
- * toolElement节点
+ * toolElement节点对象封装 
  * 
  *************************************************************/
 
 /**
- * tool对象封装 
- * @param {Array} nodes 原生节点集
+ * toolElement节点对象封装 
+ * @param {Array} nodes 原生节点集，可以为空数组。
  * @description 所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
  *              若想获取原生节点集，只需toolElement.node即可。
- * @return {ToolElement} 将传入的节点数组包装成对象返回
+ * @return {ToolElement} tool对象
  */
 function ToolElement(nodes) {
+    // 原生节点集，可以为空数组。
     this.node = nodes;
+
+    // 根据索引获取原生节点
+    this.get = function(ind) {
+        return nodes[ind];
+    };
 
     //////////////// 遍历节点 ////////////////  
 
@@ -235,12 +235,12 @@ function ToolElement(nodes) {
 
     // 获取上一个节点
     this.prev = function() {
-        return prevAndNext('prev', nodes);
+        return _prevAndNext('prev', nodes);
     };
 
     // 获取下一个节点
     this.next = function() {
-        return prevAndNext('next', nodes);
+        return _prevAndNext('next', nodes);
     };
 
     // 获取指定节点
@@ -272,7 +272,7 @@ function ToolElement(nodes) {
      */
     this.before = function(str) {
         this.each(nodes, function(node) {
-            beforeAndAfter('before', str, node);
+            _beforeAndAfter('before', str, node);
         });
         return pack(nodes);
     };
@@ -284,7 +284,7 @@ function ToolElement(nodes) {
      */
     this.after = function(str) {
         this.each(nodes, function(node) {
-            beforeAndAfter('after', str, node);
+            _beforeAndAfter('after', str, node);
         });
         return pack(nodes);
     };
@@ -295,7 +295,7 @@ function ToolElement(nodes) {
      * @param  {String} [str] 要修改成的html
      */
     this.html = function(str) {
-        return htmlAndText('html', str, nodes);
+        return _htmlAndText('html', str, nodes);
     };
 
     /**
@@ -303,12 +303,8 @@ function ToolElement(nodes) {
      * @param  {String} [str] 要修改成的text
      */
     this.text = function(str) {
-        return htmlAndText('text', str, nodes);
+        return _htmlAndText('text', str, nodes);
     };
-}
-
-function ToolElements(toolEles) {
-    // this.
 }
 
 module.exports.ele = ele;

@@ -172,19 +172,22 @@
 	</div>
 	<div>
 		<h3 class="d">this is title...</h3> 
+		<h3 class="d">this is title...</h3> 
+		<h3 class="d">this is title...</h3> 
+		<h3 class="d">this is title...</h3> 
 	</div>
-	<script type="text/javascript" src="./dep/jquery.js"></script>
+	<script type="text/javascript" src="./jquery.js"></script>
 	<script> 
 		window.onload = function() {
-			var date = new Date();
-			var strat = date.getTime();
-			console.log(strat);
-			for (var i = 0; i < 100000; i++) {
-				var ele = $('.d');  
-			}
-			console.log(ele);  
-			var offset = new Date().getTime() - strat;
-			console.log('消耗时间：' + offset + 'ms');
+			// var date = new Date();
+			// var strat = date.getTime();
+			// for (var i = 0; i < 100000; i++) {
+			// 	var ele = $('.d').html();  
+			// }
+			// var offset = new Date().getTime() - strat;
+			// console.log('消耗时间：' + offset + 'ms');
+
+			console.log($('.d').eq(0));
 		}
 	</script>
 </body>
