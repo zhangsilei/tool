@@ -90,7 +90,7 @@ function ele(eleKey) {
         } else { // 节点
             return null;
         }
-    } else if(eleKey && typeof eleKey == 'object') {
+    } else if (eleKey && typeof eleKey == 'object') {
         return _pack(eleKey);
     }
 }
@@ -236,12 +236,15 @@ function ToolElement(nodes) {
     // 原生节点集，可以为空数组。
     this.node = nodes;
 
+    /************************************************************
+     * 节点相关操作
+     ***********************************************************/
+
     // 根据索引获取原生节点
     this.get = function(ind) {
         return nodes[ind];
     };
 
-    //////////////// 遍历节点 ////////////////  
     this.each = function(cb) {
         var nodes = this.node;
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -249,7 +252,6 @@ function ToolElement(nodes) {
         }
     };
 
-    //////////////// 获取节点 ////////////////  
     // 获取上一个节点
     this.prev = function() {
         return _prevAndNext('prev', nodes);
@@ -265,7 +267,6 @@ function ToolElement(nodes) {
         return _pack([nodes[ind]]);
     };
 
-    //////////////// 删除节点 //////////////// 
     // 删除当前节点 
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -279,7 +280,6 @@ function ToolElement(nodes) {
         return this.html('');
     };
 
-    //////////////// 增加节点 ////////////////
     /**
      * 在当前节点之前插入内容，支持生成自定义标签
      * @param {String} 插入的内容
@@ -304,7 +304,6 @@ function ToolElement(nodes) {
         return _pack(nodes);
     };
 
-    //////////////// 修改节点 ////////////////
     /**
      * 获取/修改当前节点的html
      * @param  {String} [str] 要修改成的html
@@ -319,6 +318,14 @@ function ToolElement(nodes) {
      */
     this.text = function(str) {
         return _htmlAndText('text', str, nodes);
+    };
+
+    /************************************************************
+     * 属性相关操作
+     ***********************************************************/
+
+    this.attr = function() {
+
     };
 }
 
