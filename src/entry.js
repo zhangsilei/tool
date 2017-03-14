@@ -7,16 +7,19 @@
 
 /*************************************************************
  *
- * 打包入口文件
+ * 打包入口文件，负责各个模块间的整合。
  * 
  *************************************************************/
 ;(function() {
 	var dom = require('./dom'),
 		util = require('./util');
-
-	// 创建tool对象，并挂载到全局下
-	window.tool = {
-		ele: dom.ele, // 注册DOM选择器  
-		trim: util.trim // 注册工具模块
-	}
+    // 将tool对象挂载到全局作用域下
+    window.$ = dom.ele; 
+    // 将工具方法挂载到tool对象下
+    dom.ToolElement.prototype.trim = util.trim;
+    // 创建tool对象，并挂载到全局下
+	// window.tool = {
+	// 	ele: dom.ele, // 注册DOM选择器  
+	// 	trim: util.trim // 注册工具模块
+	// }
 })();

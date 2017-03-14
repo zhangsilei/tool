@@ -5,6 +5,8 @@
  * 
  ***********************************************************/
 
+var util = require('./util');
+
 // 所有html标签    
 var htmlTagNames = [
     'a', 'abbr', 'acronym', 'address', 'applet', 'area', 'article', 'aside', 'audio',
@@ -60,33 +62,36 @@ function ele(eleKey) {
                 }
             }
         }
-        return pack(elesArr);
+        return _pack(elesArr);
     }
+    if (eleKey && typeof eleKey == 'string') {
+        if (util.trim(eleKey)) { // 选择器
+            var eleKeySub = eleKey.slice(1),
+                sign = eleKey[0];
 
-    if (eleKey) {
-        var eleKeySub = eleKey.slice(1),
-            sign = eleKey[0];
+            if (sign == '#') { // id
 
-        if (sign == '#') { // id
+                var result = document.getElementById(eleKeySub);
+                return result ? _pack([result]) : null;
 
-            var result = document.getElementById(eleKeySub);
-            return result ? pack([result]) : null;
+            } else if (sign == '.') { //class 
 
-        } else if (sign == '.') { //class 
+                return _traverse('class');
 
-            return _traverse('class');
+            } else if (sign == '~') { // name
 
-        } else if (sign == '~') { // name
+                return _traverse('name');
 
-            return _traverse('name');
+            } else { // tag 
 
-        } else { // tag 
+                return _traverse('tag');
 
-            return _traverse('tag');
-
+            }
+        } else { // 节点
+            return null;
         }
-    } else {
-        return null;
+    } else if(eleKey && typeof eleKey == 'object') {
+        return _pack(eleKey);
     }
 }
 
@@ -102,8 +107,12 @@ function ele(eleKey) {
  * @param  {Array} nodes 原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
  */
-function pack(nodes) {
-    return new ToolElement(nodes);
+function _pack(nodes) {
+    if (typeof nodes == 'object' && nodes instanceof Array) {
+        return new ToolElement(nodes);
+    } else {
+        console.warn('_pack()方法入参必须为数组');
+    }
 }
 
 /**
@@ -142,7 +151,7 @@ function _htmlAndText(type, str, nodes) {
             result.push(nodes[i]);
         }
     }
-    return (typeof result[0] == 'object') ? pack(result) : result; // 是节点才包装成对象 
+    return (typeof result[0] == 'object') ? _pack(result) : result; // 是节点才包装成对象 
 }
 
 /**
@@ -156,34 +165,42 @@ function _beforeAndAfter(type, str, node) {
     var parent = node.parentNode,
         charStart = -1,
         charEnd = -1,
-        nextNode = pack([node]).next();
-    if (str.indexOf('<') != -1 && str.indexOf('>') != -1) { // str is a text
-        for (var i = 0, len = str.length; i < len; i++) {
-            var tempChar = str[i];
-            if (tempChar == '<') {
-                // create newText    
-                type == 'before' ? _insertBefore(parent, str.slice(0, i), node) : !nextNode ? _appendChild(parent, str.slice(0, i)) : _insertBefore(parent, str.slice(0, i), nextNode.node[0]);
-                charStart = i;
-            } else if (tempChar == '>') {
-                charEnd = i;
-                // create newNode        
-                var tagName = str.slice(charStart + 1, charEnd),
-                    tagEnd = str.indexOf('</' + tagName + '>'),
-                    newNode = document.createElement(tagName);
-                newNode.innerHTML = str.slice(charEnd + 1, tagEnd);
-                type == 'before' ? parent.insertBefore(newNode, node) : !nextNode ? parent.appendChild(newNode) : parent.insertBefore(newNode, nextNode.node[0]);
-                // reset str
-                str = str.slice(tagEnd + tagName.length + 3, str.length);
-                i = 0;
-                len = str.length;
-                // create last newText    
-                if (str.indexOf('<') == -1) {
-                    type == 'before' ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
+        nextNode = _pack([node]).next();
+    if (!str && typeof str == 'undefined') {
+        return;
+    } else {
+        if (util.trim(str) == '') {
+            return;
+        } else {
+            if (str.indexOf('<') != -1 && str.indexOf('>') != -1) { // str is a text
+                for (var i = 0, len = str.length; i < len; i++) {
+                    var tempChar = str[i];
+                    if (tempChar == '<') {
+                        // create newText    
+                        type == 'before' ? _insertBefore(parent, str.slice(0, i), node) : !nextNode ? _appendChild(parent, str.slice(0, i)) : _insertBefore(parent, str.slice(0, i), nextNode.node[0]);
+                        charStart = i;
+                    } else if (tempChar == '>') {
+                        charEnd = i;
+                        // create newNode        
+                        var tagName = str.slice(charStart + 1, charEnd),
+                            tagEnd = str.indexOf('</' + tagName + '>'),
+                            newNode = document.createElement(tagName);
+                        newNode.innerHTML = str.slice(charEnd + 1, tagEnd);
+                        type == 'before' ? parent.insertBefore(newNode, node) : !nextNode ? parent.appendChild(newNode) : parent.insertBefore(newNode, nextNode.node[0]);
+                        // reset str
+                        str = str.slice(tagEnd + tagName.length + 3, str.length);
+                        i = 0;
+                        len = str.length;
+                        // create last newText    
+                        if (str.indexOf('<') == -1) {
+                            type == 'before' ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
+                        }
+                    }
                 }
+            } else { // str has tag
+                type == 'before' ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
             }
         }
-    } else { // str has tag
-        type == 'before' ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
     }
 }
 
@@ -198,20 +215,21 @@ function _prevAndNext(type, nodes) {
             }
         }
     }
-    return pack(result);
+    return _pack(result);
 }
 
 /*************************************************************
  *
- * toolElement节点对象封装 
+ * ToolElement节点对象封装 
  * 
  *************************************************************/
 
 /**
- * toolElement节点对象封装 
+ * ToolElement节点对象封装 
  * @param {Array} nodes 原生节点集，可以为空数组。
  * @description 所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
  *              若想获取原生节点集，只需toolElement.node即可。
+ *              若想获取某个原生节点，只需toolElement.get(ind)即可。
  * @return {ToolElement} tool对象
  */
 function ToolElement(nodes) {
@@ -224,15 +242,14 @@ function ToolElement(nodes) {
     };
 
     //////////////// 遍历节点 ////////////////  
-
-    this.each = function(nodes, callback) {
+    this.each = function(cb) {
+        var nodes = this.node;
         for (var i = 0, len = nodes.length; i < len; i++) {
-            callback(nodes[i]);
+            cb.call(nodes[i], i, nodes[i]);
         }
     };
 
     //////////////// 获取节点 ////////////////  
-
     // 获取上一个节点
     this.prev = function() {
         return _prevAndNext('prev', nodes);
@@ -244,12 +261,11 @@ function ToolElement(nodes) {
     };
 
     // 获取指定节点
-    this.eq = function() {
-
+    this.eq = function(ind) {
+        return _pack([nodes[ind]]);
     };
 
     //////////////// 删除节点 //////////////// 
-
     // 删除当前节点 
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -264,17 +280,16 @@ function ToolElement(nodes) {
     };
 
     //////////////// 增加节点 ////////////////
-
     /**
      * 在当前节点之前插入内容，支持生成自定义标签
      * @param {String} 插入的内容
      * @return {ToolElement} ToolElement对象
      */
     this.before = function(str) {
-        this.each(nodes, function(node) {
+        this.each(function(ind, node) {
             _beforeAndAfter('before', str, node);
         });
-        return pack(nodes);
+        return _pack(nodes);
     };
 
     /**
@@ -283,10 +298,10 @@ function ToolElement(nodes) {
      * @return {ToolElement}     ToolElement对象 
      */
     this.after = function(str) {
-        this.each(nodes, function(node) {
+        this.each(function(ind, node) {
             _beforeAndAfter('after', str, node);
         });
-        return pack(nodes);
+        return _pack(nodes);
     };
 
     //////////////// 修改节点 ////////////////
@@ -308,3 +323,4 @@ function ToolElement(nodes) {
 }
 
 module.exports.ele = ele;
+module.exports.ToolElement = ToolElement;

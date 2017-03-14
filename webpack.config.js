@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-    entry: './src/core.js',
+    entry: './src/entry.js',
     output: {
         path: './dist',
         filename: 'tool.js'

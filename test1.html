@@ -180,7 +180,7 @@
         <p id="a">wow!!</p>
     </div>
     <script src="./dist/tool.js"></script>
-    <script src="./jquery.js"></script>
+    <!-- <script src="./jquery.js"></script> -->
     <script>
     window.onload = function() {
         // var date = new Date();
@@ -190,11 +190,10 @@
         // }
         // var offset = new Date().getTime() - strat;
         // console.log('消耗时间：' + offset + 'ms');
-
-        var ele = tool.ele('.h');
-        var $ele = $('.d');
-        console.log(ele.empty(), 'tool');
-        // console.log($ele.remove(), 'jq');
+        var ele = $('.d').eq(0);
+        // var $ele = $('.d');
+        console.log(ele, 'tool');
+        // console.log($ele.before('aaa'), 'jq');
     }
     </script>
 </body>
