@@ -175,11 +175,11 @@
     <div>
         <span class="h">hello</span>
         <h3 class="d">this is title...</h3>
-        <h3 class="d">this is title...</h3>
+        <h3 class="d">this is title...</h3> 
         <h3 class="d">this is title...</h3>
         <p id="a">wow!!</p>
     </div>
-    <script src="./dist/tool.js"></script>
+    <script src="../dist/tool.js"></script>
     <!-- <script src="./jquery.js"></script> -->
     <script>
     window.onload = function() {
@@ -190,10 +190,12 @@
         // }
         // var offset = new Date().getTime() - strat;
         // console.log('消耗时间：' + offset + 'ms');
-        var ele = $('.d');
+        // var ele = $('.d');
         // var $ele = $('.d');
         // $ele.attr('name', 'zsl');
-        console.log($.dateFormat('yyyy-MM'));
+        $.setCookie('name', 'zsl');
+        $.setCookie('name', null);
+        console.log($.getCookie('name'));
         // $ele.each(function(ind, value) {
         //     $(this).attr('name', 'zsl' + ind);
         // })

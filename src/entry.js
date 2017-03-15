@@ -12,18 +12,18 @@
  *************************************************************/
 ;
 (function() {
-	var dom = require('./dom'),
-		util = require('./util'),
-		ToolElement = dom.ToolElement;
-	// 将选择器挂载到全局变量$下
+	var dom = require('./dom');
+	var util = require('./util');
+	var storage = require('./storage');
+	// 选择器
 	window.$ = dom.ele;
-	// 将工具方法挂载到全局变量$下
+	// 工具方法
 	window.$.trim = util.trim;
 	window.$.dateFormat = util.dateFormat;
-
-	// 创建tool对象，并挂载到全局下
-	// window.tool = {
-	// 	ele: dom.ele, // 注册DOM选择器  
-	// 	trim: util.trim // 注册工具模块
-	// }
+	window.$.getQueryString = util.getQueryString;
+	window.$.validate = util.validate;
+	window.$.browserVersion = util.browserVersion;
+	// 本地存储
+	window.$.getCookie = storage.getCookie;
+	window.$.setCookie = storage.setCookie;
 })();
