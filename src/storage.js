@@ -13,10 +13,10 @@ var storage = {
     getCookie: function(cname) {
         var cvalue = "",
             cookies = document.cookie;
-        if (cookies.length > 0) { // 有cookie
+        if (cookies.length > 0) {
             var search = cname + "=",
                 start = cookies.indexOf(search);
-            if (start != -1) { // 有名字为cname的cookie
+            if (start != -1) {
                 start += search.length;
                 var end = cookies.indexOf(";", start);
                 if (end == -1) {
@@ -41,5 +41,7 @@ var storage = {
     }
 }
 
-module.exports.getCookie = storage.getCookie;
-module.exports.setCookie = storage.setCookie;
+module.exports = {
+    getCookie: storage.getCookie,
+    setCookie: storage.setCookie
+};

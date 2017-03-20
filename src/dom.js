@@ -329,5 +329,7 @@ function ToolElement(nodes) {
     };
 }
 
-module.exports.ele = ele;
-module.exports.ToolElement = ToolElement;
+module.exports = {
+    ele: ele,
+    ToolElement: ToolElement
+};

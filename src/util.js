@@ -15,13 +15,13 @@ function trim(str) {
 
 /**
  * 时间格式化
- * @param  {String} dateType  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
+ * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
  * @param  {number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description dateType可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description format可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
  */
-function dateFormat(dateType, timestamp) {
-	if (dateType && typeof dateType == 'string') {
+function dateFormat(format, timestamp) {
+	if (format && typeof format == 'string') {
 		var date = timestamp && typeof timestamp == 'number' ? new Date(timestamp) : new Date(),
 			year = date.getFullYear(),
 			month = date.getMonth() + 1,
@@ -29,26 +29,26 @@ function dateFormat(dateType, timestamp) {
 			hour = date.getHours(),
 			min = date.getMinutes(),
 			sec = date.getSeconds();
-		if (dateType.match(/y{4}/g)) { // 年
-			dateType = dateType.replace(/y{4}/g, year);
+		if (format.match(/y{4}/g)) { // 年
+			format = format.replace(/y{4}/g, year);
 		}
-		if (dateType.match(/M{2}/g)) { // 月
-			dateType = dateType.replace(/M{2}/g, month < 10 ? '0' + month : month);
+		if (format.match(/M{2}/g)) { // 月
+			format = format.replace(/M{2}/g, month < 10 ? '0' + month : month);
 		}
-		if (dateType.match(/d{2}/g)) { // 日
-			dateType = dateType.replace(/d{2}/g, day < 10 ? '0' + day : day);
+		if (format.match(/d{2}/g)) { // 日
+			format = format.replace(/d{2}/g, day < 10 ? '0' + day : day);
 		}
-		if (dateType.match(/H{2}/g)) { // 时
-			dateType = dateType.replace(/H{2}/g, hour < 10 ? '0' + hour : hour);
+		if (format.match(/H{2}/g)) { // 时
+			format = format.replace(/H{2}/g, hour < 10 ? '0' + hour : hour);
 		}
-		if (dateType.match(/m{2}/g)) { // 分
-			dateType = dateType.replace(/m{2}/g, min < 10 ? '0' + min : min);
+		if (format.match(/m{2}/g)) { // 分
+			format = format.replace(/m{2}/g, min < 10 ? '0' + min : min);
 		}
-		if (dateType.match(/s{2}/g)) { // 秒
-			dateType = dateType.replace(/s{2}/g, sec < 10 ? '0' + sec : sec);
+		if (format.match(/s{2}/g)) { // 秒
+			format = format.replace(/s{2}/g, sec < 10 ? '0' + sec : sec);
 		}
 	}
-	return dateType;
+	return format;
 }
 
 
@@ -106,14 +106,18 @@ var browser = {
 			android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
 			iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
 			iPad: u.indexOf('iPad') > -1, //是否iPad
-			webApp: u.indexOf('Safari') == -1 //是否web应用程序，没有头部与底部
+			webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
+			wechat: u.match(/MicroMessenger/i), // 是否微信打开
+			alipay: u.match(/AliApp/i) // 是否支付宝打开
 		};
 	}(),
 	language: (navigator.browserLanguage || navigator.language).toLowerCase()
 };
 
-module.exports.trim = trim;
-module.exports.dateFormat = dateFormat;
-module.exports.getQueryString = getQueryString;
-module.exports.validate = validate;
-module.exports.browserVersion = browser.versions;
+module.exports = {
+	trim: trim,
+	dateFormat: dateFormat,
+	getQueryString: getQueryString,
+	validate: validate,
+	browserVersion: browser.versions
+};
