@@ -29,20 +29,19 @@
     - `after(str) => str: html字符串` 在当前节点后插入新节点
     - `html([str]) => str: html字符串` 获取/设置当前节点html
     - `text([str]) => str: 字符串` 获取/设置当前节点文本内容
-    
-    **工具方法**  
-    a. 本地存储：  
-  		- `getCookie(key) => key: cookie的键` 获取cookie  
-  		- `setCookie(key, val, expires) => key: 键 , val: 值 , expires: 存活时间` 设置cookie
-  	b. 日期：  
-  		- `dateFormat(format, timestamp) => format: 格式字符串 , timestamp: 时间戳` 格式化日期 (yyyy＝年，MM＝月，dd＝日，HH＝时，mm＝分，ss＝秒)  
-  	c. 字符串：
-  		- `trim(str) => str: 字符串` 去空格
-  	d. 浏览器：
-  		- `getQueryString(name) => name: 参数名` 获取地址栏参数
-  		- `browserVersion.name => name: trident=IE内核 , presto=opera内核 , webKit=苹果、谷歌内核 , gecko=火狐内核 , mobile=移动终端 , ios=ios终端 , android=android终端或者uc浏览器 , iPhone=iPhone或者QQHD浏览器 , iPad=iPad终端 , webApp=web应用程序 , wechat=微信 , alipay=支付宝 ` 判断终端类型
-  	e. 数据校验：
-  		- `validate.name => name: input=只有中文、数字、字母和下划线，且位置不限 , mobile=手机号 , code(n)=n位数字验证码 , email=邮箱`
+     
+    **本地存储**：  
+  	- `getCookie(key) => key: cookie的键` 获取cookie  
+  	- `setCookie(key, val, expires) => key: 键 , val: 值 , expires: 存活时间` 设置cookie
+  	**日期**：  
+  	- `dateFormat(format, timestamp) => format: 格式字符串 , timestamp: 时间戳` 格式化日期 (yyyy＝年，MM＝月，dd＝日，HH＝时，mm＝分，ss＝秒)  
+  	**字符串**：
+  	- `trim(str) => str: 字符串` 去空格
+  	**浏览器**：
+  	- `getQueryString(name) => name: 参数名` 获取地址栏参数
+  	- `browserVersion.name => name: trident=IE内核 , presto=opera内核 , webKit=苹果、谷歌内核 , gecko=火狐内核 , mobile=移动终端 , ios=ios终端 , android=android终端或者uc浏览器 , iPhone=iPhone或者QQHD浏览器 , iPad=iPad终端 , webApp=web应用程序 , wechat=微信 , alipay=支付宝 ` 判断终端类型
+  	**数据校验**：
+  	- `validate.name => name: input=只有中文、数字、字母和下划线，且位置不限 , mobile=手机号 , code(n)=n位数字验证码 , email=邮箱`
 
 ### 二、使用说明
 
@@ -50,8 +49,12 @@
 
 2. 引入 tool.js  
     ```
-    <script src="/path/tool.js"></script> 
-    ```  
+    <script src="/path/tool.js"></script>  
+    或  
+    <script src="/path/tool.min.js"></script>
+    ```    
+    
+3. 当已经引入jQuery时，使用tool代替$命名空间
     
     
     
