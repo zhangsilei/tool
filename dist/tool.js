@@ -68,16 +68,19 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /*************************************************************
  *
  * 工具方法模块
  * 
  *************************************************************/
 
+
+
 /**
- * 过滤空格
+ * 过滤空格 added
  * @param  {String} str 要过滤的字符串
  * @return {String}     过滤后的字符串
  */
@@ -86,14 +89,14 @@ function trim(str) {
 }
 
 /**
- * 时间格式化
- * @param  {String} dateType  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
+ * 时间格式化 added
+ * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
  * @param  {number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description dateType可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description format可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
  */
-function dateFormat(dateType, timestamp) {
-	if (dateType && typeof dateType == 'string') {
+function dateFormat(format, timestamp) {
+	if (format && typeof format == 'string') {
 		var date = timestamp && typeof timestamp == 'number' ? new Date(timestamp) : new Date(),
 			year = date.getFullYear(),
 			month = date.getMonth() + 1,
@@ -101,31 +104,31 @@ function dateFormat(dateType, timestamp) {
 			hour = date.getHours(),
 			min = date.getMinutes(),
 			sec = date.getSeconds();
-		if (dateType.match(/y{4}/g)) { // 年
-			dateType = dateType.replace(/y{4}/g, year);
+		if (format.match(/y{4}/g)) { // 年
+			format = format.replace(/y{4}/g, year);
 		}
-		if (dateType.match(/M{2}/g)) { // 月
-			dateType = dateType.replace(/M{2}/g, month < 10 ? '0' + month : month);
+		if (format.match(/M{2}/g)) { // 月
+			format = format.replace(/M{2}/g, month < 10 ? '0' + month : month);
 		}
-		if (dateType.match(/d{2}/g)) { // 日
-			dateType = dateType.replace(/d{2}/g, day < 10 ? '0' + day : day);
+		if (format.match(/d{2}/g)) { // 日
+			format = format.replace(/d{2}/g, day < 10 ? '0' + day : day);
 		}
-		if (dateType.match(/H{2}/g)) { // 时
-			dateType = dateType.replace(/H{2}/g, hour < 10 ? '0' + hour : hour);
+		if (format.match(/H{2}/g)) { // 时
+			format = format.replace(/H{2}/g, hour < 10 ? '0' + hour : hour);
 		}
-		if (dateType.match(/m{2}/g)) { // 分
-			dateType = dateType.replace(/m{2}/g, min < 10 ? '0' + min : min);
+		if (format.match(/m{2}/g)) { // 分
+			format = format.replace(/m{2}/g, min < 10 ? '0' + min : min);
 		}
-		if (dateType.match(/s{2}/g)) { // 秒
-			dateType = dateType.replace(/s{2}/g, sec < 10 ? '0' + sec : sec);
+		if (format.match(/s{2}/g)) { // 秒
+			format = format.replace(/s{2}/g, sec < 10 ? '0' + sec : sec);
 		}
 	}
-	return dateType;
+	return format;
 }
 
 
 /**
- * 获取请求url的参数
+ * 获取请求url的参数  added
  * @param {String} name URL后缀的参数名
  */
 function getQueryString(name) {
@@ -138,7 +141,7 @@ function getQueryString(name) {
 }
 
 /**
- * 数据校验，验证数据的合法性
+ * 数据校验，验证数据的合法性  added
  * @return {Boolean} 是否合法
  */
 var validate = {
@@ -161,7 +164,7 @@ var validate = {
 }
 
 /**
- * 判断终端的类型
+ * 判断终端的类型  added
  * @return {boolean} 选定终端类型的布尔值
  * @description 调用方式：browser.versions.webKit
  */
@@ -178,28 +181,35 @@ var browser = {
 			android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
 			iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
 			iPad: u.indexOf('iPad') > -1, //是否iPad
-			webApp: u.indexOf('Safari') == -1 //是否web应用程序，没有头部与底部
+			webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
+			wechat: u.match(/MicroMessenger/i), // 是否微信打开
+			alipay: u.match(/AliApp/i) // 是否支付宝打开
 		};
 	}(),
 	language: (navigator.browserLanguage || navigator.language).toLowerCase()
 };
 
-module.exports.trim = trim;
-module.exports.dateFormat = dateFormat;
-module.exports.getQueryString = getQueryString;
-module.exports.validate = validate;
-module.exports.browserVersion = browser.versions;
+module.exports = {
+	trim: trim,
+	dateFormat: dateFormat,
+	getQueryString: getQueryString,
+	validate: validate,
+	browserVersion: browser.versions
+};
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /************************************************************
  *
  * 节点选择器，tool.js的入口方法
  * 该方法关注DOM查询，并将查询到的结果包装成tool对象并返回。
  * 
  ***********************************************************/
+
+
 
 var util = __webpack_require__(0);
 
@@ -429,14 +439,14 @@ function _prevAndNext(type, nodes) {
  * @return {ToolElement} tool对象
  */
 function ToolElement(nodes) {
-    // 原生节点集，可以为空数组。
+    // 原生节点集，可以为空数组。  added
     this.node = nodes;
 
     /************************************************************
      * 节点相关操作
      ***********************************************************/
 
-    // 根据索引获取原生节点
+    // 根据索引获取原生节点  added
     this.get = function(ind) {
         return nodes[ind];
     };
@@ -448,22 +458,22 @@ function ToolElement(nodes) {
         }
     };
 
-    // 获取上一个节点
+    // 获取上一个节点  added
     this.prev = function() {
         return _prevAndNext('prev', nodes);
     };
 
-    // 获取下一个节点
+    // 获取下一个节点  added
     this.next = function() {
         return _prevAndNext('next', nodes);
     };
 
-    // 获取指定节点
+    // 获取指定节点  added
     this.eq = function(ind) {
         return _pack([nodes[ind]]);
     };
 
-    // 删除当前节点 
+    // 删除当前节点  added
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
             var node = nodes[i];
@@ -471,13 +481,13 @@ function ToolElement(nodes) {
         }
     };
 
-    // 清空当前节点
+    // 清空当前节点  added
     this.empty = function() {
         return this.html('');
     };
 
     /**
-     * 在当前节点之前插入内容，支持生成自定义标签
+     * 在当前节点之前插入内容，支持生成自定义标签  added
      * @param {String} 插入的内容
      * @return {ToolElement} ToolElement对象
      */
@@ -489,7 +499,7 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 在当前节点之后插入内容，支持生成自定义标签
+     * 在当前节点之后插入内容，支持生成自定义标签  added
      * @param  {String} str 插入的内容   
      * @return {ToolElement}     ToolElement对象 
      */
@@ -525,18 +535,23 @@ function ToolElement(nodes) {
     };
 }
 
-module.exports.ele = ele;
-module.exports.ToolElement = ToolElement;
+module.exports = {
+    ele: ele,
+    ToolElement: ToolElement
+};
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 /*************************************************************
  *
  * 本地存储模块
  * 
  *************************************************************/
+
+
 
 var storage = {
     /**
@@ -547,10 +562,10 @@ var storage = {
     getCookie: function(cname) {
         var cvalue = "",
             cookies = document.cookie;
-        if (cookies.length > 0) { // 有cookie
+        if (cookies.length > 0) {
             var search = cname + "=",
                 start = cookies.indexOf(search);
-            if (start != -1) { // 有名字为cname的cookie
+            if (start != -1) {
                 start += search.length;
                 var end = cookies.indexOf(";", start);
                 if (end == -1) {
@@ -575,13 +590,16 @@ var storage = {
     }
 }
 
-module.exports.getCookie = storage.getCookie;
-module.exports.setCookie = storage.setCookie;
+module.exports = {
+    getCookie: storage.getCookie,
+    setCookie: storage.setCookie
+};
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 // tool.js是个关注DOM的框架，不过度封装，旨在提高性能效率
 // 模块间可以相互调用，以提高效率，但这样的话就要保证每个模块的正确性。
 // 写完before就先写那些好封装的方法如：attr，text。。
@@ -594,23 +612,32 @@ module.exports.setCookie = storage.setCookie;
  * 打包入口文件，负责各个模块间的整合。
  * 
  *************************************************************/
-;
-(function() {
+
+
+
+(function(w) {
 	var dom = __webpack_require__(1);
 	var util = __webpack_require__(0);
 	var storage = __webpack_require__(2);
-	// 选择器
-	window.$ = dom.ele;
+
+	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
+
+	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
+
+	// 选择器 
+	w[spaceName] = dom.ele;
+
 	// 工具方法
-	window.$.trim = util.trim;
-	window.$.dateFormat = util.dateFormat;
-	window.$.getQueryString = util.getQueryString;
-	window.$.validate = util.validate;
-	window.$.browserVersion = util.browserVersion;
+	w[spaceName].trim = util.trim;
+	w[spaceName].dateFormat = util.dateFormat;
+	w[spaceName].getQueryString = util.getQueryString;
+	w[spaceName].validate = util.validate;
+	w[spaceName].browserVersion = util.browserVersion;
+
 	// 本地存储
-	window.$.getCookie = storage.getCookie;
-	window.$.setCookie = storage.setCookie;
-})();
+	w[spaceName].getCookie = storage.getCookie;
+	w[spaceName].setCookie = storage.setCookie;
+})(window);
 
 /***/ })
 /******/ ]);

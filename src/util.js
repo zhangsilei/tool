@@ -4,8 +4,10 @@
  * 
  *************************************************************/
 
+'use strict';
+
 /**
- * 过滤空格
+ * 过滤空格 added
  * @param  {String} str 要过滤的字符串
  * @return {String}     过滤后的字符串
  */
@@ -14,7 +16,7 @@ function trim(str) {
 }
 
 /**
- * 时间格式化
+ * 时间格式化 added
  * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
  * @param  {number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
@@ -53,7 +55,7 @@ function dateFormat(format, timestamp) {
 
 
 /**
- * 获取请求url的参数
+ * 获取请求url的参数  added
  * @param {String} name URL后缀的参数名
  */
 function getQueryString(name) {
@@ -66,7 +68,7 @@ function getQueryString(name) {
 }
 
 /**
- * 数据校验，验证数据的合法性
+ * 数据校验，验证数据的合法性  added
  * @return {Boolean} 是否合法
  */
 var validate = {
@@ -89,7 +91,7 @@ var validate = {
 }
 
 /**
- * 判断终端的类型
+ * 判断终端的类型  added
  * @return {boolean} 选定终端类型的布尔值
  * @description 调用方式：browser.versions.webKit
  */

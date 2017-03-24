@@ -5,6 +5,8 @@
  * 
  ***********************************************************/
 
+'use strict';
+
 var util = require('./util');
 
 // 所有html标签    
@@ -233,14 +235,14 @@ function _prevAndNext(type, nodes) {
  * @return {ToolElement} tool对象
  */
 function ToolElement(nodes) {
-    // 原生节点集，可以为空数组。
+    // 原生节点集，可以为空数组。  added
     this.node = nodes;
 
     /************************************************************
      * 节点相关操作
      ***********************************************************/
 
-    // 根据索引获取原生节点
+    // 根据索引获取原生节点  added
     this.get = function(ind) {
         return nodes[ind];
     };
@@ -252,22 +254,22 @@ function ToolElement(nodes) {
         }
     };
 
-    // 获取上一个节点
+    // 获取上一个节点  added
     this.prev = function() {
         return _prevAndNext('prev', nodes);
     };
 
-    // 获取下一个节点
+    // 获取下一个节点  added
     this.next = function() {
         return _prevAndNext('next', nodes);
     };
 
-    // 获取指定节点
+    // 获取指定节点  added
     this.eq = function(ind) {
         return _pack([nodes[ind]]);
     };
 
-    // 删除当前节点 
+    // 删除当前节点  added
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
             var node = nodes[i];
@@ -275,13 +277,13 @@ function ToolElement(nodes) {
         }
     };
 
-    // 清空当前节点
+    // 清空当前节点  added
     this.empty = function() {
         return this.html('');
     };
 
     /**
-     * 在当前节点之前插入内容，支持生成自定义标签
+     * 在当前节点之前插入内容，支持生成自定义标签  added
      * @param {String} 插入的内容
      * @return {ToolElement} ToolElement对象
      */
@@ -293,7 +295,7 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 在当前节点之后插入内容，支持生成自定义标签
+     * 在当前节点之后插入内容，支持生成自定义标签  added
      * @param  {String} str 插入的内容   
      * @return {ToolElement}     ToolElement对象 
      */

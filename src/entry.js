@@ -10,20 +10,29 @@
  * 打包入口文件，负责各个模块间的整合。
  * 
  *************************************************************/
-;
-(function() {
+
+'use strict';
+
+(function(w) {
 	var dom = require('./dom');
 	var util = require('./util');
 	var storage = require('./storage');
-	// 选择器
-	window.$ = dom.ele;
+
+	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
+
+	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
+
+	// 选择器 
+	w[spaceName] = dom.ele;
+
 	// 工具方法
-	window.$.trim = util.trim;
-	window.$.dateFormat = util.dateFormat;
-	window.$.getQueryString = util.getQueryString;
-	window.$.validate = util.validate;
-	window.$.browserVersion = util.browserVersion;
+	w[spaceName].trim = util.trim;
+	w[spaceName].dateFormat = util.dateFormat;
+	w[spaceName].getQueryString = util.getQueryString;
+	w[spaceName].validate = util.validate;
+	w[spaceName].browserVersion = util.browserVersion;
+
 	// 本地存储
-	window.$.getCookie = storage.getCookie;
-	window.$.setCookie = storage.setCookie;
-})();
+	w[spaceName].getCookie = storage.getCookie;
+	w[spaceName].setCookie = storage.setCookie;
+})(window);

@@ -180,9 +180,9 @@
         <p id="a">wow!!</p>
     </div>
     <script src="../dist/tool.js"></script>
-    <!-- <script src="./jquery.js"></script> -->
+    <!-- <script src="./jquery.js"></script> -->  
     <script>
-    window.onload = function() {
+    window.onload = function() { 
         // var date = new Date();
         // var strat = date.getTime();
         // for (var i = 0; i < 100000; i++) {
@@ -190,14 +190,10 @@
         // }
         // var offset = new Date().getTime() - strat;
         // console.log('消耗时间：' + offset + 'ms');
-        // var ele = $('.d');
+        var $ele = $('.h');
         // var $ele = $('.d');
         // $ele.attr('name', 'zsl');
-        // $ele.each(function(ind, value) {
-        //     $(this).attr('name', 'zsl' + ind);
-        // })
-        // console.log($ele);
-        console.log($('.h'));
+        $ele.before('<div>ddd</div>');
     }
     </script>
 </body>
