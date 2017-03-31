@@ -26,7 +26,7 @@
         return t.d(n, "a", n), n
     }, t.o = function(e, t) {
         return Object.prototype.hasOwnProperty.call(e, t)
-    }, t.p = "", t(t.s = 5)
+    }, t.p = "", t(t.s = 6)
 }([function(e, t, n) {
     "use strict";
 
@@ -61,6 +61,36 @@
         dateFormat: r,
         validate: o
     }
+}, function(e, t, n) {
+    "use strict";
+    var r = {
+        init: function() {
+            this.resetPrototype()
+        },
+        resetPrototype: function() {
+            Array.prototype.deleteOf = function(e) {
+                var t = this[e];
+                return this.splice(e, 1), t
+            }, Array.prototype.deleteVal = function(e) {
+                for (var t = 0, n = this.length; t < n; t++) {
+                    var r = this[t];
+                    if (r == e) return this.deleteOf(t)
+                }
+            }, Array.prototype.addOf = function(e, t) {
+                return this.splice(e, 0, t).length, this.length
+            }, Array.prototype.replace = function(e, t, n) {
+                for (var r = [], o = 0, n = n || this.length, i = 0, a = this.length; i < a; i++) {
+                    var u = this[i];
+                    o < n ? r.push(u == e ? t : u) : r.push(u), o++
+                }
+                return r
+            }, Array.prototype.removeRepeat = function(e, t) {
+                for (var n = 0, r = 0, o = this.length; n < o; n++)
+                    for (; r < o; r++) this[r] == this[n]
+            }
+        }
+    };
+    r.init(), e.exports.array = r
 }, function(e, t, n) {
     "use strict";
     var r = {
@@ -102,14 +132,14 @@
             for (var r = document.getElementsByTagName("*"), i = [], a = 0, u = r.length; a < u; a++) {
                 var c = r[a];
                 if ("class" == t || "name" == t) {
-                    var f = c.getAttribute(t);
-                    f && String(f).indexOf(n) != -1 && (i[i.length] = c)
+                    var s = c.getAttribute(t);
+                    s && String(s).indexOf(n) != -1 && (i[i.length] = c)
                 } else "tag" == t && c.nodeName == e.toUpperCase() && (i[i.length] = c)
             }
             return o(i)
         }
         if (e && "string" == typeof e) {
-            if (g.trim(e)) {
+            if (l.trim(e)) {
                 var n = e.slice(1),
                     r = e[0];
                 if ("#" == r) {
@@ -124,7 +154,7 @@
     }
 
     function o(e) {
-        return "object" == typeof e && e instanceof Array ? new s(e) : void console.warn("_pack()方法入参必须为数组")
+        return "object" == typeof e && e instanceof Array ? new f(e) : void console.warn("_pack()方法入参必须为数组")
     }
 
     function i(e, t, n) {
@@ -144,23 +174,23 @@
         var r = n.parentNode,
             u = -1,
             c = -1,
-            f = o([n]).next();
-        if ((t || "undefined" != typeof t) && "" != g.trim(t))
+            s = o([n]).next();
+        if ((t || "undefined" != typeof t) && "" != l.trim(t))
             if (t.indexOf("<") != -1 && t.indexOf(">") != -1)
-                for (var s = 0, l = t.length; s < l; s++) {
-                    var d = t[s];
-                    if ("<" == d) "before" == e ? i(r, t.slice(0, s), n) : f ? i(r, t.slice(0, s), f.node[0]) : a(r, t.slice(0, s)), u = s;
-                    else if (">" == d) {
-                        c = s;
+                for (var f = 0, g = t.length; f < g; f++) {
+                    var h = t[f];
+                    if ("<" == h) "before" == e ? i(r, t.slice(0, f), n) : s ? i(r, t.slice(0, f), s.node[0]) : a(r, t.slice(0, f)), u = f;
+                    else if (">" == h) {
+                        c = f;
                         var p = t.slice(u + 1, c),
-                            h = t.indexOf("</" + p + ">"),
+                            d = t.indexOf("</" + p + ">"),
                             m = document.createElement(p);
-                        m.innerHTML = t.slice(c + 1, h), "before" == e ? r.insertBefore(m, n) : f ? r.insertBefore(m, f.node[0]) : r.appendChild(m), t = t.slice(h + p.length + 3, t.length), s = 0, l = t.length, t.indexOf("<") == -1 && ("before" == e ? i(r, t, n) : f ? i(r, t, f.node[0]) : a(r, t))
+                        m.innerHTML = t.slice(c + 1, d), "before" == e ? r.insertBefore(m, n) : s ? r.insertBefore(m, s.node[0]) : r.appendChild(m), t = t.slice(d + p.length + 3, t.length), f = 0, g = t.length, t.indexOf("<") == -1 && ("before" == e ? i(r, t, n) : s ? i(r, t, s.node[0]) : a(r, t))
                     }
-                } else "before" == e ? i(r, t, n) : f ? i(r, t, f.node[0]) : a(r, t)
+                } else "before" == e ? i(r, t, n) : s ? i(r, t, s.node[0]) : a(r, t)
     }
 
-    function f(e, t) {
+    function s(e, t) {
         for (var n = [], r = 0, i = t.length; r < i; r++)
             for (var a = t[r]; a = "prev" == e ? a.previousSibling : a.nextSibling;)
                 if (1 == a.nodeType) {
@@ -170,15 +200,15 @@
         return o(n)
     }
 
-    function s(e) {
+    function f(e) {
         this.node = e, this.get = function(t) {
             return e[t]
         }, this.each = function(e) {
             for (var t = this.node, n = 0, r = t.length; n < r; n++) e.call(t[n], n, t[n])
         }, this.prev = function() {
-            return f("prev", e)
+            return s("prev", e)
         }, this.next = function() {
-            return f("next", e)
+            return s("next", e)
         }, this.eq = function(t) {
             return o([e[t]])
         }, this.remove = function() {
@@ -202,10 +232,10 @@
             return u("text", t, e)
         }, this.attr = function() {}
     }
-    var g = n(0);
+    var l = n(0);
     e.exports = {
         ele: r,
-        ToolElement: s
+        ToolElement: f
     }
 }, function(e, t, n) {
     "use strict";
@@ -278,12 +308,12 @@
 }, function(e, t, n) {
     "use strict";
     ! function(e) {
-        var t = n(2),
+        var t = n(3),
             r = n(0),
-            o = n(3),
-            i = n(4),
-            a = n(1),
-            u = "undefined" == typeof e.$ ? "$" : "tool";
+            o = n(4),
+            i = n(5),
+            a = n(2),
+            u = (n(1), "undefined" == typeof e.$ ? "$" : "tool");
         "tool" == u && console.warn("window.$命名空间已被使用，请用tool代替..."), e[u] = t.ele, e[u].dateFormat = r.dateFormat, e[u].validate = r.validate, e[u].getCookie = o.getCookie, e[u].setCookie = o.setCookie, e[u].getStorage = o.getStorage, e[u].setStorage = o.setStorage, e[u].removeStorage = o.removeStorage, e[u].clearStorage = o.clearStorage, e[u].trim = i.trim, e[u].browserVersion = a.browserVersion, e[u].getQueryString = a.getQueryString
     }(window)
 }]);

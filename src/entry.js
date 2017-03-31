@@ -17,6 +17,7 @@
 	var storage = require('./storage');
 	var string = require('./string');
 	var bom = require('./bom');
+	var array = require('./array');
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 

@@ -4,10 +4,12 @@ module.exports = {
     entry: './src/entry.js',
     output: {
         path: './dist',
-        filename: 'tool.js'
+        filename: 'tool.min.js'
     },
     plugins: [
         // 暂时没找到自动生成min.js的方法，所以只能手动生成两个文件
-        new webpack.optimize.UglifyJsPlugin({minimize: true})
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true
+        })
     ]
 }
