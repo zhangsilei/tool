@@ -26,48 +26,45 @@
         return t.d(n, "a", n), n
     }, t.o = function(e, t) {
         return Object.prototype.hasOwnProperty.call(e, t)
-    }, t.p = "", t(t.s = 3)
+    }, t.p = "", t(t.s = 5)
 }([function(e, t, n) {
     "use strict";
 
-    function r(e) {
-        return e.replace(/(^\s*)|(\s*$)/g, "")
-    }
-
-    function o(e, t) {
+    function r(e, t) {
         if (e && "string" == typeof e) {
             var n = t && "number" == typeof t ? new Date(t) : new Date,
                 r = n.getFullYear(),
                 o = n.getMonth() + 1,
                 i = n.getDate(),
                 a = n.getHours(),
-                c = n.getMinutes(),
-                u = n.getSeconds();
-            e.match(/y{4}/g) && (e = e.replace(/y{4}/g, r)), e.match(/M{2}/g) && (e = e.replace(/M{2}/g, o < 10 ? "0" + o : o)), e.match(/d{2}/g) && (e = e.replace(/d{2}/g, i < 10 ? "0" + i : i)), e.match(/H{2}/g) && (e = e.replace(/H{2}/g, a < 10 ? "0" + a : a)), e.match(/m{2}/g) && (e = e.replace(/m{2}/g, c < 10 ? "0" + c : c)), e.match(/s{2}/g) && (e = e.replace(/s{2}/g, u < 10 ? "0" + u : u))
+                u = n.getMinutes(),
+                c = n.getSeconds();
+            e.match(/y{4}/g) && (e = e.replace(/y{4}/g, r)), e.match(/M{2}/g) && (e = e.replace(/M{2}/g, o < 10 ? "0" + o : o)), e.match(/d{2}/g) && (e = e.replace(/d{2}/g, i < 10 ? "0" + i : i)), e.match(/H{2}/g) && (e = e.replace(/H{2}/g, a < 10 ? "0" + a : a)), e.match(/m{2}/g) && (e = e.replace(/m{2}/g, u < 10 ? "0" + u : u)), e.match(/s{2}/g) && (e = e.replace(/s{2}/g, c < 10 ? "0" + c : c))
         }
         return e
     }
-
-    function i(e) {
-        var t = new RegExp("(^|&)" + e + "=([^&]*)(&|$)"),
-            n = window.location.search.substr(1).match(t);
-        return null != n ? n[2] : null
-    }
-    var a = {
-            input: function(e) {
-                return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(e)
-            },
-            mobile: function(e) {
-                return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(e)
-            },
-            code: function(e, t) {
-                return t && "number" == typeof t ? new RegExp("^\\d{" + t + "}$").test(e) : /^\d{4}$/.test(e)
-            },
-            email: function(e) {
-                return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(e)
-            }
+    var o = {
+        input: function(e) {
+            return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(e)
         },
-        c = {
+        mobile: function(e) {
+            return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(e)
+        },
+        code: function(e, t) {
+            return t && "number" == typeof t ? new RegExp("^\\d{" + t + "}$").test(e) : /^\d{4}$/.test(e)
+        },
+        email: function(e) {
+            return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(e)
+        }
+    };
+    e.exports = {
+        dateFormat: r,
+        validate: o
+    }
+}, function(e, t, n) {
+    "use strict";
+    var r = {
+        browser: {
             versions: function() {
                 var e = navigator.userAgent;
                 return {
@@ -81,30 +78,33 @@
                     iPhone: e.indexOf("iPhone") > -1,
                     iPad: e.indexOf("iPad") > -1,
                     webApp: e.indexOf("Safari") == -1,
-                    wechat: e.match(/MicroMessenger/i),
-                    alipay: e.match(/AliApp/i)
+                    wechat: !!e.match(/MicroMessenger/i),
+                    alipay: !!e.match(/AliApp/i)
                 }
             }(),
             language: (navigator.browserLanguage || navigator.language).toLowerCase()
-        };
+        },
+        getQueryString: function(e) {
+            var t = new RegExp("(^|&)" + e + "=([^&]*)(&|$)"),
+                n = window.location.search.substr(1).match(t);
+            return null != n ? n[2] : null
+        }
+    };
     e.exports = {
-        trim: r,
-        dateFormat: o,
-        getQueryString: i,
-        validate: a,
-        browserVersion: c.versions
+        browserVersion: r.browser.versions,
+        getQueryString: r.getQueryString
     }
 }, function(e, t, n) {
     "use strict";
 
     function r(e) {
         function t(t) {
-            for (var r = document.getElementsByTagName("*"), i = [], a = 0, c = r.length; a < c; a++) {
-                var u = r[a];
+            for (var r = document.getElementsByTagName("*"), i = [], a = 0, u = r.length; a < u; a++) {
+                var c = r[a];
                 if ("class" == t || "name" == t) {
-                    var f = u.getAttribute(t);
-                    f && String(f).indexOf(n) != -1 && (i[i.length] = u)
-                } else "tag" == t && u.nodeName == e.toUpperCase() && (i[i.length] = u)
+                    var f = c.getAttribute(t);
+                    f && String(f).indexOf(n) != -1 && (i[i.length] = c)
+                } else "tag" == t && c.nodeName == e.toUpperCase() && (i[i.length] = c)
             }
             return o(i)
         }
@@ -135,27 +135,27 @@
         e.appendChild(document.createTextNode(t))
     }
 
-    function c(e, t, n) {
+    function u(e, t, n) {
         for (var r = [], i = 0, a = n.length; i < a; i++) t || "" == t ? ("html" == e ? n[i].innerHTML = t : n[i].innerText = t, r.push(n[i])) : r[r.length] = "html" == e ? n[i].innerHTML : n[i].innerText;
         return "object" == typeof r[0] ? o(r) : r
     }
 
-    function u(e, t, n) {
+    function c(e, t, n) {
         var r = n.parentNode,
-            c = -1,
             u = -1,
+            c = -1,
             f = o([n]).next();
         if ((t || "undefined" != typeof t) && "" != g.trim(t))
             if (t.indexOf("<") != -1 && t.indexOf(">") != -1)
                 for (var s = 0, l = t.length; s < l; s++) {
                     var d = t[s];
-                    if ("<" == d) "before" == e ? i(r, t.slice(0, s), n) : f ? i(r, t.slice(0, s), f.node[0]) : a(r, t.slice(0, s)), c = s;
+                    if ("<" == d) "before" == e ? i(r, t.slice(0, s), n) : f ? i(r, t.slice(0, s), f.node[0]) : a(r, t.slice(0, s)), u = s;
                     else if (">" == d) {
-                        u = s;
-                        var h = t.slice(c + 1, u),
-                            p = t.indexOf("</" + h + ">"),
-                            m = document.createElement(h);
-                        m.innerHTML = t.slice(u + 1, p), "before" == e ? r.insertBefore(m, n) : f ? r.insertBefore(m, f.node[0]) : r.appendChild(m), t = t.slice(p + h.length + 3, t.length), s = 0, l = t.length, t.indexOf("<") == -1 && ("before" == e ? i(r, t, n) : f ? i(r, t, f.node[0]) : a(r, t))
+                        c = s;
+                        var p = t.slice(u + 1, c),
+                            h = t.indexOf("</" + p + ">"),
+                            m = document.createElement(p);
+                        m.innerHTML = t.slice(c + 1, h), "before" == e ? r.insertBefore(m, n) : f ? r.insertBefore(m, f.node[0]) : r.appendChild(m), t = t.slice(h + p.length + 3, t.length), s = 0, l = t.length, t.indexOf("<") == -1 && ("before" == e ? i(r, t, n) : f ? i(r, t, f.node[0]) : a(r, t))
                     }
                 } else "before" == e ? i(r, t, n) : f ? i(r, t, f.node[0]) : a(r, t)
     }
@@ -190,16 +190,16 @@
             return this.html("")
         }, this.before = function(t) {
             return this.each(function(e, n) {
-                u("before", t, n)
+                c("before", t, n)
             }), o(e)
         }, this.after = function(t) {
             return this.each(function(e, n) {
-                u("after", t, n)
+                c("after", t, n)
             }), o(e)
         }, this.html = function(t) {
-            return c("html", t, e)
+            return u("html", t, e)
         }, this.text = function(t) {
-            return c("text", t, e)
+            return u("text", t, e)
         }, this.attr = function() {}
     }
     var g = n(0);
@@ -267,11 +267,23 @@
     }
 }, function(e, t, n) {
     "use strict";
+    var r = {
+        trim: function(e) {
+            return e.replace(/(^\s*)|(\s*$)/g, "")
+        }
+    };
+    e.exports = {
+        trim: r.trim
+    }
+}, function(e, t, n) {
+    "use strict";
     ! function(e) {
-        var t = n(1),
+        var t = n(2),
             r = n(0),
-            o = n(2),
-            i = "undefined" == typeof e.$ ? "$" : "tool";
-        "tool" == i && console.warn("window.$命名空间已被使用，请用tool代替..."), e[i] = t.ele, e[i].trim = r.trim, e[i].dateFormat = r.dateFormat, e[i].getQueryString = r.getQueryString, e[i].validate = r.validate, e[i].browserVersion = r.browserVersion, e[i].getCookie = o.getCookie, e[i].setCookie = o.setCookie, e[i].getStorage = o.getStorage, e[i].setStorage = o.setStorage, e[i].removeStorage = o.removeStorage, e[i].clearStorage = o.clearStorage
+            o = n(3),
+            i = n(4),
+            a = n(1),
+            u = "undefined" == typeof e.$ ? "$" : "tool";
+        "tool" == u && console.warn("window.$命名空间已被使用，请用tool代替..."), e[u] = t.ele, e[u].dateFormat = r.dateFormat, e[u].validate = r.validate, e[u].getCookie = o.getCookie, e[u].setCookie = o.setCookie, e[u].getStorage = o.getStorage, e[u].setStorage = o.setStorage, e[u].removeStorage = o.removeStorage, e[u].clearStorage = o.clearStorage, e[u].trim = i.trim, e[u].browserVersion = a.browserVersion, e[u].getQueryString = a.getQueryString
     }(window)
 }]);

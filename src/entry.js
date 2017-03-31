@@ -15,6 +15,8 @@
 	var dom = require('./dom');
 	var util = require('./util');
 	var storage = require('./storage');
+	var string = require('./string');
+	var bom = require('./bom');
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 
@@ -24,11 +26,8 @@
 	w[spaceName] = dom.ele;
 
 	// 工具方法
-	w[spaceName].trim = util.trim;
 	w[spaceName].dateFormat = util.dateFormat;
-	w[spaceName].getQueryString = util.getQueryString;
 	w[spaceName].validate = util.validate;
-	w[spaceName].browserVersion = util.browserVersion;
 
 	// 本地存储
 	w[spaceName].getCookie = storage.getCookie;
@@ -37,4 +36,11 @@
 	w[spaceName].setStorage = storage.setStorage;
 	w[spaceName].removeStorage = storage.removeStorage;
 	w[spaceName].clearStorage = storage.clearStorage;
+
+	// 字符串处理
+	w[spaceName].trim = string.trim;
+
+	// 浏览器处理
+	w[spaceName].browserVersion = bom.browserVersion;
+	w[spaceName].getQueryString = bom.getQueryString;
 })(window);
