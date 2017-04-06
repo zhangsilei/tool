@@ -18,6 +18,7 @@
 	var string = require('./string');
 	var bom = require('./bom');
 	var array = require('./array');
+	var test = require('./test');
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 
@@ -44,4 +45,7 @@
 	// 浏览器处理
 	w[spaceName].browserVersion = bom.browserVersion;
 	w[spaceName].getQueryString = bom.getQueryString;
+
+	// 测试中的代码
+	w[spaceName].test = test;
 })(window);

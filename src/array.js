@@ -8,6 +8,7 @@
 'use strict';
 
 var string = require('./string');
+var test = require('./test');
 
 var array = {
     init: function() {
@@ -98,8 +99,9 @@ var array = {
          * 该方法不改变原数组
          * @param  {Number} ind   从第几个重复元素开始删除
          * @param  {Number} [num] 删除的元素数量，默认全部删除
+         * @beta 暂时未开放，测试中有问题。
          */
-        Array.prototype.removeDuplicate = function(ind, num) {
+        Array.prototype.removeDuplicate = function(num) {
             var obj = {},
                 count = 0,
                 indexs = [],
@@ -119,6 +121,7 @@ var array = {
                     count++;
                 }
             }
+            return this;
         };
 
         /**
@@ -152,12 +155,14 @@ var array = {
 function _trim(num, str, that) {
     var count = 0, // 去除的空串数
         result = [],
+        isStr = false,
         num = num || that.length;
+    if (typeof str == 'string') {
+        isStr = true;
+    }
     for (var i = 0, len = that.length; i < len; i++) {
-        var temp = that[i],
-            val = str == null ? str : string.trim(str);
-        console.log(val)
-        if (val != str) {
+        var temp = that[i];
+        if (isStr ? string.trim(temp) : temp != str) {
             result.push(temp);
         } else {
             if (count < num) {
@@ -171,5 +176,9 @@ function _trim(num, str, that) {
 }
 
 array.init();
+test.init([{
+    targetObj: 'Array',
+    funcName: 'removeDuplicate'
+}]);
 
 module.exports.array = array;

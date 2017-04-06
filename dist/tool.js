@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
+
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -46,7 +46,7 @@
 /******/ 			});
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -55,19 +55,47 @@
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-/******/
+
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*************************************************************
+ *
+ * 字符串处理模块
+ * 
+ *************************************************************/
+
+
+
+var string = {
+	/**
+	 * 过滤空格 added
+	 * @param  {String} str 要过滤的字符串
+	 * @return {String}     过滤后的字符串
+	 */
+	trim: function(str) {
+		return str.replace(/(^\s*)|(\s*$)/g, "");
+	}
+}
+
+module.exports = {
+	trim: string.trim
+}
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -146,7 +174,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -159,7 +187,8 @@ module.exports = {
 
 
 
-var string = __webpack_require__(5);
+var string = __webpack_require__(0);
+var test = __webpack_require__(7);
 
 var array = {
     init: function() {
@@ -250,8 +279,9 @@ var array = {
          * 该方法不改变原数组
          * @param  {Number} ind   从第几个重复元素开始删除
          * @param  {Number} [num] 删除的元素数量，默认全部删除
+         * @beta 暂时未开放，测试中有问题。
          */
-        Array.prototype.removeDuplicate = function(ind, num) {
+        Array.prototype.removeDuplicate = function(num) {
             var obj = {},
                 count = 0,
                 indexs = [],
@@ -271,6 +301,7 @@ var array = {
                     count++;
                 }
             }
+            return this;
         };
 
         /**
@@ -304,12 +335,14 @@ var array = {
 function _trim(num, str, that) {
     var count = 0, // 去除的空串数
         result = [],
+        isStr = false,
         num = num || that.length;
+    if (typeof str == 'string') {
+        isStr = true;
+    }
     for (var i = 0, len = that.length; i < len; i++) {
-        var temp = that[i],
-            val = str == null ? str : string.trim(str);
-        console.log(val)
-        if (val != str) {
+        var temp = that[i];
+        if (isStr ? string.trim(temp) : temp != str) {
             result.push(temp);
         } else {
             if (count < num) {
@@ -323,11 +356,15 @@ function _trim(num, str, that) {
 }
 
 array.init();
+test.init([{
+    targetObj: 'Array',
+    funcName: 'removeDuplicate'
+}]);
 
 module.exports.array = array;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -386,7 +423,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -399,7 +436,7 @@ module.exports = {
 
 
 
-var util = __webpack_require__(0);
+var util = __webpack_require__(1);
 
 // 所有html标签    
 var htmlTagNames = [
@@ -729,7 +766,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -846,34 +883,6 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*************************************************************
- *
- * 字符串处理模块
- * 
- *************************************************************/
-
-
-
-var string = {
-	/**
-	 * 过滤空格 added
-	 * @param  {String} str 要过滤的字符串
-	 * @return {String}     过滤后的字符串
-	 */
-	trim: function(str) {
-		return str.replace(/(^\s*)|(\s*$)/g, "");
-	}
-}
-
-module.exports = {
-	trim: string.trim
-}
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -892,12 +901,13 @@ module.exports = {
 
 
 (function(w) {
-	var dom = __webpack_require__(3);
-	var util = __webpack_require__(0);
-	var storage = __webpack_require__(4);
-	var string = __webpack_require__(5);
-	var bom = __webpack_require__(2);
-	var array = __webpack_require__(1);
+	var dom = __webpack_require__(4);
+	var util = __webpack_require__(1);
+	var storage = __webpack_require__(5);
+	var string = __webpack_require__(0);
+	var bom = __webpack_require__(3);
+	var array = __webpack_require__(2);
+	var test = __webpack_require__(7);
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 
@@ -924,7 +934,43 @@ module.exports = {
 	// 浏览器处理
 	w[spaceName].browserVersion = bom.browserVersion;
 	w[spaceName].getQueryString = bom.getQueryString;
+
+	// 测试中的代码
+	w[spaceName].test = test;
 })(window);
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var test = {
+    queue: [],
+    init: function(objs) {
+        for (var i = 0, len = objs.length; i < len; i++) {
+            var temp = objs[i];
+            this.pushInQueue(temp);
+        }
+    },
+    pushInQueue: function(obj) {
+        var targetObj = obj.targetObj,
+            funcName = obj.funcName;
+
+    },
+    deleteUnit: function(obj) {
+        var targetObj = obj.targetObj,
+            funcName = obj.funcName;
+        switch (targetObj.toLowerCase()) {
+            case 'array':
+                delete Array.prototype[funcName];
+                break;
+        }
+    }
+}
+
+module.exports = test;
 
 /***/ })
 /******/ ]);
