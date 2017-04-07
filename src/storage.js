@@ -10,9 +10,10 @@ var ls = window.localStorage;
 
 var storage = {
     /**
-     * 读取Cookie
+     * @function $.getCookie()
      * @param  {String} cname Cookie的key
      * @return {String} Cookie的value
+     * @description 读取Cookie
      */
     getCookie: function(cname) {
         var cvalue = "",
@@ -33,10 +34,11 @@ var storage = {
     },
 
     /**
-     * 写入Cookie   
+     * @function $.setCookie()
      * @param {String} cname  Cookie的key
      * @param {String} cvalue Cookie的value
      * @param {String} days   Cookie的存活天数
+     * @description 写入Cookie
      */
     setCookie: function(cname, cvalue, days) {
         var date = new Date();
@@ -46,9 +48,10 @@ var storage = {
     },
 
     /**
-     * 获取本地存储中对应的值
+     * @function $.getStorage()
      * @param  {String} key 本地数据的key
      * @return {String}     本地数据的value
+     * @description 获取本地存储中对应的值
      */
     getStorage: function(key) {
         var val = '';
@@ -59,9 +62,10 @@ var storage = {
     },
 
     /**
-     * 设置本地存储数据
+     * @function $.setStorage()
      * @param {String} key 本地数据的key
      * @param {String} val 本地数据的value   
+     * @description 设置本地存储数据
      */
     setStorage: function(key, val) {
         _checkStorageSupport(function() {
@@ -70,8 +74,9 @@ var storage = {
     },
 
     /**
-     * 移除指定的本地数据
+     * @function $.removeStorage()
      * @param  {String} key 本地数据的key
+     * @description 移除指定的本地数据
      */
     removeStorage: function(key) {
         _checkStorageSupport(function() {
@@ -80,7 +85,8 @@ var storage = {
     },
 
     /**
-     * 清除本地存储的所有数据      
+     * @function $.clearStorage()
+     * @description 清除本地存储的所有数据      
      */
     clearStorage: function() {
         _checkStorageSupport(function() {
@@ -89,7 +95,7 @@ var storage = {
     }
 }
 
-/**
+/***
  * 监测浏览器是否支持localStorage
  * @param  {Function} func 普通方法
  */

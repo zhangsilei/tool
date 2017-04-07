@@ -1,7 +1,8 @@
 /*************************************************************
  *
  * 数组处理模块
- * 为了考虑调用方便和代码整洁性，会在原生JavaScript上修改原型链
+ * 为了考虑调用方便和代码整洁性，会在原生JavaScript上添加原型链方法
+ * 直接用数组调用即可
  * 
  *************************************************************/
 
@@ -10,6 +11,10 @@
 var string = require('./string');
 var test = require('./test');
 
+/**
+ * @mixin
+ * 数组处理模块
+ */
 var array = {
     init: function() {
         this.addPrototype();
@@ -20,10 +25,10 @@ var array = {
      */
     addPrototype: function() {
         /**
-         * 删除并返回数组的指定位置元素
-         * 该方法直接改变原数组
+         * @function deleteOf
          * @param  {Number} ind 数组元素索引
          * @return {any}        被删除的数组元素
+         * @description 删除并返回数组的指定位置元素，该方法直接改变原数组
          */
         Array.prototype.deleteOf = function(ind) {
             var deleted = this[ind];
@@ -32,11 +37,11 @@ var array = {
         };
 
         /**
-         * 删除并返数组的指定值元素
-         * 该方法直接改变原数组
+         * @function deleteVal
          * @param  {any}    val   数组元素的值
          * @param  {Number} [num] 删除的元素个数，默认全部删除
          * @return {any}          被删除的数组元素
+         * @description 删除并返数组的指定值元素，该方法直接改变原数组
          */
         Array.prototype.deleteVal = function(val, num) {
             var count = 0,
@@ -58,11 +63,11 @@ var array = {
         };
 
         /**
-         * 向数组中的指定位置插入元素，并返回新的长度
-         * 该方法直接改变原数组
+         * @function pushOf
          * @param {Number} ind 索引值
          * @param {Number} val 元素值
          * @return {Number} 新数组长度
+         * @description 向数组中的指定位置插入元素，并返回新的长度。该方法直接改变原数组
          */
         Array.prototype.pushOf = function(ind, val) {
             this.splice(ind, 0, val).length;
@@ -70,11 +75,12 @@ var array = {
         };
 
         /**
-         * 替换数组中指定值的元素，并返回新数组
-         * 该方法不会改变原数组
+         * @function replace
          * @param  {any}    val    本元素值 
          * @param  {any}    newVal 新元素值
          * @param  {Number} [num]  替换的元素个数，默认替换全部
+         * @return {Array} 新数组
+         * @description 替换数组中指定值的元素，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.replace = function(val, newVal, num) {
             var result = [],
@@ -95,11 +101,11 @@ var array = {
         };
 
         /**
-         * 数组去重，并返回新数组
-         * 该方法不改变原数组
+         * @function removeDuplicate
          * @param  {Number} ind   从第几个重复元素开始删除
          * @param  {Number} [num] 删除的元素数量，默认全部删除
-         * @beta 暂时未开放，测试中有问题。
+         * @description 数组去重，并返回新数组。该方法不改变原数组
+         *              暂时未开放，测试中有问题。xxxxxxxxx
          */
         Array.prototype.removeDuplicate = function(num) {
             var obj = {},
@@ -125,20 +131,20 @@ var array = {
         };
 
         /**
-         * 数组去空串，并返回新数组 
-         * 该方法不会改变原数组
+         * @function trim
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
+         * @description 数组去空串，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.trim = function(num) {
             return _trim(num, '', this);
         };
 
         /**
-         * 数组去null值，并返回新数组 
-         * 该方法不会改变原数组
+         * @function removeNull
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
+         * @description 数组去null值，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.removeNull = function(num) {
             return _trim(num, null, this);
@@ -146,7 +152,7 @@ var array = {
     }
 }
 
-/**
+/***
  * 数组去空串/null值，并返回新数组 
  * 该方法不会改变原数组
  * @param  {Number} [num] 删除的空串数量
@@ -176,6 +182,7 @@ function _trim(num, str, that) {
 }
 
 array.init();
+// 添加测试中的方法
 test.init([{
     targetObj: 'Array',
     funcName: 'removeDuplicate'

@@ -18,14 +18,13 @@
 	var string = require('./string');
 	var bom = require('./bom');
 	var array = require('./array');
-	var test = require('./test');
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 
 	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
 
 	// 选择器 
-	w[spaceName] = dom.ele;
+	// w[spaceName] = dom.ele;
 
 	// 工具方法
 	w[spaceName].dateFormat = util.dateFormat;
@@ -45,7 +44,4 @@
 	// 浏览器处理
 	w[spaceName].browserVersion = bom.browserVersion;
 	w[spaceName].getQueryString = bom.getQueryString;
-
-	// 测试中的代码
-	w[spaceName].test = test;
 })(window);

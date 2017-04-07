@@ -192,11 +192,11 @@
         // console.log('消耗时间：' + offset + 'ms');
         // var $ele = $('.d');''
         // $ele.attr('name', 'zsl');
-        var arr = ['a', 'b', 'c', 'e', 'd', 'e', 'd'];
-        // arr.splice(0, 1);
+        var arr = ['a', 'b', undefined, 'd', 'e', undefined];
+        var newArr = arr.removeNull(1);
         // var d = arr.replace('a', 'pp');
         // var dd = arr.removeDuplicate();
-        // console.log(dd)
+        console.log(newArr)
     }
     </script>
 </body>

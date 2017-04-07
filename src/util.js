@@ -7,11 +7,11 @@
 'use strict';
 
 /**
- * 时间格式化 added
+ * @function $.dateFormat()
  * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
  * @param  {number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description format可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description 时间格式化，format可以随意组合。例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
  */
 function dateFormat(format, timestamp) {
 	if (format && typeof format == 'string') {
@@ -45,8 +45,9 @@ function dateFormat(format, timestamp) {
 }
 
 /**
- * 数据校验，验证数据的合法性  added
+ * @function $.validate.key
  * @return {Boolean} 是否合法
+ * @description 数据校验，验证数据的合法性
  */
 var validate = {
 	input: function(str) { // 输入框

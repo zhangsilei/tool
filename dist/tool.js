@@ -63,11 +63,200 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*************************************************************
+ *
+ * 浏览器模块
+ * 
+ *************************************************************/
+
+
+
+/**
+ * @mixin 浏览器模块
+ */
+var bom = {
+    /**
+     * @member browserVersion
+     * @return {boolean} 选定终端类型的布尔值
+     * @description 判断终端的类型，调用方式：$.browserVersion.key\n
+     *              trident: IE内核
+     *              
+     */
+    browser: {
+        versions: function() {
+            var u = navigator.userAgent;
+            return {
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
+                wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
+                alipay: !!u.match(/AliApp/i) // 是否支付宝打开
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    },
+
+    /**
+     * @function getQueryString
+     * @param {String} name URL后缀的参数名
+     * @return {String} 对应的值
+     * @description 获取请求url的参数
+     */
+    getQueryString: function(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        // if (r != null) return unescape(r[2]);
+        // return null;
+        if (r != null) return r[2];
+        return null;
+    }
+}
+
+module.exports = {
+    browserVersion: bom.browser.versions,
+    getQueryString: bom.getQueryString
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*************************************************************
+ *
+ * 本地存储模块
+ * 
+ *************************************************************/
+
+
+
+var ls = window.localStorage;
+
+var storage = {
+    /**
+     * @function $.getCookie()
+     * @param  {String} cname Cookie的key
+     * @return {String} Cookie的value
+     * @description 读取Cookie
+     */
+    getCookie: function(cname) {
+        var cvalue = "",
+            cookies = document.cookie;
+        if (cookies.length > 0) {
+            var search = cname + "=",
+                start = cookies.indexOf(search);
+            if (start != -1) {
+                start += search.length;
+                var end = cookies.indexOf(";", start);
+                if (end == -1) {
+                    end = cookies.length;
+                }
+                cvalue = unescape(cookies.substring(start, end));
+            }
+        }
+        return cvalue;
+    },
+
+    /**
+     * @function $.setCookie()
+     * @param {String} cname  Cookie的key
+     * @param {String} cvalue Cookie的value
+     * @param {String} days   Cookie的存活天数
+     * @description 写入Cookie
+     */
+    setCookie: function(cname, cvalue, days) {
+        var date = new Date();
+        date.setDate(date.getDate() + days);
+        var exdate = "; expires=" + date.toGMTString();
+        document.cookie = cname + "=" + escape(cvalue) + exdate;
+    },
+
+    /**
+     * @function $.getStorage()
+     * @param  {String} key 本地数据的key
+     * @return {String}     本地数据的value
+     * @description 获取本地存储中对应的值
+     */
+    getStorage: function(key) {
+        var val = '';
+        _checkStorageSupport(function() {
+            val = ls.getItem(key);
+        });
+        return val;
+    },
+
+    /**
+     * @function $.setStorage()
+     * @param {String} key 本地数据的key
+     * @param {String} val 本地数据的value   
+     * @description 设置本地存储数据
+     */
+    setStorage: function(key, val) {
+        _checkStorageSupport(function() {
+            ls.setItem(key, val);
+        });
+    },
+
+    /**
+     * @function $.removeStorage()
+     * @param  {String} key 本地数据的key
+     * @description 移除指定的本地数据
+     */
+    removeStorage: function(key) {
+        _checkStorageSupport(function() {
+            ls.removeItem(key);
+        });
+    },
+
+    /**
+     * @function $.clearStorage()
+     * @description 清除本地存储的所有数据      
+     */
+    clearStorage: function() {
+        _checkStorageSupport(function() {
+            ls.clear();
+        });
+    }
+}
+
+/***
+ * 监测浏览器是否支持localStorage
+ * @param  {Function} func 普通方法
+ */
+function _checkStorageSupport(func) {
+    if (!ls) {
+        alert('浏览器不支持localStorage！或者开启了隐私模式！');
+    } else {
+        func();
+    }
+}
+
+module.exports = {
+    getCookie: storage.getCookie,
+    setCookie: storage.setCookie,
+    getStorage: storage.getStorage,
+    setStorage: storage.setStorage,
+    removeStorage: storage.removeStorage,
+    clearStorage: storage.clearStorage
+};
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80,22 +269,23 @@
 
 
 var string = {
-	/**
-	 * 过滤空格 added
-	 * @param  {String} str 要过滤的字符串
-	 * @return {String}     过滤后的字符串
-	 */
-	trim: function(str) {
-		return str.replace(/(^\s*)|(\s*$)/g, "");
-	}
+    /**
+     * @function $.trim()
+     * @param  {String} str 要过滤的字符串
+     * @return {String}     过滤后的字符串
+     * @description 过滤空格
+     */
+    trim: function(str) {
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
 }
 
 module.exports = {
-	trim: string.trim
+    trim: string.trim
 }
 
 /***/ }),
-/* 1 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -108,11 +298,11 @@ module.exports = {
 
 
 /**
- * 时间格式化 added
+ * @function $.dateFormat()
  * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
  * @param  {number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description format可以随意组合，例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description 时间格式化，format可以随意组合。例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
  */
 function dateFormat(format, timestamp) {
 	if (format && typeof format == 'string') {
@@ -146,8 +336,9 @@ function dateFormat(format, timestamp) {
 }
 
 /**
- * 数据校验，验证数据的合法性  added
+ * @function $.validate.key
  * @return {Boolean} 是否合法
+ * @description 数据校验，验证数据的合法性
  */
 var validate = {
 	input: function(str) { // 输入框
@@ -174,22 +365,80 @@ module.exports = {
 };
 
 /***/ }),
-/* 2 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// tool.js是个关注DOM的框架，不过度封装，旨在提高性能效率
+// 模块间可以相互调用，以提高效率，但这样的话就要保证每个模块的正确性。
+// DOM modules：DOM、CSS、AJAX、Attribute、Event 
+// 目标：tool.js可以定位成原生JavaScript的加强形式，可以针对原生对象或方法进行拓展。
+
+/*************************************************************
+ *
+ * 打包入口文件，负责各个模块间的整合。
+ * 
+ *************************************************************/
+
+
+
+(function(w) {
+	var dom = __webpack_require__(6);
+	var util = __webpack_require__(3);
+	var storage = __webpack_require__(1);
+	var string = __webpack_require__(2);
+	var bom = __webpack_require__(0);
+	var array = __webpack_require__(5);
+
+	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
+
+	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
+
+	// 选择器 
+	// w[spaceName] = dom.ele;
+
+	// 工具方法
+	w[spaceName].dateFormat = util.dateFormat;
+	w[spaceName].validate = util.validate;
+
+	// 本地存储
+	w[spaceName].getCookie = storage.getCookie;
+	w[spaceName].setCookie = storage.setCookie;
+	w[spaceName].getStorage = storage.getStorage;
+	w[spaceName].setStorage = storage.setStorage;
+	w[spaceName].removeStorage = storage.removeStorage;
+	w[spaceName].clearStorage = storage.clearStorage;
+
+	// 字符串处理
+	w[spaceName].trim = string.trim;
+
+	// 浏览器处理
+	w[spaceName].browserVersion = bom.browserVersion;
+	w[spaceName].getQueryString = bom.getQueryString;
+})(window);
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*************************************************************
  *
  * 数组处理模块
- * 为了考虑调用方便和代码整洁性，会在原生JavaScript上修改原型链
+ * 为了考虑调用方便和代码整洁性，会在原生JavaScript上添加原型链方法
+ * 直接用数组调用即可
  * 
  *************************************************************/
 
 
 
-var string = __webpack_require__(0);
+var string = __webpack_require__(2);
 var test = __webpack_require__(7);
 
+/**
+ * @mixin
+ * 数组处理模块
+ */
 var array = {
     init: function() {
         this.addPrototype();
@@ -200,10 +449,10 @@ var array = {
      */
     addPrototype: function() {
         /**
-         * 删除并返回数组的指定位置元素
-         * 该方法直接改变原数组
+         * @function deleteOf
          * @param  {Number} ind 数组元素索引
          * @return {any}        被删除的数组元素
+         * @description 删除并返回数组的指定位置元素，该方法直接改变原数组
          */
         Array.prototype.deleteOf = function(ind) {
             var deleted = this[ind];
@@ -212,11 +461,11 @@ var array = {
         };
 
         /**
-         * 删除并返数组的指定值元素
-         * 该方法直接改变原数组
+         * @function deleteVal
          * @param  {any}    val   数组元素的值
          * @param  {Number} [num] 删除的元素个数，默认全部删除
          * @return {any}          被删除的数组元素
+         * @description 删除并返数组的指定值元素，该方法直接改变原数组
          */
         Array.prototype.deleteVal = function(val, num) {
             var count = 0,
@@ -238,11 +487,11 @@ var array = {
         };
 
         /**
-         * 向数组中的指定位置插入元素，并返回新的长度
-         * 该方法直接改变原数组
+         * @function pushOf
          * @param {Number} ind 索引值
          * @param {Number} val 元素值
          * @return {Number} 新数组长度
+         * @description 向数组中的指定位置插入元素，并返回新的长度。该方法直接改变原数组
          */
         Array.prototype.pushOf = function(ind, val) {
             this.splice(ind, 0, val).length;
@@ -250,11 +499,12 @@ var array = {
         };
 
         /**
-         * 替换数组中指定值的元素，并返回新数组
-         * 该方法不会改变原数组
+         * @function replace
          * @param  {any}    val    本元素值 
          * @param  {any}    newVal 新元素值
          * @param  {Number} [num]  替换的元素个数，默认替换全部
+         * @return {Array} 新数组
+         * @description 替换数组中指定值的元素，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.replace = function(val, newVal, num) {
             var result = [],
@@ -275,11 +525,11 @@ var array = {
         };
 
         /**
-         * 数组去重，并返回新数组
-         * 该方法不改变原数组
+         * @function removeDuplicate
          * @param  {Number} ind   从第几个重复元素开始删除
          * @param  {Number} [num] 删除的元素数量，默认全部删除
-         * @beta 暂时未开放，测试中有问题。
+         * @description 数组去重，并返回新数组。该方法不改变原数组
+         *              暂时未开放，测试中有问题。xxxxxxxxx
          */
         Array.prototype.removeDuplicate = function(num) {
             var obj = {},
@@ -305,20 +555,20 @@ var array = {
         };
 
         /**
-         * 数组去空串，并返回新数组 
-         * 该方法不会改变原数组
+         * @function trim
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
+         * @description 数组去空串，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.trim = function(num) {
             return _trim(num, '', this);
         };
 
         /**
-         * 数组去null值，并返回新数组 
-         * 该方法不会改变原数组
+         * @function removeNull
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
+         * @description 数组去null值，并返回新数组。该方法不会改变原数组
          */
         Array.prototype.removeNull = function(num) {
             return _trim(num, null, this);
@@ -326,7 +576,7 @@ var array = {
     }
 }
 
-/**
+/***
  * 数组去空串/null值，并返回新数组 
  * 该方法不会改变原数组
  * @param  {Number} [num] 删除的空串数量
@@ -356,6 +606,7 @@ function _trim(num, str, that) {
 }
 
 array.init();
+// 添加测试中的方法
 test.init([{
     targetObj: 'Array',
     funcName: 'removeDuplicate'
@@ -364,66 +615,7 @@ test.init([{
 module.exports.array = array;
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*************************************************************
- *
- * 浏览器模块
- * 
- *************************************************************/
-
-
-
-var bom = {
-    /**
-     * 判断终端的类型  added
-     * @return {boolean} 选定终端类型的布尔值
-     * @description 调用方式：browser.versions.webKit
-     */
-    browser: {
-        versions: function() {
-            var u = navigator.userAgent;
-            return {
-                trident: u.indexOf('Trident') > -1, //IE内核
-                presto: u.indexOf('Presto') > -1, //opera内核
-                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-                iPad: u.indexOf('iPad') > -1, //是否iPad
-                webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
-                wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
-                alipay: !!u.match(/AliApp/i) // 是否支付宝打开
-            };
-        }(),
-        language: (navigator.browserLanguage || navigator.language).toLowerCase()
-    },
-
-    /**
-     * 获取请求url的参数  added
-     * @param {String} name URL后缀的参数名
-     */
-    getQueryString: function(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        // if (r != null) return unescape(r[2]);
-        // return null;
-        if (r != null) return r[2];
-        return null;
-    }
-}
-
-module.exports = {
-    browserVersion: bom.browser.versions,
-    getQueryString: bom.getQueryString
-}
-
-/***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -436,7 +628,7 @@ module.exports = {
 
 
 
-var util = __webpack_require__(1);
+var util = __webpack_require__(3);
 
 // 所有html标签    
 var htmlTagNames = [
@@ -464,12 +656,13 @@ var htmlTagNames = [
 ];
 
 /**
- * 节点查询
- * @param  {String} eleKey 可查询的key包括：id/class/name/tag
- * @return {ToolElement}   包装了属性和方法的tool对象    
+ * @function $.ele()
+ * @param  {String} eleKey 可查询的key包括：id:#idName/class:.className/name:~name/tag:tagName
+ * @return {ToolElement}   包装了属性和方法的tool对象   
+ * @description 节点查询 
  */
 function ele(eleKey) {
-    /**
+    /***
      * 遍历查询节点   
      * @param  {String} queryKey  根据哪种方式查询节点：class/name/tag
      * @return {ToolElement}  tool对象    
@@ -533,7 +726,7 @@ function ele(eleKey) {
  * 
  *************************************************************/
 
-/**
+/***
  * 将原生节点封装成ToolElement
  * @param  {Array} nodes 原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
@@ -546,7 +739,7 @@ function _pack(nodes) {
     }
 }
 
-/**
+/***
  * 插入节点
  * @param {Element} parent 当前节点的原生父节点
  * @param  {String}  str    新节点名称
@@ -556,7 +749,7 @@ function _insertBefore(parent, str, ele) {
     parent.insertBefore(document.createTextNode(str), ele);
 }
 
-/**
+/***
  * 追加节点
  * @param  {Element} parent 当前节点的原生父节点
  * @param  {String} str    新节点的名称
@@ -565,7 +758,7 @@ function _appendChild(parent, str) {
     parent.appendChild(document.createTextNode(str));
 }
 
-/**
+/***
  * 获得/设置节点的html/text 
  * @param  {String} type 操作类型：html：操作元素的html，text：操作元素的text
  * @param  {String} str  要设置的内容值
@@ -585,7 +778,7 @@ function _htmlAndText(type, str, nodes) {
     return (typeof result[0] == 'object') ? _pack(result) : result; // 是节点才包装成对象 
 }
 
-/**
+/***
  * 在当前节点的前/后插入新的内容
  * @param  {String} type 操作类型：before：在之前插入，after：在之后插入
  * @param  {String} str  要插入的内容
@@ -656,9 +849,10 @@ function _prevAndNext(type, nodes) {
  *************************************************************/
 
 /**
- * ToolElement节点对象封装 
+ * @class ToolElement
  * @param {Array} nodes 原生节点集，可以为空数组。
- * @description 所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
+ * @description ToolElement节点对象封装。
+ *              所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
  *              若想获取原生节点集，只需toolElement.node即可。
  *              若想获取某个原生节点，只需toolElement.get(ind)即可。
  * @return {ToolElement} tool对象
@@ -766,211 +960,51 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /*************************************************************
  *
- * 本地存储模块
- * 
- *************************************************************/
-
-
-
-var ls = window.localStorage;
-
-var storage = {
-    /**
-     * 读取Cookie
-     * @param  {String} cname Cookie的key
-     * @return {String} Cookie的value
-     */
-    getCookie: function(cname) {
-        var cvalue = "",
-            cookies = document.cookie;
-        if (cookies.length > 0) {
-            var search = cname + "=",
-                start = cookies.indexOf(search);
-            if (start != -1) {
-                start += search.length;
-                var end = cookies.indexOf(";", start);
-                if (end == -1) {
-                    end = cookies.length;
-                }
-                cvalue = unescape(cookies.substring(start, end));
-            }
-        }
-        return cvalue;
-    },
-
-    /**
-     * 写入Cookie   
-     * @param {String} cname  Cookie的key
-     * @param {String} cvalue Cookie的value
-     * @param {String} days   Cookie的存活天数
-     */
-    setCookie: function(cname, cvalue, days) {
-        var date = new Date();
-        date.setDate(date.getDate() + days);
-        var exdate = "; expires=" + date.toGMTString();
-        document.cookie = cname + "=" + escape(cvalue) + exdate;
-    },
-
-    /**
-     * 获取本地存储中对应的值
-     * @param  {String} key 本地数据的key
-     * @return {String}     本地数据的value
-     */
-    getStorage: function(key) {
-        var val = '';
-        _checkStorageSupport(function() {
-            val = ls.getItem(key);
-        });
-        return val;
-    },
-
-    /**
-     * 设置本地存储数据
-     * @param {String} key 本地数据的key
-     * @param {String} val 本地数据的value   
-     */
-    setStorage: function(key, val) {
-        _checkStorageSupport(function() {
-            ls.setItem(key, val);
-        });
-    },
-
-    /**
-     * 移除指定的本地数据
-     * @param  {String} key 本地数据的key
-     */
-    removeStorage: function(key) {
-        _checkStorageSupport(function() {
-            ls.removeItem(key);
-        });
-    },
-
-    /**
-     * 清除本地存储的所有数据      
-     */
-    clearStorage: function() {
-        _checkStorageSupport(function() {
-            ls.clear();
-        });
-    }
-}
-
-/**
- * 监测浏览器是否支持localStorage
- * @param  {Function} func 普通方法
- */
-function _checkStorageSupport(func) {
-    if (!ls) {
-        alert('浏览器不支持localStorage！或者开启了隐私模式！');
-    } else {
-        func();
-    }
-}
-
-module.exports = {
-    getCookie: storage.getCookie,
-    setCookie: storage.setCookie,
-    getStorage: storage.getStorage,
-    setStorage: storage.setStorage,
-    removeStorage: storage.removeStorage,
-    clearStorage: storage.clearStorage
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// tool.js是个关注DOM的框架，不过度封装，旨在提高性能效率
-// 模块间可以相互调用，以提高效率，但这样的话就要保证每个模块的正确性。
-// DOM modules：DOM、CSS、AJAX、Attribute、Event 
-// 目标：tool.js可以定位成原生JavaScript的加强形式，可以针对原生对象或方法进行拓展。
-
-/*************************************************************
- *
- * 打包入口文件，负责各个模块间的整合。
+ * 测试中的方法、类、对象都会放在这里面，并且不对外露出
+ * 可以在控制台查看，相当于一个测试中的环境。
+ * @description 暂时不引入单元测试框架，先手动测试，有问题的直接不露出
  * 
  *************************************************************/
 
 
 
 (function(w) {
-	var dom = __webpack_require__(4);
-	var util = __webpack_require__(1);
-	var storage = __webpack_require__(5);
-	var string = __webpack_require__(0);
-	var bom = __webpack_require__(3);
-	var array = __webpack_require__(2);
-	var test = __webpack_require__(7);
+    var test = {
+        queue: [], // 测试队列
 
-	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
+        init: function(obj) {
+            this.pushQueue(obj);
+            console.log(w.test);
+        },
 
-	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
+        pushQueue: function(obj) {
+            if (!w.test) {
+                w.test = this;
+            }
+            this.queue.push(obj);
+        },
 
-	// 选择器 
-	w[spaceName] = dom.ele;
-
-	// 工具方法
-	w[spaceName].dateFormat = util.dateFormat;
-	w[spaceName].validate = util.validate;
-
-	// 本地存储
-	w[spaceName].getCookie = storage.getCookie;
-	w[spaceName].setCookie = storage.setCookie;
-	w[spaceName].getStorage = storage.getStorage;
-	w[spaceName].setStorage = storage.setStorage;
-	w[spaceName].removeStorage = storage.removeStorage;
-	w[spaceName].clearStorage = storage.clearStorage;
-
-	// 字符串处理
-	w[spaceName].trim = string.trim;
-
-	// 浏览器处理
-	w[spaceName].browserVersion = bom.browserVersion;
-	w[spaceName].getQueryString = bom.getQueryString;
-
-	// 测试中的代码
-	w[spaceName].test = test;
-})(window);
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var test = {
-    queue: [],
-    init: function(objs) {
-        for (var i = 0, len = objs.length; i < len; i++) {
-            var temp = objs[i];
-            this.pushInQueue(temp);
-        }
-    },
-    pushInQueue: function(obj) {
-        var targetObj = obj.targetObj,
-            funcName = obj.funcName;
-
-    },
-    deleteUnit: function(obj) {
-        var targetObj = obj.targetObj,
-            funcName = obj.funcName;
-        switch (targetObj.toLowerCase()) {
-            case 'array':
-                delete Array.prototype[funcName];
-                break;
+        deleteUnit: function(obj) {
+            var targetObj = obj.targetObj,
+                funcName = obj.funcName;
+            switch (targetObj.toLowerCase()) {
+                case 'array':
+                    delete Array.prototype[funcName];
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
 
-module.exports = test;
+    module.exports = test;
+})(window);
 
 /***/ })
 /******/ ]);

@@ -1,27 +1,41 @@
+/*************************************************************
+ *
+ * 测试中的方法、类、对象都会放在这里面，并且不对外露出
+ * 可以在控制台查看，相当于一个测试中的环境。
+ * @description 暂时不引入单元测试框架，先手动测试，有问题的直接不露出
+ * 
+ *************************************************************/
+
 'use strict';
 
-var test = {
-    queue: [],
-    init: function(objs) {
-        for (var i = 0, len = objs.length; i < len; i++) {
-            var temp = objs[i];
-            this.pushInQueue(temp);
-        }
-    },
-    pushInQueue: function(obj) {
-        var targetObj = obj.targetObj,
-            funcName = obj.funcName;
+(function(w) {
+    var test = {
+        queue: [], // 测试队列
 
-    },
-    deleteUnit: function(obj) {
-        var targetObj = obj.targetObj,
-            funcName = obj.funcName;
-        switch (targetObj.toLowerCase()) {
-            case 'array':
-                delete Array.prototype[funcName];
-                break;
+        init: function(obj) {
+            this.pushQueue(obj);
+            console.log(w.test);
+        },
+
+        pushQueue: function(obj) {
+            if (!w.test) {
+                w.test = this;
+            }
+            this.queue.push(obj);
+        },
+
+        deleteUnit: function(obj) {
+            var targetObj = obj.targetObj,
+                funcName = obj.funcName;
+            switch (targetObj.toLowerCase()) {
+                case 'array':
+                    delete Array.prototype[funcName];
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
 
-module.exports = test;
+    module.exports = test;
+})(window);

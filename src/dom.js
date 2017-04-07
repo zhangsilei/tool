@@ -35,12 +35,13 @@ var htmlTagNames = [
 ];
 
 /**
- * 节点查询
- * @param  {String} eleKey 可查询的key包括：id/class/name/tag
- * @return {ToolElement}   包装了属性和方法的tool对象    
+ * @function $.ele()
+ * @param  {String} eleKey 可查询的key包括：id:#idName/class:.className/name:~name/tag:tagName
+ * @return {ToolElement}   包装了属性和方法的tool对象   
+ * @description 节点查询 
  */
 function ele(eleKey) {
-    /**
+    /***
      * 遍历查询节点   
      * @param  {String} queryKey  根据哪种方式查询节点：class/name/tag
      * @return {ToolElement}  tool对象    
@@ -104,7 +105,7 @@ function ele(eleKey) {
  * 
  *************************************************************/
 
-/**
+/***
  * 将原生节点封装成ToolElement
  * @param  {Array} nodes 原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
@@ -117,7 +118,7 @@ function _pack(nodes) {
     }
 }
 
-/**
+/***
  * 插入节点
  * @param {Element} parent 当前节点的原生父节点
  * @param  {String}  str    新节点名称
@@ -127,7 +128,7 @@ function _insertBefore(parent, str, ele) {
     parent.insertBefore(document.createTextNode(str), ele);
 }
 
-/**
+/***
  * 追加节点
  * @param  {Element} parent 当前节点的原生父节点
  * @param  {String} str    新节点的名称
@@ -136,7 +137,7 @@ function _appendChild(parent, str) {
     parent.appendChild(document.createTextNode(str));
 }
 
-/**
+/***
  * 获得/设置节点的html/text 
  * @param  {String} type 操作类型：html：操作元素的html，text：操作元素的text
  * @param  {String} str  要设置的内容值
@@ -156,7 +157,7 @@ function _htmlAndText(type, str, nodes) {
     return (typeof result[0] == 'object') ? _pack(result) : result; // 是节点才包装成对象 
 }
 
-/**
+/***
  * 在当前节点的前/后插入新的内容
  * @param  {String} type 操作类型：before：在之前插入，after：在之后插入
  * @param  {String} str  要插入的内容
@@ -227,9 +228,10 @@ function _prevAndNext(type, nodes) {
  *************************************************************/
 
 /**
- * ToolElement节点对象封装 
+ * @class ToolElement
  * @param {Array} nodes 原生节点集，可以为空数组。
- * @description 所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
+ * @description ToolElement节点对象封装。
+ *              所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
  *              若想获取原生节点集，只需toolElement.node即可。
  *              若想获取某个原生节点，只需toolElement.get(ind)即可。
  * @return {ToolElement} tool对象

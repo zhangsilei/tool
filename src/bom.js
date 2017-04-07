@@ -6,11 +6,16 @@
 
 'use strict';
 
+/**
+ * @mixin 浏览器模块
+ */
 var bom = {
     /**
-     * 判断终端的类型  added
+     * @member browserVersion
      * @return {boolean} 选定终端类型的布尔值
-     * @description 调用方式：browser.versions.webKit
+     * @description 判断终端的类型，调用方式：$.browserVersion.key\n
+     *              trident: IE内核
+     *              
      */
     browser: {
         versions: function() {
@@ -34,8 +39,10 @@ var bom = {
     },
 
     /**
-     * 获取请求url的参数  added
+     * @function getQueryString
      * @param {String} name URL后缀的参数名
+     * @return {String} 对应的值
+     * @description 获取请求url的参数
      */
     getQueryString: function(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
