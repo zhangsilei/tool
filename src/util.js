@@ -1,17 +1,80 @@
-/*************************************************************
- *
- * 工具方法模块
- * 
- *************************************************************/
+/**
+ * @module 工具方法－Util
+ * @description 此模块包涵了常用的工具方法，直接通过命名空间调用即可：eg: $.trim(str);
+ *              部分方法需要加上类名：eg: $.validate.input(str);
+ */
 
 'use strict';
 
+var validate = {
+	/**
+	 * @function input
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否满足：只有中文、数字、字母和下划线，且位置不限。
+	 * @example $.validate.input(str)
+	 */
+	input: function(str) {
+		return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(str);
+	},
+
+	/**
+	 * @function mobile
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否为手机号
+	 * @example $.validata.mobile(str);
+	 */
+	mobile: function(str) {
+		return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(str);
+	},
+
+	/**
+	 * @function code
+	 * @param  {String} str   需要校验的字符串
+	 * @param  {Number} [num] 验证码的个数，默认四位数
+	 * @return {Boolean}      
+	 * @description 是否为数字验证码
+	 * @example $.validata.code(str, [num]);
+	 */
+	code: function(str, num) {
+		if (num && typeof num == 'number') {
+			return new RegExp('^\\d{' + num + '}$').test(str);
+		} else {
+			return /^\d{4}$/.test(str);
+		}
+	},
+
+	/**
+	 * @function email
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否为邮箱
+	 * @example $.validata.email(str);
+	 */
+	email: function(str) {
+		return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(str);
+	}
+}
+
 /**
- * @function $.dateFormat()
+ * @function trim
+ * @param  {String} str 要过滤的字符串
+ * @return {String}     过滤后的字符串
+ * @description 过滤空串
+ * @example $.trim(str);
+ */
+function trim(str) {
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+/**
+ * @function dateFormat
  * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
- * @param  {number} [timestamp] 时间戳，默认当前时间
+ * @param  {Number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description 时间格式化，format可以随意组合。例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description 时间格式化，format可以随意组合。eg: yyyy-MM-dd HH:mm:ss => 2017-01-01 13:13:13
+ * @example $.dateFormat(format, [timestamp]);
  */
 function dateFormat(format, timestamp) {
 	if (format && typeof format == 'string') {
@@ -42,30 +105,6 @@ function dateFormat(format, timestamp) {
 		}
 	}
 	return format;
-}
-
-/**
- * @function $.validate.key
- * @return {Boolean} 是否合法
- * @description 数据校验，验证数据的合法性
- */
-var validate = {
-	input: function(str) { // 输入框
-		return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(str); // 只有中文、数字、字母和下划线，且位置不限
-	},
-	mobile: function(str) { // 手机号
-		return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(str);
-	},
-	code: function(str, num) { // 数字验证码，默认四位数 
-		if (num && typeof num == 'number') {
-			return new RegExp('^\\d{' + num + '}$').test(str);
-		} else {
-			return /^\d{4}$/.test(str);
-		}
-	},
-	email: function(str) { // 邮箱
-		return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(str);
-	}
 }
 
 module.exports = {

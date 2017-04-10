@@ -1,23 +1,24 @@
 {
-    "name": "tool",
-    "version": "1.0.0",
-    "description": "",
-    "main": "jquery.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/DreamOn324/tool.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/DreamOn324/tool/issues"
-    },
-    "homepage": "https://github.com/DreamOn324/tool#readme",
-    "devDependencies": {},
-    "dependencies": {
-        "webpack": "^2.2.1"
-    }
+  "name": "tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jquery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreamOn324/tool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DreamOn324/tool/issues"
+  },
+  "homepage": "https://github.com/DreamOn324/tool#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "jsdoc": "^3.4.3",
+    "webpack": "^2.2.1"
+  }
 }

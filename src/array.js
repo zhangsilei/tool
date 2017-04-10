@@ -1,28 +1,20 @@
-/*************************************************************
- *
- * 数组处理模块
- * 为了考虑调用方便和代码整洁性，会在原生JavaScript上添加原型链方法
- * 直接用数组调用即可
- * 
- *************************************************************/
+/**
+ * @module 原生方法加强－Array
+ * @description 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+ *              无需额外调用，已经挂载到原生Array的原型链上。
+ *              eg: var arr = [1, 2, 3]; arr.deleteOf(0);
+ */
 
 'use strict';
 
-var string = require('./string');
+var util = require('./util');
 var test = require('./test');
 
-/**
- * @mixin
- * 数组处理模块
- */
 var array = {
     init: function() {
         this.addPrototype();
     },
 
-    /**
-     * 向Array原型链中添加新方法
-     */
     addPrototype: function() {
         /**
          * @function deleteOf

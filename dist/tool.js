@@ -68,68 +68,55 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 "use strict";
-/*************************************************************
- *
- * 浏览器模块
- * 
- *************************************************************/
-
-
+/**
+ * @function browserVersion
+ * @return {Object} 终端类型：trident = IE内核; presto = opera内核; webKit = 苹果、谷歌内核;
+ *                      gecko = 火狐内核; mobile = 移动终端; ios = ios终端; 
+ *                      android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; 
+ *                      iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;
+ * @description 判断终端的类型
+ * @example eg: $.browserVersion.webKit;
+ */
+function browserVersion() {
+    var u = navigator.userAgent;
+    return {
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+        iPad: u.indexOf('iPad') > -1, //是否iPad
+        webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
+        wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
+        alipay: !!u.match(/AliApp/i) // 是否支付宝打开
+    };
+}
 
 /**
- * @mixin 浏览器模块
+ * @function getQueryString
+ * @param {String} name URL后缀的参数名
+ * @return {String} 对应的值
+ * @description 获取请求url的参数
+ * @example eg: $.getQueryString(name);
  */
-var bom = {
-    /**
-     * @member browserVersion
-     * @return {boolean} 选定终端类型的布尔值
-     * @description 判断终端的类型，调用方式：$.browserVersion.key\n
-     *              trident: IE内核
-     *              
-     */
-    browser: {
-        versions: function() {
-            var u = navigator.userAgent;
-            return {
-                trident: u.indexOf('Trident') > -1, //IE内核
-                presto: u.indexOf('Presto') > -1, //opera内核
-                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-                iPad: u.indexOf('iPad') > -1, //是否iPad
-                webApp: u.indexOf('Safari') == -1, //是否web应用程序，没有头部与底部
-                wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
-                alipay: !!u.match(/AliApp/i) // 是否支付宝打开
-            };
-        }(),
-        language: (navigator.browserLanguage || navigator.language).toLowerCase()
-    },
-
-    /**
-     * @function getQueryString
-     * @param {String} name URL后缀的参数名
-     * @return {String} 对应的值
-     * @description 获取请求url的参数
-     */
-    getQueryString: function(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        // if (r != null) return unescape(r[2]);
-        // return null;
-        if (r != null) return r[2];
-        return null;
-    }
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    // if (r != null) return unescape(r[2]);
+    // return null;
+    if (r != null) return r[2];
+    return null;
 }
 
 module.exports = {
-    browserVersion: bom.browser.versions,
-    getQueryString: bom.getQueryString
+    browserVersion: browserVersion,
+    getQueryString: getQueryString
 }
 
 /***/ }),
@@ -137,11 +124,11 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/*************************************************************
- *
- * 本地存储模块
- * 
- *************************************************************/
+/**
+ * @module 本地存储－Storage
+ * @description 该模块提供了本地存储的方法，包括cookie和localStorage。
+ *              直接通过命名空间调用即可。eg: $.getCookie(cname);
+ */
 
 
 
@@ -149,7 +136,7 @@ var ls = window.localStorage;
 
 var storage = {
     /**
-     * @function $.getCookie()
+     * @function getCookie
      * @param  {String} cname Cookie的key
      * @return {String} Cookie的value
      * @description 读取Cookie
@@ -173,7 +160,7 @@ var storage = {
     },
 
     /**
-     * @function $.setCookie()
+     * @function setCookie
      * @param {String} cname  Cookie的key
      * @param {String} cvalue Cookie的value
      * @param {String} days   Cookie的存活天数
@@ -187,7 +174,7 @@ var storage = {
     },
 
     /**
-     * @function $.getStorage()
+     * @function getStorage
      * @param  {String} key 本地数据的key
      * @return {String}     本地数据的value
      * @description 获取本地存储中对应的值
@@ -201,7 +188,7 @@ var storage = {
     },
 
     /**
-     * @function $.setStorage()
+     * @function setStorage
      * @param {String} key 本地数据的key
      * @param {String} val 本地数据的value   
      * @description 设置本地存储数据
@@ -213,7 +200,7 @@ var storage = {
     },
 
     /**
-     * @function $.removeStorage()
+     * @function removeStorage
      * @param  {String} key 本地数据的key
      * @description 移除指定的本地数据
      */
@@ -224,7 +211,7 @@ var storage = {
     },
 
     /**
-     * @function $.clearStorage()
+     * @function clearStorage
      * @description 清除本地存储的所有数据      
      */
     clearStorage: function() {
@@ -256,53 +243,88 @@ module.exports = {
 };
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*************************************************************
- *
- * 字符串处理模块
- * 
- *************************************************************/
-
-
-
-var string = {
-    /**
-     * @function $.trim()
-     * @param  {String} str 要过滤的字符串
-     * @return {String}     过滤后的字符串
-     * @description 过滤空格
-     */
-    trim: function(str) {
-        return str.replace(/(^\s*)|(\s*$)/g, "");
-    }
-}
-
-module.exports = {
-    trim: string.trim
-}
-
-/***/ }),
+/* 2 */,
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/*************************************************************
- *
- * 工具方法模块
- * 
- *************************************************************/
+/**
+ * @module 工具方法－Util
+ * @description 此模块包涵了常用的工具方法，直接通过命名空间调用即可：eg: $.trim(str);
+ *              部分方法需要加上类名：eg: $.validate.input(str);
+ */
 
 
+
+var validate = {
+	/**
+	 * @function input
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否满足：只有中文、数字、字母和下划线，且位置不限。
+	 * @example $.validate.input(str)
+	 */
+	input: function(str) {
+		return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(str);
+	},
+
+	/**
+	 * @function mobile
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否为手机号
+	 * @example $.validata.mobile(str);
+	 */
+	mobile: function(str) {
+		return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(str);
+	},
+
+	/**
+	 * @function code
+	 * @param  {String} str   需要校验的字符串
+	 * @param  {Number} [num] 验证码的个数，默认四位数
+	 * @return {Boolean}      
+	 * @description 是否为数字验证码
+	 * @example $.validata.code(str, [num]);
+	 */
+	code: function(str, num) {
+		if (num && typeof num == 'number') {
+			return new RegExp('^\\d{' + num + '}$').test(str);
+		} else {
+			return /^\d{4}$/.test(str);
+		}
+	},
+
+	/**
+	 * @function email
+	 * @param  {String} str 需要校验的字符串
+	 * @return {Boolean}    
+	 * @description 是否为邮箱
+	 * @example $.validata.email(str);
+	 */
+	email: function(str) {
+		return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(str);
+	}
+}
 
 /**
- * @function $.dateFormat()
+ * @function trim
+ * @param  {String} str 要过滤的字符串
+ * @return {String}     过滤后的字符串
+ * @description 过滤空串
+ * @example $.trim(str);
+ */
+function trim(str) {
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+/**
+ * @function dateFormat
  * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
- * @param  {number} [timestamp] 时间戳，默认当前时间
+ * @param  {Number} [timestamp] 时间戳，默认当前时间
  * @return {String} 格式化后的时间字符串
- * @description 时间格式化，format可以随意组合。例如：2017-01-01 13:13:13 => yyyy-MM-dd HH:mm:ss
+ * @description 时间格式化，format可以随意组合。eg: yyyy-MM-dd HH:mm:ss => 2017-01-01 13:13:13
+ * @example $.dateFormat(format, [timestamp]);
  */
 function dateFormat(format, timestamp) {
 	if (format && typeof format == 'string') {
@@ -335,30 +357,6 @@ function dateFormat(format, timestamp) {
 	return format;
 }
 
-/**
- * @function $.validate.key
- * @return {Boolean} 是否合法
- * @description 数据校验，验证数据的合法性
- */
-var validate = {
-	input: function(str) { // 输入框
-		return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(str); // 只有中文、数字、字母和下划线，且位置不限
-	},
-	mobile: function(str) { // 手机号
-		return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(str);
-	},
-	code: function(str, num) { // 数字验证码，默认四位数 
-		if (num && typeof num == 'number') {
-			return new RegExp('^\\d{' + num + '}$').test(str);
-		} else {
-			return /^\d{4}$/.test(str);
-		}
-	},
-	email: function(str) { // 邮箱
-		return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(str);
-	}
-}
-
 module.exports = {
 	dateFormat: dateFormat,
 	validate: validate
@@ -386,7 +384,6 @@ module.exports = {
 	var dom = __webpack_require__(6);
 	var util = __webpack_require__(3);
 	var storage = __webpack_require__(1);
-	var string = __webpack_require__(2);
 	var bom = __webpack_require__(0);
 	var array = __webpack_require__(5);
 
@@ -395,11 +392,12 @@ module.exports = {
 	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
 
 	// 选择器 
-	// w[spaceName] = dom.ele;
+	w[spaceName] = dom.ele;
 
 	// 工具方法
 	w[spaceName].dateFormat = util.dateFormat;
 	w[spaceName].validate = util.validate;
+	w[spaceName].trim = util.trim;
 
 	// 本地存储
 	w[spaceName].getCookie = storage.getCookie;
@@ -408,9 +406,6 @@ module.exports = {
 	w[spaceName].setStorage = storage.setStorage;
 	w[spaceName].removeStorage = storage.removeStorage;
 	w[spaceName].clearStorage = storage.clearStorage;
-
-	// 字符串处理
-	w[spaceName].trim = string.trim;
 
 	// 浏览器处理
 	w[spaceName].browserVersion = bom.browserVersion;
@@ -422,31 +417,23 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/*************************************************************
- *
- * 数组处理模块
- * 为了考虑调用方便和代码整洁性，会在原生JavaScript上添加原型链方法
- * 直接用数组调用即可
- * 
- *************************************************************/
+/**
+ * @module 原生方法加强－Array
+ * @description 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+ *              无需额外调用，已经挂载到原生Array的原型链上。
+ *              eg: var arr = [1, 2, 3]; arr.deleteOf(0);
+ */
 
 
 
-var string = __webpack_require__(2);
+var util = __webpack_require__(3);
 var test = __webpack_require__(7);
 
-/**
- * @mixin
- * 数组处理模块
- */
 var array = {
     init: function() {
         this.addPrototype();
     },
 
-    /**
-     * 向Array原型链中添加新方法
-     */
     addPrototype: function() {
         /**
          * @function deleteOf
@@ -619,12 +606,11 @@ module.exports.array = array;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/************************************************************
- *
- * 节点选择器，tool.js的入口方法
- * 该方法关注DOM查询，并将查询到的结果包装成tool对象并返回。
- * 
- ***********************************************************/
+/**
+ * @module 节点选择器－Dom
+ * @description 该方法关注DOM查询，并将查询到的结果包装成tool节点对象并返回。
+ *              调用方式同jQuery，eg: $('.class'); $('#id'); $('~name'); $('tagName');
+ */
 
 
 
@@ -656,10 +642,10 @@ var htmlTagNames = [
 ];
 
 /**
- * @function $.ele()
- * @param  {String} eleKey 可查询的key包括：id:#idName/class:.className/name:~name/tag:tagName
- * @return {ToolElement}   包装了属性和方法的tool对象   
- * @description 节点查询 
+ * @function $
+ * @param  {String} eleKey 节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。
+ * @return {ToolElement}   tool节点对象   
+ * @description 节点选择器
  */
 function ele(eleKey) {
     /***
@@ -850,26 +836,36 @@ function _prevAndNext(type, nodes) {
 
 /**
  * @class ToolElement
- * @param {Array} nodes 原生节点集，可以为空数组。
- * @description ToolElement节点对象封装。
- *              所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
- *              若想获取原生节点集，只需toolElement.node即可。
- *              若想获取某个原生节点，只需toolElement.get(ind)即可。
+ * @param {Array} nodes  原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
+ * @description tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。
+ *              无需手动封装，直接调用$()即可。
  */
 function ToolElement(nodes) {
-    // 原生节点集，可以为空数组。  added
+    /**
+     * @member
+     * @type {Array}
+     * @description 原生节点集
+     */
     this.node = nodes;
 
     /************************************************************
      * 节点相关操作
      ***********************************************************/
 
-    // 根据索引获取原生节点  added
+    /**
+     * @param  {Number} ind 索引
+     * @return {Element}    原生节点
+     * @description 根据索引获取原生节点 
+     */
     this.get = function(ind) {
         return nodes[ind];
     };
 
+    /**
+     * @param  {Function} cb 回调函数
+     * @description 遍历节点集
+     */
     this.each = function(cb) {
         var nodes = this.node;
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -877,22 +873,34 @@ function ToolElement(nodes) {
         }
     };
 
-    // 获取上一个节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 获取上一个节点
+     */
     this.prev = function() {
         return _prevAndNext('prev', nodes);
     };
 
-    // 获取下一个节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 获取下一个节点
+     */
     this.next = function() {
         return _prevAndNext('next', nodes);
     };
 
-    // 获取指定节点  added
+    /**
+     * @param  {Number} ind  索引
+     * @return {ToolElement} tool对象
+     * @description 获取指定节点
+     */
     this.eq = function(ind) {
         return _pack([nodes[ind]]);
     };
 
-    // 删除当前节点  added
+    /**
+     * @description 删除当前节点
+     */
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
             var node = nodes[i];
@@ -900,15 +908,18 @@ function ToolElement(nodes) {
         }
     };
 
-    // 清空当前节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 清空当前节点
+     */
     this.empty = function() {
         return this.html('');
     };
 
     /**
-     * 在当前节点之前插入内容，支持生成自定义标签  added
-     * @param {String} 插入的内容
-     * @return {ToolElement} ToolElement对象
+     * @param {String}       插入的内容
+     * @return {ToolElement} tool对象
+     * @description 在当前节点之前插入内容，支持传入标签。
      */
     this.before = function(str) {
         this.each(function(ind, node) {
@@ -918,9 +929,9 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 在当前节点之后插入内容，支持生成自定义标签  added
-     * @param  {String} str 插入的内容   
-     * @return {ToolElement}     ToolElement对象 
+     * @param  {String} str  插入的内容   
+     * @return {ToolElement} tool对象 
+     * @description 在当前节点之后插入内容，支持传入标签。
      */
     this.after = function(str) {
         this.each(function(ind, node) {
@@ -930,16 +941,16 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 获取/修改当前节点的html
      * @param  {String} [str] 要修改成的html
+     * @description 获取/修改当前节点的html
      */
     this.html = function(str) {
         return _htmlAndText('html', str, nodes);
     };
 
     /**
-     * 获取/修改当前节点text
      * @param  {String} [str] 要修改成的text
+     * @description 获取/修改当前节点text
      */
     this.text = function(str) {
         return _htmlAndText('text', str, nodes);

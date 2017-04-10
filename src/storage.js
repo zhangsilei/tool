@@ -1,8 +1,8 @@
-/*************************************************************
- *
- * 本地存储模块
- * 
- *************************************************************/
+/**
+ * @module 本地存储－Storage
+ * @description 该模块提供了本地存储的方法，包括cookie和localStorage。
+ *              直接通过命名空间调用即可。eg: $.getCookie(cname);
+ */
 
 'use strict';
 
@@ -10,7 +10,7 @@ var ls = window.localStorage;
 
 var storage = {
     /**
-     * @function $.getCookie()
+     * @function getCookie
      * @param  {String} cname Cookie的key
      * @return {String} Cookie的value
      * @description 读取Cookie
@@ -34,7 +34,7 @@ var storage = {
     },
 
     /**
-     * @function $.setCookie()
+     * @function setCookie
      * @param {String} cname  Cookie的key
      * @param {String} cvalue Cookie的value
      * @param {String} days   Cookie的存活天数
@@ -48,7 +48,7 @@ var storage = {
     },
 
     /**
-     * @function $.getStorage()
+     * @function getStorage
      * @param  {String} key 本地数据的key
      * @return {String}     本地数据的value
      * @description 获取本地存储中对应的值
@@ -62,7 +62,7 @@ var storage = {
     },
 
     /**
-     * @function $.setStorage()
+     * @function setStorage
      * @param {String} key 本地数据的key
      * @param {String} val 本地数据的value   
      * @description 设置本地存储数据
@@ -74,7 +74,7 @@ var storage = {
     },
 
     /**
-     * @function $.removeStorage()
+     * @function removeStorage
      * @param  {String} key 本地数据的key
      * @description 移除指定的本地数据
      */
@@ -85,7 +85,7 @@ var storage = {
     },
 
     /**
-     * @function $.clearStorage()
+     * @function clearStorage
      * @description 清除本地存储的所有数据      
      */
     clearStorage: function() {

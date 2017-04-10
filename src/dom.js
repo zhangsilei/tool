@@ -1,9 +1,8 @@
-/************************************************************
- *
- * 节点选择器，tool.js的入口方法
- * 该方法关注DOM查询，并将查询到的结果包装成tool对象并返回。
- * 
- ***********************************************************/
+/**
+ * @module 节点选择器－Dom
+ * @description 该方法关注DOM查询，并将查询到的结果包装成tool节点对象并返回。
+ *              调用方式同jQuery，eg: $('.class'); $('#id'); $('~name'); $('tagName');
+ */
 
 'use strict';
 
@@ -35,10 +34,10 @@ var htmlTagNames = [
 ];
 
 /**
- * @function $.ele()
- * @param  {String} eleKey 可查询的key包括：id:#idName/class:.className/name:~name/tag:tagName
- * @return {ToolElement}   包装了属性和方法的tool对象   
- * @description 节点查询 
+ * @function $
+ * @param  {String} eleKey 节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。
+ * @return {ToolElement}   tool节点对象   
+ * @description 节点选择器
  */
 function ele(eleKey) {
     /***
@@ -229,26 +228,36 @@ function _prevAndNext(type, nodes) {
 
 /**
  * @class ToolElement
- * @param {Array} nodes 原生节点集，可以为空数组。
- * @description ToolElement节点对象封装。
- *              所有的属性和方法都写在这里面，构造的时候只需传入选择器拿到的原生节点集。
- *              若想获取原生节点集，只需toolElement.node即可。
- *              若想获取某个原生节点，只需toolElement.get(ind)即可。
+ * @param {Array} nodes  原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
+ * @description tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。
+ *              无需手动封装，直接调用$()即可。
  */
 function ToolElement(nodes) {
-    // 原生节点集，可以为空数组。  added
+    /**
+     * @member
+     * @type {Array}
+     * @description 原生节点集
+     */
     this.node = nodes;
 
     /************************************************************
      * 节点相关操作
      ***********************************************************/
 
-    // 根据索引获取原生节点  added
+    /**
+     * @param  {Number} ind 索引
+     * @return {Element}    原生节点
+     * @description 根据索引获取原生节点 
+     */
     this.get = function(ind) {
         return nodes[ind];
     };
 
+    /**
+     * @param  {Function} cb 回调函数
+     * @description 遍历节点集
+     */
     this.each = function(cb) {
         var nodes = this.node;
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -256,22 +265,34 @@ function ToolElement(nodes) {
         }
     };
 
-    // 获取上一个节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 获取上一个节点
+     */
     this.prev = function() {
         return _prevAndNext('prev', nodes);
     };
 
-    // 获取下一个节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 获取下一个节点
+     */
     this.next = function() {
         return _prevAndNext('next', nodes);
     };
 
-    // 获取指定节点  added
+    /**
+     * @param  {Number} ind  索引
+     * @return {ToolElement} tool对象
+     * @description 获取指定节点
+     */
     this.eq = function(ind) {
         return _pack([nodes[ind]]);
     };
 
-    // 删除当前节点  added
+    /**
+     * @description 删除当前节点
+     */
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
             var node = nodes[i];
@@ -279,15 +300,18 @@ function ToolElement(nodes) {
         }
     };
 
-    // 清空当前节点  added
+    /**
+     * @return {ToolElement} tool对象
+     * @description 清空当前节点
+     */
     this.empty = function() {
         return this.html('');
     };
 
     /**
-     * 在当前节点之前插入内容，支持生成自定义标签  added
-     * @param {String} 插入的内容
-     * @return {ToolElement} ToolElement对象
+     * @param {String}       插入的内容
+     * @return {ToolElement} tool对象
+     * @description 在当前节点之前插入内容，支持传入标签。
      */
     this.before = function(str) {
         this.each(function(ind, node) {
@@ -297,9 +321,9 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 在当前节点之后插入内容，支持生成自定义标签  added
-     * @param  {String} str 插入的内容   
-     * @return {ToolElement}     ToolElement对象 
+     * @param  {String} str  插入的内容   
+     * @return {ToolElement} tool对象 
+     * @description 在当前节点之后插入内容，支持传入标签。
      */
     this.after = function(str) {
         this.each(function(ind, node) {
@@ -309,16 +333,16 @@ function ToolElement(nodes) {
     };
 
     /**
-     * 获取/修改当前节点的html
      * @param  {String} [str] 要修改成的html
+     * @description 获取/修改当前节点的html
      */
     this.html = function(str) {
         return _htmlAndText('html', str, nodes);
     };
 
     /**
-     * 获取/修改当前节点text
      * @param  {String} [str] 要修改成的text
+     * @description 获取/修改当前节点text
      */
     this.text = function(str) {
         return _htmlAndText('text', str, nodes);
