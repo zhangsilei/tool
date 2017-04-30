@@ -2,7 +2,6 @@
  * @module 原生方法加强－Array
  * @description 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
  *              无需额外调用，已经挂载到原生Array的原型链上。
- *              eg: var arr = [1, 2, 3]; arr.deleteOf(0);
  */
 
 'use strict';
@@ -21,6 +20,8 @@ var array = {
          * @param  {Number} ind 数组元素索引
          * @return {any}        被删除的数组元素
          * @description 删除并返回数组的指定位置元素，该方法直接改变原数组
+         * @example
+         * [1, 2, 3].deleteOf(0) => [2, 3]
          */
         Array.prototype.deleteOf = function(ind) {
             var deleted = this[ind];
@@ -34,6 +35,8 @@ var array = {
          * @param  {Number} [num] 删除的元素个数，默认全部删除
          * @return {any}          被删除的数组元素
          * @description 删除并返数组的指定值元素，该方法直接改变原数组
+         * @example
+         * [1, 2, 3].deleteVal(1) => [2, 3]
          */
         Array.prototype.deleteVal = function(val, num) {
             var count = 0,
@@ -60,6 +63,8 @@ var array = {
          * @param {Number} val 元素值
          * @return {Number} 新数组长度
          * @description 向数组中的指定位置插入元素，并返回新的长度。该方法直接改变原数组
+         * @example
+         * [1, 2, 3].pushOf(0, 4) => [4, 1, 2, 3] 
          */
         Array.prototype.pushOf = function(ind, val) {
             this.splice(ind, 0, val).length;
@@ -73,6 +78,8 @@ var array = {
          * @param  {Number} [num]  替换的元素个数，默认替换全部
          * @return {Array} 新数组
          * @description 替换数组中指定值的元素，并返回新数组。该方法不会改变原数组
+         * @example
+         * [1, 2, 3].replace(1, 2) => [2, 2, 3]
          */
         Array.prototype.replace = function(val, newVal, num) {
             var result = [],
@@ -92,7 +99,7 @@ var array = {
             return result;
         };
 
-        /**
+        /***
          * @function removeDuplicate
          * @param  {Number} ind   从第几个重复元素开始删除
          * @param  {Number} [num] 删除的元素数量，默认全部删除
@@ -127,6 +134,8 @@ var array = {
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
          * @description 数组去空串，并返回新数组。该方法不会改变原数组
+         * @example
+         * [1, 2, '', 3].trim() => [1, 2, 3]
          */
         Array.prototype.trim = function(num) {
             return _trim(num, '', this);
@@ -137,6 +146,8 @@ var array = {
          * @param  {Number} [num] 删除的空串数量
          * @return {Array}        新数组
          * @description 数组去null值，并返回新数组。该方法不会改变原数组
+         * @example
+         * [1, 2, null, 3, undefined].trim() => [1, 2, 3]
          */
         Array.prototype.removeNull = function(num) {
             return _trim(num, null, this);

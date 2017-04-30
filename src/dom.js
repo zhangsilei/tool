@@ -2,6 +2,7 @@
  * @module 节点选择器－Dom
  * @description 该方法关注DOM查询，并将查询到的结果包装成tool节点对象并返回。
  *              调用方式同jQuery，eg: $('.class'); $('#id'); $('~name'); $('tagName');
+ *              Members代表tool对象的属性，Method为tool对象的方法。
  */
 
 'use strict';
@@ -226,7 +227,7 @@ function _prevAndNext(type, nodes) {
  * 
  *************************************************************/
 
-/**
+/***
  * @class ToolElement
  * @param {Array} nodes  原生节点集，可以为空数组。
  * @return {ToolElement} tool对象
@@ -235,9 +236,11 @@ function _prevAndNext(type, nodes) {
  */
 function ToolElement(nodes) {
     /**
-     * @member
-     * @type {Array}
+     * @type Array
      * @description 原生节点集
+     * @example
+     * <div>It's a test.</div>  
+     * $('div').node 等价于 document.getElementsByTagId('div')[0]
      */
     this.node = nodes;
 
@@ -249,6 +252,10 @@ function ToolElement(nodes) {
      * @param  {Number} ind 索引
      * @return {Element}    原生节点
      * @description 根据索引获取原生节点 
+     * @example
+     * <div class="wrap">one</div>  
+     * <div class="wrap">two</div>  
+     * $('.wrap').get(0) 等价于 document.getElementsByTagId('div')[0]
      */
     this.get = function(ind) {
         return nodes[ind];
@@ -257,6 +264,11 @@ function ToolElement(nodes) {
     /**
      * @param  {Function} cb 回调函数
      * @description 遍历节点集
+     * @example
+     * <div class="wrap">test</div>  
+     * <div class="wrap">test</div>  
+     * <div class="wrap">test</div>  
+     * $('.wrap').each(function(){});
      */
     this.each = function(cb) {
         var nodes = this.node;
@@ -268,6 +280,10 @@ function ToolElement(nodes) {
     /**
      * @return {ToolElement} tool对象
      * @description 获取上一个节点
+     * @example
+     * <div class="prev-ele">prev</div>
+     * <div class="current-ele">current</div>  
+     * $('.current-ele').prev() => $('.prev-ele')
      */
     this.prev = function() {
         return _prevAndNext('prev', nodes);
@@ -276,6 +292,10 @@ function ToolElement(nodes) {
     /**
      * @return {ToolElement} tool对象
      * @description 获取下一个节点
+     * @example
+     * <div class="current-ele">current</div>
+     * <div class="next-ele">next</div>  
+     * $('.current-ele').next() => $('.next-ele')
      */
     this.next = function() {
         return _prevAndNext('next', nodes);
@@ -285,6 +305,10 @@ function ToolElement(nodes) {
      * @param  {Number} ind  索引
      * @return {ToolElement} tool对象
      * @description 获取指定节点
+     * @example
+     * <div class="one">test1</div>
+     * <div class="two">test2</div>
+     * $('div').eq(0) => $('.one')
      */
     this.eq = function(ind) {
         return _pack([nodes[ind]]);
@@ -292,6 +316,9 @@ function ToolElement(nodes) {
 
     /**
      * @description 删除当前节点
+     * @example
+     * <div>content..</div>
+     * $('div').remove()
      */
     this.remove = function() {
         for (var i = 0, len = nodes.length; i < len; i++) {
@@ -303,6 +330,9 @@ function ToolElement(nodes) {
     /**
      * @return {ToolElement} tool对象
      * @description 清空当前节点
+     * @example
+     * <div>content...</div>
+     * $('div').empty()
      */
     this.empty = function() {
         return this.html('');
@@ -312,6 +342,9 @@ function ToolElement(nodes) {
      * @param {String}       插入的内容
      * @return {ToolElement} tool对象
      * @description 在当前节点之前插入内容，支持传入标签。
+     * @example
+     * <div>test</div>
+     * $('div').before('<div>content...</div>') => <div><content/div><div>test</div>
      */
     this.before = function(str) {
         this.each(function(ind, node) {
@@ -324,6 +357,9 @@ function ToolElement(nodes) {
      * @param  {String} str  插入的内容   
      * @return {ToolElement} tool对象 
      * @description 在当前节点之后插入内容，支持传入标签。
+     * @example
+     * <div>test</div>
+     * $('div').before('<div>content...</div>') => <div>test</div><div><content>/div>
      */
     this.after = function(str) {
         this.each(function(ind, node) {
@@ -335,6 +371,10 @@ function ToolElement(nodes) {
     /**
      * @param  {String} [str] 要修改成的html
      * @description 获取/修改当前节点的html
+     * @example
+     * <div>test</div>
+     * $('div').html() => '<div>test</div>'
+     * $('div').html('hi') => '<div>hi</div>'
      */
     this.html = function(str) {
         return _htmlAndText('html', str, nodes);
@@ -343,6 +383,10 @@ function ToolElement(nodes) {
     /**
      * @param  {String} [str] 要修改成的text
      * @description 获取/修改当前节点text
+     * @example
+     * <div>test</div>
+     * $('div').text() => '<div>test</div>'
+     * $('div').text('hi') => '<div>hi</div>'
      */
     this.text = function(str) {
         return _htmlAndText('text', str, nodes);

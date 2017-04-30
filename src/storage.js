@@ -1,7 +1,6 @@
 /**
  * @module 本地存储－Storage
- * @description 该模块提供了本地存储的方法，包括cookie和localStorage。
- *              直接通过命名空间调用即可。eg: $.getCookie(cname);
+ * @description 该模块提供了本地存储相关api
  */
 
 'use strict';

@@ -109,5 +109,6 @@ function dateFormat(format, timestamp) {
 
 module.exports = {
 	dateFormat: dateFormat,
-	validate: validate
+	validate: validate,
+	trim: trim
 };

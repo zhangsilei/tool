@@ -1,4 +1,32 @@
-/******/ (function(modules) { // webpackBootstrap
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: tool.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: tool.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -49,7 +77,7 @@
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
+/******/ 		var getter = module &amp;&amp; module.__esModule ?
 /******/ 			function getDefault() { return module['default']; } :
 /******/ 			function getModuleExports() { return module; };
 /******/ 		__webpack_require__.d(getter, 'a', getter);
@@ -111,7 +139,7 @@ var validate = {
 	 * @example $.validata.code(str, [num]);
 	 */
 	code: function(str, num) {
-		if (num && typeof num == 'number') {
+		if (num &amp;&amp; typeof num == 'number') {
 			return new RegExp('^\\d{' + num + '}$').test(str);
 		} else {
 			return /^\d{4}$/.test(str);
@@ -150,8 +178,8 @@ function trim(str) {
  * @example $.dateFormat(format, [timestamp]);
  */
 function dateFormat(format, timestamp) {
-	if (format && typeof format == 'string') {
-		var date = timestamp && typeof timestamp == 'number' ? new Date(timestamp) : new Date(),
+	if (format &amp;&amp; typeof format == 'string') {
+		var date = timestamp &amp;&amp; typeof timestamp == 'number' ? new Date(timestamp) : new Date(),
 			year = date.getFullYear(),
 			month = date.getMonth() + 1,
 			day = date.getDate(),
@@ -162,19 +190,19 @@ function dateFormat(format, timestamp) {
 			format = format.replace(/y{4}/g, year);
 		}
 		if (format.match(/M{2}/g)) { // 月
-			format = format.replace(/M{2}/g, month < 10 ? '0' + month : month);
+			format = format.replace(/M{2}/g, month &lt; 10 ? '0' + month : month);
 		}
 		if (format.match(/d{2}/g)) { // 日
-			format = format.replace(/d{2}/g, day < 10 ? '0' + day : day);
+			format = format.replace(/d{2}/g, day &lt; 10 ? '0' + day : day);
 		}
 		if (format.match(/H{2}/g)) { // 时
-			format = format.replace(/H{2}/g, hour < 10 ? '0' + hour : hour);
+			format = format.replace(/H{2}/g, hour &lt; 10 ? '0' + hour : hour);
 		}
 		if (format.match(/m{2}/g)) { // 分
-			format = format.replace(/m{2}/g, min < 10 ? '0' + min : min);
+			format = format.replace(/m{2}/g, min &lt; 10 ? '0' + min : min);
 		}
 		if (format.match(/s{2}/g)) { // 秒
-			format = format.replace(/s{2}/g, sec < 10 ? '0' + sec : sec);
+			format = format.replace(/s{2}/g, sec &lt; 10 ? '0' + sec : sec);
 		}
 	}
 	return format;
@@ -234,9 +262,9 @@ var array = {
         Array.prototype.deleteVal = function(val, num) {
             var count = 0,
                 num = num || this.length;
-            for (var i = 0, len = this.length; i < len; i++) {
+            for (var i = 0, len = this.length; i &lt; len; i++) {
                 var temp = this[i];
-                if (count < num) {
+                if (count &lt; num) {
                     if (temp == val) {
                         if (i == len - 1) {
                             return this.deleteOf(i);
@@ -278,9 +306,9 @@ var array = {
             var result = [],
                 count = 0,
                 num = num || this.length;
-            for (var i = 0, len = this.length; i < len; i++) {
+            for (var i = 0, len = this.length; i &lt; len; i++) {
                 var temp = this[i];
-                if (count < num) {
+                if (count &lt; num) {
                     if (temp == val) {
                         result.push(newVal);
                         count++;
@@ -304,7 +332,7 @@ var array = {
                 count = 0,
                 indexs = [],
                 num = num || this.length;
-            for (var i = 0, len = this.length; i < len; i++) {
+            for (var i = 0, len = this.length; i &lt; len; i++) {
                 var temp = this[i];
                 if (!obj[temp]) {
                     obj[temp] = i;
@@ -313,8 +341,8 @@ var array = {
                     indexs.push(i);
                 }
             }
-            for (var j = 0, len = indexs.length; j < len; j++) {
-                if (count < num) {
+            for (var j = 0, len = indexs.length; j &lt; len; j++) {
+                if (count &lt; num) {
                     this.deleteOf(indexs[j] - count);
                     count++;
                 }
@@ -362,12 +390,12 @@ function _trim(num, str, that) {
     if (typeof str == 'string') {
         isStr = true;
     }
-    for (var i = 0, len = that.length; i < len; i++) {
+    for (var i = 0, len = that.length; i &lt; len; i++) {
         var temp = that[i];
         if (isStr ? string.trim(temp) : temp != str) {
             result.push(temp);
         } else {
-            if (count < num) {
+            if (count &lt; num) {
                 count++;
             } else {
                 result.push(temp);
@@ -415,7 +443,7 @@ var bom = {
             trident: u.indexOf('Trident') > -1, //IE内核
             presto: u.indexOf('Presto') > -1, //opera内核
             webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核 
-            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+            gecko: u.indexOf('Gecko') > -1 &amp;&amp; u.indexOf('KHTML') == -1, //火狐内核
             mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
             ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
             android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
@@ -437,7 +465,7 @@ var bom = {
      * $.getQueryString('name') => 'test'
      */
     getQueryString: function(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$)");
         var r = window.location.search.substr(1).match(reg);
         // if (r != null) return unescape(r[2]);
         // return null;
@@ -508,7 +536,7 @@ function ele(eleKey) {
     function _traverse(queryKey) {
         var allEles = document.getElementsByTagName('*'),
             elesArr = [];
-        for (var i = 0, len = allEles.length; i < len; i++) {
+        for (var i = 0, len = allEles.length; i &lt; len; i++) {
             var temp = allEles[i];
             if (queryKey == 'class' || queryKey == 'name') {
                 var attrValue = temp.getAttribute(queryKey);
@@ -525,7 +553,7 @@ function ele(eleKey) {
         }
         return _pack(elesArr);
     }
-    if (eleKey && typeof eleKey == 'string') {
+    if (eleKey &amp;&amp; typeof eleKey == 'string') {
         if (util.trim(eleKey)) { // 选择器
             var eleKeySub = eleKey.slice(1),
                 sign = eleKey[0];
@@ -551,7 +579,7 @@ function ele(eleKey) {
         } else { // 节点
             return null;
         }
-    } else if (eleKey && typeof eleKey == 'object') {
+    } else if (eleKey &amp;&amp; typeof eleKey == 'object') {
         return _pack(eleKey);
     }
 }
@@ -569,7 +597,7 @@ function ele(eleKey) {
  * @return {ToolElement} tool对象
  */
 function _pack(nodes) {
-    if (typeof nodes == 'object' && nodes instanceof Array) {
+    if (typeof nodes == 'object' &amp;&amp; nodes instanceof Array) {
         return new ToolElement(nodes);
     } else {
         console.warn('_pack()方法入参必须为数组');
@@ -604,8 +632,8 @@ function _appendChild(parent, str) {
  */
 function _htmlAndText(type, str, nodes) {
     var result = [];
-    for (var i = 0, len = nodes.length; i < len; i++) {
-        if (!str && str != '') {
+    for (var i = 0, len = nodes.length; i &lt; len; i++) {
+        if (!str &amp;&amp; str != '') {
             result[result.length] = type == 'html' ? nodes[i].innerHTML : nodes[i].innerText;
         } else {
             type == 'html' ? nodes[i].innerHTML = str : nodes[i].innerText = str;
@@ -627,16 +655,16 @@ function _beforeAndAfter(type, str, node) {
         charStart = -1,
         charEnd = -1,
         nextNode = _pack([node]).next();
-    if (!str && typeof str == 'undefined') {
+    if (!str &amp;&amp; typeof str == 'undefined') {
         return;
     } else {
         if (util.trim(str) == '') {
             return;
         } else {
-            if (str.indexOf('<') != -1 && str.indexOf('>') != -1) { // str is a text
-                for (var i = 0, len = str.length; i < len; i++) {
+            if (str.indexOf('&lt;') != -1 &amp;&amp; str.indexOf('>') != -1) { // str is a text
+                for (var i = 0, len = str.length; i &lt; len; i++) {
                     var tempChar = str[i];
-                    if (tempChar == '<') {
+                    if (tempChar == '&lt;') {
                         // create newText    
                         type == 'before' ? _insertBefore(parent, str.slice(0, i), node) : !nextNode ? _appendChild(parent, str.slice(0, i)) : _insertBefore(parent, str.slice(0, i), nextNode.node[0]);
                         charStart = i;
@@ -644,7 +672,7 @@ function _beforeAndAfter(type, str, node) {
                         charEnd = i;
                         // create newNode        
                         var tagName = str.slice(charStart + 1, charEnd),
-                            tagEnd = str.indexOf('</' + tagName + '>'),
+                            tagEnd = str.indexOf('&lt;/' + tagName + '>'),
                             newNode = document.createElement(tagName);
                         newNode.innerHTML = str.slice(charEnd + 1, tagEnd);
                         type == 'before' ? parent.insertBefore(newNode, node) : !nextNode ? parent.appendChild(newNode) : parent.insertBefore(newNode, nextNode.node[0]);
@@ -653,7 +681,7 @@ function _beforeAndAfter(type, str, node) {
                         i = 0;
                         len = str.length;
                         // create last newText    
-                        if (str.indexOf('<') == -1) {
+                        if (str.indexOf('&lt;') == -1) {
                             type == 'before' ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
                         }
                     }
@@ -667,7 +695,7 @@ function _beforeAndAfter(type, str, node) {
 
 function _prevAndNext(type, nodes) {
     var result = [];
-    for (var i = 0, len = nodes.length; i < len; i++) {
+    for (var i = 0, len = nodes.length; i &lt; len; i++) {
         var node = nodes[i];
         while (node = type == 'prev' ? node.previousSibling : node.nextSibling) {
             if (node.nodeType == 1) {
@@ -697,7 +725,7 @@ function ToolElement(nodes) {
      * @type Array
      * @description 原生节点集
      * @example
-     * <div>It's a test.</div>  
+     * &lt;div>It's a test.&lt;/div>  
      * $('div').node 等价于 document.getElementsByTagId('div')[0]
      */
     this.node = nodes;
@@ -711,8 +739,8 @@ function ToolElement(nodes) {
      * @return {Element}    原生节点
      * @description 根据索引获取原生节点 
      * @example
-     * <div class="wrap">one</div>  
-     * <div class="wrap">two</div>  
+     * &lt;div class="wrap">one&lt;/div>  
+     * &lt;div class="wrap">two&lt;/div>  
      * $('.wrap').get(0) 等价于 document.getElementsByTagId('div')[0]
      */
     this.get = function(ind) {
@@ -723,14 +751,14 @@ function ToolElement(nodes) {
      * @param  {Function} cb 回调函数
      * @description 遍历节点集
      * @example
-     * <div class="wrap">test</div>  
-     * <div class="wrap">test</div>  
-     * <div class="wrap">test</div>  
+     * &lt;div class="wrap">test&lt;/div>  
+     * &lt;div class="wrap">test&lt;/div>  
+     * &lt;div class="wrap">test&lt;/div>  
      * $('.wrap').each(function(){});
      */
     this.each = function(cb) {
         var nodes = this.node;
-        for (var i = 0, len = nodes.length; i < len; i++) {
+        for (var i = 0, len = nodes.length; i &lt; len; i++) {
             cb.call(nodes[i], i, nodes[i]);
         }
     };
@@ -739,8 +767,8 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象
      * @description 获取上一个节点
      * @example
-     * <div class="prev-ele">prev</div>
-     * <div class="current-ele">current</div>  
+     * &lt;div class="prev-ele">prev&lt;/div>
+     * &lt;div class="current-ele">current&lt;/div>  
      * $('.current-ele').prev() => $('.prev-ele')
      */
     this.prev = function() {
@@ -751,8 +779,8 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象
      * @description 获取下一个节点
      * @example
-     * <div class="current-ele">current</div>
-     * <div class="next-ele">next</div>  
+     * &lt;div class="current-ele">current&lt;/div>
+     * &lt;div class="next-ele">next&lt;/div>  
      * $('.current-ele').next() => $('.next-ele')
      */
     this.next = function() {
@@ -764,8 +792,8 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象
      * @description 获取指定节点
      * @example
-     * <div class="one">test1</div>
-     * <div class="two">test2</div>
+     * &lt;div class="one">test1&lt;/div>
+     * &lt;div class="two">test2&lt;/div>
      * $('div').eq(0) => $('.one')
      */
     this.eq = function(ind) {
@@ -775,11 +803,11 @@ function ToolElement(nodes) {
     /**
      * @description 删除当前节点
      * @example
-     * <div>content..</div>
+     * &lt;div>content..&lt;/div>
      * $('div').remove()
      */
     this.remove = function() {
-        for (var i = 0, len = nodes.length; i < len; i++) {
+        for (var i = 0, len = nodes.length; i &lt; len; i++) {
             var node = nodes[i];
             node.parentNode.removeChild(node);
         }
@@ -789,7 +817,7 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象
      * @description 清空当前节点
      * @example
-     * <div>content...</div>
+     * &lt;div>content...&lt;/div>
      * $('div').empty()
      */
     this.empty = function() {
@@ -801,8 +829,8 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象
      * @description 在当前节点之前插入内容，支持传入标签。
      * @example
-     * <div>test</div>
-     * $('div').before('<div>content...</div>') => <div><content/div><div>test</div>
+     * &lt;div>test&lt;/div>
+     * $('div').before('&lt;div>content...&lt;/div>') => &lt;div>&lt;content/div>&lt;div>test&lt;/div>
      */
     this.before = function(str) {
         this.each(function(ind, node) {
@@ -816,8 +844,8 @@ function ToolElement(nodes) {
      * @return {ToolElement} tool对象 
      * @description 在当前节点之后插入内容，支持传入标签。
      * @example
-     * <div>test</div>
-     * $('div').before('<div>content...</div>') => <div>test</div><div><content>/div>
+     * &lt;div>test&lt;/div>
+     * $('div').before('&lt;div>content...&lt;/div>') => &lt;div>test&lt;/div>&lt;div>&lt;content>/div>
      */
     this.after = function(str) {
         this.each(function(ind, node) {
@@ -830,9 +858,9 @@ function ToolElement(nodes) {
      * @param  {String} [str] 要修改成的html
      * @description 获取/修改当前节点的html
      * @example
-     * <div>test</div>
-     * $('div').html() => '<div>test</div>'
-     * $('div').html('hi') => '<div>hi</div>'
+     * &lt;div>test&lt;/div>
+     * $('div').html() => '&lt;div>test&lt;/div>'
+     * $('div').html('hi') => '&lt;div>hi&lt;/div>'
      */
     this.html = function(str) {
         return _htmlAndText('html', str, nodes);
@@ -842,9 +870,9 @@ function ToolElement(nodes) {
      * @param  {String} [str] 要修改成的text
      * @description 获取/修改当前节点text
      * @example
-     * <div>test</div>
-     * $('div').text() => '<div>test</div>'
-     * $('div').text('hi') => '<div>hi</div>'
+     * &lt;div>test&lt;/div>
+     * $('div').text() => '&lt;div>test&lt;/div>'
+     * $('div').text('hi') => '&lt;div>hi&lt;/div>'
      */
     this.text = function(str) {
         return _htmlAndText('text', str, nodes);
@@ -1060,7 +1088,7 @@ module.exports = {
 
 	var spaceName = typeof w.$ == 'undefined' ? '$' : 'tool';
 
-	spaceName == 'tool' && console.warn('window.$命名空间已被使用，请用tool代替...');
+	spaceName == 'tool' &amp;&amp; console.warn('window.$命名空间已被使用，请用tool代替...');
 
 	// 选择器 
 	w[spaceName] = dom.ele;
@@ -1084,4 +1112,26 @@ module.exports = {
 })(window);
 
 /***/ })
-/******/ ]);
+/******/ ]);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-%25E5%258E%259F%25E7%2594%259F%25E6%2596%25B9%25E6%25B3%2595%25E5%258A%25A0%25E5%25BC%25BA%25EF%25BC%258DArray.html">原生方法加强－Array</a></li><li><a href="module-%25E5%25B7%25A5%25E5%2585%25B7%25E6%2596%25B9%25E6%25B3%2595%25EF%25BC%258DUtil.html">工具方法－Util</a></li><li><a href="module-%25E6%259C%25AC%25E5%259C%25B0%25E5%25AD%2598%25E5%2582%25A8%25EF%25BC%258DStorage.html">本地存储－Storage</a></li><li><a href="module-%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8-Bom.html">浏览器-Bom</a></li><li><a href="module-%25E8%258A%2582%25E7%2582%25B9%25E9%2580%2589%25E6%258B%25A9%25E5%2599%25A8%25EF%25BC%258DDom.html">节点选择器－Dom</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sun Apr 30 2017 17:16:55 GMT+0800 (CST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

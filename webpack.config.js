@@ -4,6 +4,7 @@ module.exports = {
     entry: './src/entry.js',
     output: {
         path: './dist',
+        // filename: 'tool.min.js'
         filename: 'tool.js'
     },
     plugins: [
