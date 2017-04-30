@@ -12,7 +12,7 @@
 
 2. 兼容性：暂未测试
 
-3. [api文档请戳我](http://dreamon324.github.io/tool/out/index.html)
+3. [api文档请戳我](https://dreamon324.github.io/tool/out/index.html)
 
 ### 二、使用说明
 
