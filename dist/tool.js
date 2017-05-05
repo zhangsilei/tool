@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
+
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -46,7 +46,7 @@
 /******/ 			});
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -55,13 +55,13 @@
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-/******/
+
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
@@ -871,12 +871,12 @@ module.exports = {
 "use strict";
 /**
  * @module 本地存储－Storage
- * @description 该模块提供了本地存储相关api
+ * @description 该模块提供了本地存储相关api，调用时直接在命名空间下使用，eg：$.getCookie(); 如果$不可用则tool.getCookie();
  */
 
 
 
-var ls = window.localStorage;
+var ls = localStorage;
 
 var storage = {
     /**
@@ -884,6 +884,8 @@ var storage = {
      * @param  {String} cname Cookie的key
      * @return {String} Cookie的value
      * @description 读取Cookie
+     * @example
+     * $.getCookie('name')
      */
     getCookie: function(cname) {
         var cvalue = "",
@@ -909,6 +911,8 @@ var storage = {
      * @param {String} cvalue Cookie的value
      * @param {String} days   Cookie的存活天数
      * @description 写入Cookie
+     * @example
+     * $.setCookie('name', 'haha', 3)
      */
     setCookie: function(cname, cvalue, days) {
         var date = new Date();
@@ -922,6 +926,8 @@ var storage = {
      * @param  {String} key 本地数据的key
      * @return {String}     本地数据的value
      * @description 获取本地存储中对应的值
+     * @example
+     * $.getStorage('name')
      */
     getStorage: function(key) {
         var val = '';
@@ -936,6 +942,8 @@ var storage = {
      * @param {String} key 本地数据的key
      * @param {String} val 本地数据的value   
      * @description 设置本地存储数据
+     * @example
+     * $.setStorage('name', 'haha')
      */
     setStorage: function(key, val) {
         _checkStorageSupport(function() {
@@ -947,6 +955,8 @@ var storage = {
      * @function removeStorage
      * @param  {String} key 本地数据的key
      * @description 移除指定的本地数据
+     * @example
+     * $.removeStorage('name')
      */
     removeStorage: function(key) {
         _checkStorageSupport(function() {
@@ -956,7 +966,9 @@ var storage = {
 
     /**
      * @function clearStorage
-     * @description 清除本地存储的所有数据      
+     * @description 清除本地存储的所有数据   
+     * @example
+     * $.clearStorage()   
      */
     clearStorage: function() {
         _checkStorageSupport(function() {
