@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
     entry: './src/entry.js',
     output: {
-        path: './dist',
+        path: __dirname + '/dist',
         // filename: 'tool.min.js'
         filename: 'tool.js'
     },
