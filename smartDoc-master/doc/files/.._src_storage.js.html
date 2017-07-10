@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/storage.js - SmartDoc</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart" _assetsPath="../assets">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartdoc">
+             
+            <img alt="SmartDoc" src="../assets/css/logo.png" title="SmartDoc">
+            
+                SmartDoc
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">Home</a>
+                    </li>
+                    
+                    <li><a href="/">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl id="sidebar_list">
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/API 增强.html">API 增强</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/Array.html">Array</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Storage.html">Storage</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/工具方法.html">工具方法</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/BOM.html">BOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/DOM.html">DOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/ToolElement.html">ToolElement</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Util.html">Util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>../src/storage.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+/**
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
+ */
+
+&#x27;use strict&#x27;;
+
+stDefine(&#x27;Storage&#x27;, function(st) {
+    /**
+     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+     * 
+     * @class Storage
+     */
+})
+
+(function() {
+    var ls = localStorage;
+
+    var storage = {
+        /**
+         * @function getCookie
+         * @param  {String} cname Cookie的key
+         * @return {String} Cookie的value
+         * @description 读取Cookie
+         */
+        getCookie: function(cname) {
+            var cvalue = &quot;&quot;,
+                cookies = document.cookie;
+            if (cookies.length &gt; 0) {
+                var search = cname + &quot;=&quot;,
+                    start = cookies.indexOf(search);
+                if (start != -1) {
+                    start += search.length;
+                    var end = cookies.indexOf(&quot;;&quot;, start);
+                    if (end == -1) {
+                        end = cookies.length;
+                    }
+                    cvalue = unescape(cookies.substring(start, end));
+                }
+            }
+            return cvalue;
+        },
+
+        /**
+         * @function setCookie
+         * @param {String} cname  Cookie的key
+         * @param {String} cvalue Cookie的value
+         * @param {String} days   Cookie的存活天数
+         * @description 写入Cookie
+         */
+        setCookie: function(cname, cvalue, days) {
+            var date = new Date();
+            date.setDate(date.getDate() + days);
+            var exdate = &quot;; expires=&quot; + date.toGMTString();
+            document.cookie = cname + &quot;=&quot; + escape(cvalue) + exdate;
+        },
+
+        /**
+         * @function getStorage
+         * @param  {String} key 本地数据的key
+         * @return {String}     本地数据的value
+         * @description 获取本地存储中对应的值
+         */
+        getStorage: function(key) {
+            var val = &#x27;&#x27;;
+            _checkStorageSupport(function() {
+                val = ls.getItem(key);
+            });
+            return val;
+        },
+
+        /**
+         * @function setStorage
+         * @param {String} key 本地数据的key
+         * @param {String} val 本地数据的value   
+         * @description 设置本地存储数据
+         */
+        setStorage: function(key, val) {
+            _checkStorageSupport(function() {
+                ls.setItem(key, val);
+            });
+        },
+
+        /**
+         * @function removeStorage
+         * @param  {String} key 本地数据的key
+         * @description 移除指定的本地数据
+         */
+        removeStorage: function(key) {
+            _checkStorageSupport(function() {
+                ls.removeItem(key);
+            });
+        },
+
+        /**
+         * @function clearStorage
+         * @description 清除本地存储的所有数据   
+         */
+        clearStorage: function() {
+            _checkStorageSupport(function() {
+                ls.clear();
+            });
+        }
+    }
+
+    /***
+     * 监测浏览器是否支持localStorage
+     * @param  {Function} func 普通方法
+     */
+    function _checkStorageSupport(func) {
+        if (!ls) {
+            alert(&#x27;浏览器不支持localStorage！或者开启了隐私模式！&#x27;);
+        } else {
+            func();
+        }
+    }
+
+    module.exports = {
+        getCookie: storage.getCookie,
+        setCookie: storage.setCookie,
+        getStorage: storage.getStorage,
+        setStorage: storage.setStorage,
+        removeStorage: storage.removeStorage,
+        clearStorage: storage.clearStorage
+    };
+})();
+    </pre>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

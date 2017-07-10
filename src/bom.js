@@ -1,9 +1,19 @@
 /**
- * @module 浏览器-Bom
- * @description 该模块提供了浏览器交互相关api
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
 'use strict';
+
+stDefine('BOM', function(st) {
+    /**
+     * 该模块提供了浏览器交互相关API
+     * 
+     * @class BOM
+     */
+})
+
 (function() {
     var bom = {
         /**
@@ -13,8 +23,6 @@
          *                      android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; 
          *                      iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;
          * @description 判断终端的类型
-         * @example
-         * $.browserVersion.trident => ture/false
          */
         browser: function() {
             var u = navigator.userAgent;
@@ -39,9 +47,6 @@
          * @param {String} name URL后缀的参数名
          * @return {String} 对应的值
          * @description 获取请求url的参数
-         * @example
-         * https://www.baidu.com?name=test
-         * $.getQueryString('name') => 'test'
          */
         getQueryString: function(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -57,4 +62,4 @@
         browserVersion: bom.browser,
         getQueryString: bom.getQueryString
     }
-})()
+})();

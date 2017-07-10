@@ -1,9 +1,19 @@
 /**
- * @module 本地存储－Storage
- * @description 该模块提供了本地存储相关api，调用时直接在命名空间下使用，eg：$.getCookie(); 如果$不可用则tool.getCookie();
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
  */
 
 'use strict';
+
+stDefine('Storage', function(st) {
+    /**
+     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+     * 
+     * @class Storage
+     */
+})
+
 (function() {
     var ls = localStorage;
 
@@ -13,8 +23,6 @@
          * @param  {String} cname Cookie的key
          * @return {String} Cookie的value
          * @description 读取Cookie
-         * @example
-         * $.getCookie('name')
          */
         getCookie: function(cname) {
             var cvalue = "",
@@ -40,8 +48,6 @@
          * @param {String} cvalue Cookie的value
          * @param {String} days   Cookie的存活天数
          * @description 写入Cookie
-         * @example
-         * $.setCookie('name', 'haha', 3)
          */
         setCookie: function(cname, cvalue, days) {
             var date = new Date();
@@ -55,8 +61,6 @@
          * @param  {String} key 本地数据的key
          * @return {String}     本地数据的value
          * @description 获取本地存储中对应的值
-         * @example
-         * $.getStorage('name')
          */
         getStorage: function(key) {
             var val = '';
@@ -71,8 +75,6 @@
          * @param {String} key 本地数据的key
          * @param {String} val 本地数据的value   
          * @description 设置本地存储数据
-         * @example
-         * $.setStorage('name', 'haha')
          */
         setStorage: function(key, val) {
             _checkStorageSupport(function() {
@@ -84,8 +86,6 @@
          * @function removeStorage
          * @param  {String} key 本地数据的key
          * @description 移除指定的本地数据
-         * @example
-         * $.removeStorage('name')
          */
         removeStorage: function(key) {
             _checkStorageSupport(function() {
@@ -96,8 +96,6 @@
         /**
          * @function clearStorage
          * @description 清除本地存储的所有数据   
-         * @example
-         * $.clearStorage()   
          */
         clearStorage: function() {
             _checkStorageSupport(function() {
@@ -126,4 +124,4 @@
         removeStorage: storage.removeStorage,
         clearStorage: storage.clearStorage
     };
-})()
+})();

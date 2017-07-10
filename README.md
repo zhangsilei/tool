@@ -12,11 +12,11 @@
 
 2. 兼容性：暂未测试
 
-3. [api文档请戳我](https://dreamon324.github.io/tool/out/index.html)
+3. [api文档请戳我](https://zhangsilei.github.io/tool/out/index.html)
 
 ### 二、使用说明
 
-1. 获取 tool.js：[直接下载](https://github.com/DreamOn324/tool/archive/v0.1.zip)
+1. 获取 tool.js：[直接下载](https://github.com/zhangsilei/tool/archive/v0.1.zip)
 
 2. 引入 tool.js  
     ```

@@ -1,0 +1,1305 @@
+{
+    "project": {
+        "name": "SmartDoc",
+        "version": "1.1.0",
+        "url": "https://github.com/zhh77/smartdoc",
+        "navs": [
+            {
+                "name": "Home",
+                "url": "https://github.com/zhh77/smartdoc"
+            },
+            {
+                "name": "Document",
+                "url": "/"
+            },
+            {
+                "name": "About",
+                "url": "https://github.com/zhh77/smartdoc"
+            }
+        ]
+    },
+    "files": {
+        "../src/array.js": {
+            "name": "../src/array.js",
+            "modules": {},
+            "classes": {
+                "Array": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/bom.js": {
+            "name": "../src/bom.js",
+            "modules": {},
+            "classes": {
+                "BOM": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/dom.js": {
+            "name": "../src/dom.js",
+            "modules": {},
+            "classes": {
+                "DOM": 1,
+                "ToolElement": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/entry.js": {
+            "name": "../src/entry.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/storage.js": {
+            "name": "../src/storage.js",
+            "modules": {
+                "API 增强": 1
+            },
+            "classes": {
+                "Storage": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/test.js": {
+            "name": "../src/test.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "../src/util.js": {
+            "name": "../src/util.js",
+            "modules": {
+                "工具方法": 1
+            },
+            "classes": {
+                "Util": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "API 增强": {
+            "name": "API 增强",
+            "submodules": {},
+            "classes": {
+                "Array": 1,
+                "Storage": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "../src/storage.js",
+            "line": 10,
+            "description": "增加常用方法挂载到JS原型链上，以拓展原生JS功能。"
+        },
+        "工具方法": {
+            "name": "工具方法",
+            "submodules": {},
+            "classes": {
+                "BOM": 1,
+                "DOM": 1,
+                "ToolElement": 1,
+                "Util": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "../src/util.js",
+            "line": 10,
+            "description": "增加常用业务工具方法，以提高通用业务的开发效率。"
+        }
+    },
+    "classes": {
+        "Array": {
+            "name": "Array",
+            "shortname": "Array",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "API 增强",
+            "namespace": "",
+            "file": "../src/array.js",
+            "line": 10,
+            "description": "此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。"
+        },
+        "BOM": {
+            "name": "BOM",
+            "shortname": "BOM",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "工具方法",
+            "namespace": "",
+            "file": "../src/bom.js",
+            "line": 10,
+            "description": "该模块提供了浏览器交互相关API"
+        },
+        "DOM": {
+            "name": "DOM",
+            "shortname": "DOM",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "工具方法",
+            "namespace": "",
+            "file": "../src/dom.js",
+            "line": 10,
+            "description": "此模块提供了DOM查询功能，大部分API调用对标jQuery。"
+        },
+        "ToolElement": {
+            "name": "ToolElement",
+            "shortname": "ToolElement",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "工具方法",
+            "namespace": "",
+            "file": "../src/dom.js",
+            "line": 238,
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "原生节点集，可以为空数组。",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。\n             无需手动封装，直接调用$()即可。"
+        },
+        "Storage": {
+            "name": "Storage",
+            "shortname": "Storage",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "API 增强",
+            "namespace": "",
+            "file": "../src/storage.js",
+            "line": 10,
+            "description": "此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();"
+        },
+        "Util": {
+            "name": "Util",
+            "shortname": "Util",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "工具方法",
+            "namespace": "",
+            "file": "../src/util.js",
+            "line": 10,
+            "description": "该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);"
+        }
+    },
+    "classitems": [
+        {
+            "file": "../src/array.js",
+            "line": 27,
+            "itemtype": "method",
+            "name": "deleteOf",
+            "params": [
+                {
+                    "name": "ind",
+                    "description": "数组元素索引",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "被删除的数组元素",
+                "type": "Any"
+            },
+            "description": "删除并返回数组的指定位置元素，该方法会改变原数组",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 39,
+            "itemtype": "method",
+            "name": "deleteVal",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "数组元素的值",
+                    "type": "Any"
+                },
+                {
+                    "name": "num",
+                    "description": "删除的元素个数，默认全部删除",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "被删除的数组元素",
+                "type": "Any"
+            },
+            "description": "删除并返数组的指定值元素，该方法会改变原数组",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "pushOf",
+            "params": [
+                {
+                    "name": "ind",
+                    "description": "索引值",
+                    "type": "Number"
+                },
+                {
+                    "name": "val",
+                    "description": "元素值",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "新数组长度",
+                "type": "Number"
+            },
+            "description": "向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 77,
+            "itemtype": "method",
+            "name": "replace",
+            "params": [
+                {
+                    "name": "val",
+                    "description": "元素值",
+                    "type": "Any"
+                },
+                {
+                    "name": "newVal",
+                    "description": "新元素值",
+                    "type": "Any"
+                },
+                {
+                    "name": "num",
+                    "description": "替换的元素个数，默认替换全部",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "新数组",
+                "type": "Array"
+            },
+            "description": "替换数组中指定值的元素，并返回新数组，该方法不会改变原数组。",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 103,
+            "itemtype": "method",
+            "name": "removeDuplicate",
+            "params": [
+                {
+                    "name": "ind",
+                    "description": "从第几个重复元素开始删除",
+                    "type": "Number"
+                },
+                {
+                    "name": "num",
+                    "description": "删除的元素数量，默认全部删除",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "description": "数组去重，并返回新数组。该方法不改变原数组\n             暂时未开放，测试中有问题。xxxxxxxxx",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 133,
+            "itemtype": "method",
+            "name": "trim",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "删除的空串数量",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "新数组",
+                "type": "Array"
+            },
+            "description": "数组去空串，并返回新数组，该方法不会改变原数组。",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 143,
+            "itemtype": "method",
+            "name": "removeNull",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "删除的空串数量",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "新数组",
+                "type": "Array"
+            },
+            "description": "数组去null值，并返回新数组，该方法不会改变原数组。",
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/array.js",
+            "line": 155,
+            "description": "数组去空串/null值，并返回新数组 \n该方法不会改变原数组",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "删除的空串数量",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "新数组",
+                "type": "Array"
+            },
+            "class": "Array",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/bom.js",
+            "line": 19,
+            "itemtype": "method",
+            "name": "browserVersion",
+            "return": {
+                "description": "终端类型：trident = IE内核; presto = opera内核; webKit = 苹果、谷歌内核;\n                     gecko = 火狐内核; mobile = 移动终端; ios = ios终端; \n                     android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; \n                     iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;",
+                "type": "Object"
+            },
+            "description": "判断终端的类型",
+            "class": "BOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/bom.js",
+            "line": 45,
+            "itemtype": "method",
+            "name": "getQueryString",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "URL后缀的参数名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "对应的值",
+                "type": "String"
+            },
+            "description": "获取请求url的参数",
+            "class": "BOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 45,
+            "itemtype": "method",
+            "name": "$",
+            "params": [
+                {
+                    "name": "eleKey",
+                    "description": "节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "tool节点对象",
+                "type": "ToolElement"
+            },
+            "description": "节点选择器",
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 52,
+            "description": "目前查询器的效率低于jQuery3~4倍左右(10w级的节点数查询)，暂时无优化思路。。瓶颈。。",
+            "params": [
+                {
+                    "name": "queryKey",
+                    "description": "根据哪种方式查询节点：class/name/tag",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 110,
+            "description": "dom.js内部公共方法，只在dom.js内使用。",
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 116,
+            "description": "将原生节点封装成ToolElement",
+            "params": [
+                {
+                    "name": "nodes",
+                    "description": "原生节点集，可以为空数组。",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 129,
+            "description": "插入节点",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "当前节点的原生父节点",
+                    "type": "Element"
+                },
+                {
+                    "name": "str",
+                    "description": "新节点名称",
+                    "type": "String"
+                },
+                {
+                    "name": "ele",
+                    "description": "新元素添加在该元素前",
+                    "type": "Element"
+                }
+            ],
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 139,
+            "description": "追加节点",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "当前节点的原生父节点",
+                    "type": "Element"
+                },
+                {
+                    "name": "str",
+                    "description": "新节点的名称",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 148,
+            "description": "获得/设置节点的html/text",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "操作类型：html：操作元素的html，text：操作元素的text",
+                    "type": "String"
+                },
+                {
+                    "name": "str",
+                    "description": "要设置的内容值",
+                    "type": "String"
+                },
+                {
+                    "name": "nodes",
+                    "description": "原生节点集",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "get操作时返回字符串数组，set时返回tool对象",
+                "type": "Array/ToolElement"
+            },
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 168,
+            "description": "在当前节点的前/后插入新的内容",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "操作类型：before：在之前插入，after：在之后插入",
+                    "type": "String"
+                },
+                {
+                    "name": "str",
+                    "description": "要插入的内容",
+                    "type": "String"
+                },
+                {
+                    "name": "node",
+                    "description": "原生节点",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 232,
+            "description": "ToolElement节点对象封装",
+            "class": "DOM",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 246,
+            "type": "Array",
+            "description": "原生节点集",
+            "example": [
+                "\n<div>It's a test.</div>  \n$('div').node 等价于 document.getElementsByTagId('div')[0]"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 255,
+            "description": "节点相关操作",
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 259,
+            "params": [
+                {
+                    "name": "ind",
+                    "description": "索引",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "原生节点",
+                "type": "Element"
+            },
+            "description": "根据索引获取原生节点",
+            "example": [
+                "\n<div class=\"wrap\">one</div>  \n<div class=\"wrap\">two</div>  \n$('.wrap').get(0) 等价于 document.getElementsByTagId('div')[0]"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 272,
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "回调函数",
+                    "type": "Function"
+                }
+            ],
+            "description": "遍历节点集",
+            "example": [
+                "\n<div class=\"wrap\">test</div>  \n<div class=\"wrap\">test</div>  \n<div class=\"wrap\">test</div>  \n$('.wrap').each(function(){});"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 288,
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "获取上一个节点",
+            "example": [
+                "\n<div class=\"prev-ele\">prev</div>\n<div class=\"current-ele\">current</div>  \n$('.current-ele').prev() => $('.prev-ele')"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 300,
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "获取下一个节点",
+            "example": [
+                "\n<div class=\"current-ele\">current</div>\n<div class=\"next-ele\">next</div>  \n$('.current-ele').next() => $('.next-ele')"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 312,
+            "params": [
+                {
+                    "name": "ind",
+                    "description": "索引",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "获取指定节点",
+            "example": [
+                "\n<div class=\"one\">test1</div>\n<div class=\"two\">test2</div>\n$('div').eq(0) => $('.one')"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 325,
+            "description": "删除当前节点",
+            "example": [
+                "\n<div>content..</div>\n$('div').remove()"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 338,
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "清空当前节点",
+            "example": [
+                "\n<div>content...</div>\n$('div').empty()"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 349,
+            "params": [
+                {
+                    "name": "插入的内容",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "在当前节点之前插入内容，支持传入标签。",
+            "example": [
+                "\n<div>test</div>\n$('div').before('<div>content...</div>') => <div><content/div><div>test</div>"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 364,
+            "params": [
+                {
+                    "name": "str",
+                    "description": "插入的内容",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "tool对象",
+                "type": "ToolElement"
+            },
+            "description": "在当前节点之后插入内容，支持传入标签。",
+            "example": [
+                "\n<div>test</div>\n$('div').before('<div>content...</div>') => <div>test</div><div><content>/div>"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 379,
+            "params": [
+                {
+                    "name": "str",
+                    "description": "要修改成的html",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "description": "获取/修改当前节点的html",
+            "example": [
+                "\n<div>test</div>\n$('div').html() => '<div>test</div>'\n$('div').html('hi') => '<div>hi</div>'"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 391,
+            "itemtype": "method",
+            "name": "text",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "要修改成的text",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "description": "获取/修改当前节点text",
+            "example": [
+                "\n<div>test</div>\n$('div').text() => '<div>test</div>'\n$('div').text('hi') => '<div>hi</div>'"
+            ],
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/dom.js",
+            "line": 404,
+            "description": "属性相关操作",
+            "class": "ToolElement",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/entry.js",
+            "line": 6,
+            "description": "打包入口文件，负责各个模块间的整合。",
+            "class": "Storage",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 21,
+            "itemtype": "method",
+            "name": "getCookie",
+            "params": [
+                {
+                    "name": "cname",
+                    "description": "Cookie的key",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Cookie的value",
+                "type": "String"
+            },
+            "description": "读取Cookie",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 45,
+            "itemtype": "method",
+            "name": "setCookie",
+            "params": [
+                {
+                    "name": "cname",
+                    "description": "Cookie的key",
+                    "type": "String"
+                },
+                {
+                    "name": "cvalue",
+                    "description": "Cookie的value",
+                    "type": "String"
+                },
+                {
+                    "name": "days",
+                    "description": "Cookie的存活天数",
+                    "type": "String"
+                }
+            ],
+            "description": "写入Cookie",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 59,
+            "itemtype": "method",
+            "name": "getStorage",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "本地数据的key",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "本地数据的value",
+                "type": "String"
+            },
+            "description": "获取本地存储中对应的值",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 73,
+            "itemtype": "method",
+            "name": "setStorage",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "本地数据的key",
+                    "type": "String"
+                },
+                {
+                    "name": "val",
+                    "description": "本地数据的value",
+                    "type": "String"
+                }
+            ],
+            "description": "设置本地存储数据",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 85,
+            "itemtype": "method",
+            "name": "removeStorage",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "本地数据的key",
+                    "type": "String"
+                }
+            ],
+            "description": "移除指定的本地数据",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 96,
+            "itemtype": "method",
+            "name": "clearStorage",
+            "description": "清除本地存储的所有数据",
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/storage.js",
+            "line": 107,
+            "description": "监测浏览器是否支持localStorage",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "普通方法",
+                    "type": "Function"
+                }
+            ],
+            "class": "Storage",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/test.js",
+            "line": 1,
+            "description": "暂时不引入单元测试框架，先手动测试，有问题的直接不露出",
+            "class": "Util",
+            "module": "API 增强"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 19,
+            "itemtype": "method",
+            "name": "input",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "需要校验的字符串",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "description": "是否满足：只有中文、数字、字母和下划线，且位置不限。",
+            "example": [
+                " $.validate.input(str)"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 30,
+            "itemtype": "method",
+            "name": "mobile",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "需要校验的字符串",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "description": "是否为手机号",
+            "example": [
+                " $.validata.mobile(str);"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 41,
+            "itemtype": "method",
+            "name": "code",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "需要校验的字符串",
+                    "type": "String"
+                },
+                {
+                    "name": "num",
+                    "description": "验证码的个数，默认四位数",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "description": "是否为数字验证码",
+            "example": [
+                " $.validata.code(str, [num]);"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 57,
+            "itemtype": "method",
+            "name": "email",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "需要校验的字符串",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "description": "是否为邮箱",
+            "example": [
+                " $.validata.email(str);"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 69,
+            "itemtype": "method",
+            "name": "trim",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "要过滤的字符串",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "过滤后的字符串",
+                "type": "String"
+            },
+            "description": "过滤空串",
+            "example": [
+                " $.trim(str);"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        },
+        {
+            "file": "../src/util.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "dateFormat",
+            "params": [
+                {
+                    "name": "format",
+                    "description": "时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss",
+                    "type": "String"
+                },
+                {
+                    "name": "timestamp",
+                    "description": "时间戳，默认当前时间",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "格式化后的时间字符串",
+                "type": "String"
+            },
+            "description": "时间格式化，format可以随意组合。eg: yyyy-MM-dd HH:mm:ss => 2017-01-01 13:13:13",
+            "example": [
+                " $.dateFormat(format, [timestamp]);"
+            ],
+            "class": "Util",
+            "module": "工具方法"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:27"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:39"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:65"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:77"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:103"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:133"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/array.js:143"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/bom.js:19"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/bom.js:45"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/dom.js:45"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/dom.js:391"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:21"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:45"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:73"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:85"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/storage.js:96"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:19"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:30"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:41"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:69"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " ../src/util.js:80"
+        },
+        {
+            "message": "Missing item type\n数组去空串/null值，并返回新数组 \n该方法不会改变原数组",
+            "line": " ../src/array.js:155"
+        },
+        {
+            "message": "Missing item type\n目前查询器的效率低于jQuery3~4倍左右(10w级的节点数查询)，暂时无优化思路。。瓶颈。。",
+            "line": " ../src/dom.js:52"
+        },
+        {
+            "message": "Missing item type\ndom.js内部公共方法，只在dom.js内使用。",
+            "line": " ../src/dom.js:110"
+        },
+        {
+            "message": "Missing item type\n将原生节点封装成ToolElement",
+            "line": " ../src/dom.js:116"
+        },
+        {
+            "message": "Missing item type\n插入节点",
+            "line": " ../src/dom.js:129"
+        },
+        {
+            "message": "Missing item type\n追加节点",
+            "line": " ../src/dom.js:139"
+        },
+        {
+            "message": "Missing item type\n获得/设置节点的html/text",
+            "line": " ../src/dom.js:148"
+        },
+        {
+            "message": "Missing item type\n在当前节点的前/后插入新的内容",
+            "line": " ../src/dom.js:168"
+        },
+        {
+            "message": "Missing item type\nToolElement节点对象封装",
+            "line": " ../src/dom.js:232"
+        },
+        {
+            "message": "Missing item type\n原生节点集",
+            "line": " ../src/dom.js:246"
+        },
+        {
+            "message": "Missing item type\n节点相关操作",
+            "line": " ../src/dom.js:255"
+        },
+        {
+            "message": "Missing item type\n根据索引获取原生节点",
+            "line": " ../src/dom.js:259"
+        },
+        {
+            "message": "Missing item type\n遍历节点集",
+            "line": " ../src/dom.js:272"
+        },
+        {
+            "message": "Missing item type\n获取上一个节点",
+            "line": " ../src/dom.js:288"
+        },
+        {
+            "message": "Missing item type\n获取下一个节点",
+            "line": " ../src/dom.js:300"
+        },
+        {
+            "message": "Missing item type\n获取指定节点",
+            "line": " ../src/dom.js:312"
+        },
+        {
+            "message": "Missing item type\n删除当前节点",
+            "line": " ../src/dom.js:325"
+        },
+        {
+            "message": "Missing item type\n清空当前节点",
+            "line": " ../src/dom.js:338"
+        },
+        {
+            "message": "Missing item type\n在当前节点之前插入内容，支持传入标签。",
+            "line": " ../src/dom.js:349"
+        },
+        {
+            "message": "Missing item type\n在当前节点之后插入内容，支持传入标签。",
+            "line": " ../src/dom.js:364"
+        },
+        {
+            "message": "Missing item type\n获取/修改当前节点的html",
+            "line": " ../src/dom.js:379"
+        },
+        {
+            "message": "Missing item type\n属性相关操作",
+            "line": " ../src/dom.js:404"
+        },
+        {
+            "message": "Missing item type\n打包入口文件，负责各个模块间的整合。",
+            "line": " ../src/entry.js:6"
+        },
+        {
+            "message": "Missing item type\n监测浏览器是否支持localStorage",
+            "line": " ../src/storage.js:107"
+        },
+        {
+            "message": "Missing item type\n暂时不引入单元测试框架，先手动测试，有问题的直接不露出",
+            "line": " ../src/test.js:1"
+        }
+    ]
+}

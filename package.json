@@ -4,21 +4,27 @@
   "description": "",
   "main": "jquery.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.dev.config.js",
+    "watch": "webpack --config webpack.dev.config.js --watch --progress",
+    "jsdoc": "jsdoc ./dist/tool.js -d doc",
+    "smartdoc": "node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DreamOn324/tool.git"
+    "url": "git+https://github.com/zhangsilei/tool.git"
   },
-  "author": "",
+  "author": "zhangsilei",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DreamOn324/tool/issues"
+    "url": "https://github.com/zhangsilei/tool/issues"
   },
-  "homepage": "https://github.com/DreamOn324/tool#readme",
+  "homepage": "https://github.com/zhangsilei/tool#readme",
   "devDependencies": {},
   "dependencies": {
     "jsdoc": "^3.4.3",
-    "webpack": "^2.5.1"
+    "smartdoc": "0.0.7",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.5.0"
   }
 }

@@ -1,11 +1,19 @@
 /**
- * @module 节点选择器－Dom
- * @description 该方法关注DOM查询，并将查询到的结果包装成tool节点对象并返回。
- *              调用方式同jQuery，eg: $('.class'); $('#id'); $('~name'); $('tagName');
- *              Members代表tool对象的属性，Method为tool对象的方法。
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
 'use strict';
+
+stDefine('DOM', function(st) {
+    /**
+     * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
+     * 
+     * @class DOM
+     */
+})
+
 (function() {
     var util = require('./util');
 
@@ -381,6 +389,7 @@
         };
 
         /**
+         * @function text
          * @param  {String} [str] 要修改成的text
          * @description 获取/修改当前节点text
          * @example

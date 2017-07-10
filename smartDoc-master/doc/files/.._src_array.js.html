@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/array.js - SmartDoc</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart" _assetsPath="../assets">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartdoc">
+             
+            <img alt="SmartDoc" src="../assets/css/logo.png" title="SmartDoc">
+            
+                SmartDoc
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">Home</a>
+                    </li>
+                    
+                    <li><a href="/">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl id="sidebar_list">
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/API 增强.html">API 增强</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/Array.html">Array</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Storage.html">Storage</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/工具方法.html">工具方法</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/BOM.html">BOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/DOM.html">DOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/ToolElement.html">ToolElement</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Util.html">Util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>../src/array.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+/**
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
+ */
+
+&#x27;use strict&#x27;;
+
+stDefine(&#x27;Array&#x27;, function(st) {
+    /**
+     * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+     * 
+     * @class Array
+     */
+})
+
+(function() {
+    var util = require(&#x27;./util&#x27;);
+    var test = require(&#x27;./test&#x27;);
+
+    var array = {
+        init: function() {
+            this.addPrototype();
+        },
+
+        addPrototype: function() {
+            /**
+             * @function deleteOf
+             * @param  {Number} ind 数组元素索引
+             * @return {any}        被删除的数组元素
+             * @description 删除并返回数组的指定位置元素，该方法会改变原数组
+             */
+            Array.prototype.deleteOf = function(ind) {
+                var deleted = this[ind];
+                this.splice(ind, 1);
+                return deleted;
+            };
+
+            /**
+             * @function deleteVal
+             * @param  {any}    val   数组元素的值
+             * @param  {Number} [num] 删除的元素个数，默认全部删除
+             * @return {any}          被删除的数组元素
+             * @description 删除并返数组的指定值元素，该方法会改变原数组
+             */
+            Array.prototype.deleteVal = function(val, num) {
+                var count = 0,
+                    num = num || this.length;
+                for (var i = 0, len = this.length; i &lt; len; i++) {
+                    var temp = this[i];
+                    if (count &lt; num) {
+                        if (temp == val) {
+                            if (i == len - 1) {
+                                return this.deleteOf(i);
+                            } else {
+                                this.deleteOf(i);
+                                count++;
+                                continue;
+                            }
+                        }
+                    }
+                }
+            };
+
+            /**
+             * @function pushOf
+             * @param {Number} ind 索引值
+             * @param {Number} val 元素值
+             * @return {Number} 新数组长度
+             * @description 向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。
+             */
+            Array.prototype.pushOf = function(ind, val) {
+                this.splice(ind, 0, val).length;
+                return this.length;
+            };
+
+            /**
+             * @function replace
+             * @param  {any}    val    元素值 
+             * @param  {any}    newVal 新元素值
+             * @param  {Number} [num]  替换的元素个数，默认替换全部
+             * @return {Array} 新数组
+             * @description 替换数组中指定值的元素，并返回新数组，该方法不会改变原数组。
+             */
+            Array.prototype.replace = function(val, newVal, num) {
+                var result = [],
+                    count = 0,
+                    num = num || this.length;
+                for (var i = 0, len = this.length; i &lt; len; i++) {
+                    var temp = this[i];
+                    if (count &lt; num) {
+                        if (temp == val) {
+                            result.push(newVal);
+                            count++;
+                            continue;
+                        }
+                    }
+                    result.push(temp);
+                }
+                return result;
+            };
+
+            /***
+             * @function removeDuplicate
+             * @param  {Number} ind   从第几个重复元素开始删除
+             * @param  {Number} [num] 删除的元素数量，默认全部删除
+             * @description 数组去重，并返回新数组。该方法不改变原数组
+             *              暂时未开放，测试中有问题。xxxxxxxxx
+             */
+            Array.prototype.removeDuplicate = function(num) {
+                var obj = {},
+                    count = 0,
+                    indexs = [],
+                    num = num || this.length;
+                for (var i = 0, len = this.length; i &lt; len; i++) {
+                    var temp = this[i];
+                    if (!obj[temp]) {
+                        obj[temp] = i;
+                    } else {
+                        indexs.push(obj[temp]);
+                        indexs.push(i);
+                    }
+                }
+                for (var j = 0, len = indexs.length; j &lt; len; j++) {
+                    if (count &lt; num) {
+                        this.deleteOf(indexs[j] - count);
+                        count++;
+                    }
+                }
+                return this;
+            };
+
+            /**
+             * @function trim
+             * @param  {Number} [num] 删除的空串数量
+             * @return {Array}        新数组
+             * @description 数组去空串，并返回新数组，该方法不会改变原数组。
+             */
+            Array.prototype.trim = function(num) {
+                return _trim(num, &#x27;&#x27;, this);
+            };
+
+            /**
+             * @function removeNull
+             * @param  {Number} [num] 删除的空串数量
+             * @return {Array}        新数组
+             * @description 数组去null值，并返回新数组，该方法不会改变原数组。
+             */
+            Array.prototype.removeNull = function(num) {
+                return _trim(num, null, this);
+            };
+        }
+    }
+
+    /***
+     * 数组去空串/null值，并返回新数组 
+     * 该方法不会改变原数组
+     * @param  {Number} [num] 删除的空串数量
+     * @return {Array}        新数组
+     */
+    function _trim(num, str, that) {
+        var count = 0, // 去除的空串数
+            result = [],
+            isStr = false,
+            num = num || that.length;
+        if (typeof str == &#x27;string&#x27;) {
+            isStr = true;
+        }
+        for (var i = 0, len = that.length; i &lt; len; i++) {
+            var temp = that[i];
+            if (isStr ? string.trim(temp) : temp != str) {
+                result.push(temp);
+            } else {
+                if (count &lt; num) {
+                    count++;
+                } else {
+                    result.push(temp);
+                }
+            }
+        }
+        return result;
+    }
+
+    array.init();
+    // 添加测试中的方法
+    test.init([{
+        targetObj: &#x27;Array&#x27;,
+        funcName: &#x27;removeDuplicate&#x27;
+    }]);
+
+    module.exports.array = array;
+})();
+    </pre>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

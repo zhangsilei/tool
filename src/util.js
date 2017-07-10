@@ -1,10 +1,19 @@
 /**
- * @module 工具方法－Util
- * @description 此模块包涵了常用的工具方法，直接通过命名空间调用即可：eg: $.trim(str);
- *              部分方法需要加上类名：eg: $.validate.input(str);
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
 'use strict';
+
+stDefine('Util', function(st) {
+    /**
+     * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
+     * 
+     * @class Util
+     */
+})
+
 (function() {
 	var validate = {
 		/**

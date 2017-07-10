@@ -72,11 +72,20 @@
 
 "use strict";
 /**
- * @module 工具方法－Util
- * @description 此模块包涵了常用的工具方法，直接通过命名空间调用即可：eg: $.trim(str);
- *              部分方法需要加上类名：eg: $.validate.input(str);
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
+
+
+stDefine('Util', function(st) {
+    /**
+     * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
+     * 
+     * @class Util
+     */
+})
 
 (function() {
 	var validate = {
@@ -193,11 +202,20 @@
 
 "use strict";
 /**
- * @module 原生方法加强－Array
- * @description 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
- *              无需额外调用，已经挂载到原生Array的原型链上。
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
  */
 
+
+
+stDefine('Array', function(st) {
+    /**
+     * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+     * 
+     * @class Array
+     */
+})
 
 (function() {
     var util = __webpack_require__(0);
@@ -213,9 +231,7 @@
              * @function deleteOf
              * @param  {Number} ind 数组元素索引
              * @return {any}        被删除的数组元素
-             * @description 删除并返回数组的指定位置元素，该方法直接改变原数组
-             * @example
-             * [1, 2, 3].deleteOf(0) => [2, 3]
+             * @description 删除并返回数组的指定位置元素，该方法会改变原数组
              */
             Array.prototype.deleteOf = function(ind) {
                 var deleted = this[ind];
@@ -228,9 +244,7 @@
              * @param  {any}    val   数组元素的值
              * @param  {Number} [num] 删除的元素个数，默认全部删除
              * @return {any}          被删除的数组元素
-             * @description 删除并返数组的指定值元素，该方法直接改变原数组
-             * @example
-             * [1, 2, 3].deleteVal(1) => [2, 3]
+             * @description 删除并返数组的指定值元素，该方法会改变原数组
              */
             Array.prototype.deleteVal = function(val, num) {
                 var count = 0,
@@ -256,9 +270,7 @@
              * @param {Number} ind 索引值
              * @param {Number} val 元素值
              * @return {Number} 新数组长度
-             * @description 向数组中的指定位置插入元素，并返回新的长度。该方法直接改变原数组
-             * @example
-             * [1, 2, 3].pushOf(0, 4) => [4, 1, 2, 3] 
+             * @description 向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。
              */
             Array.prototype.pushOf = function(ind, val) {
                 this.splice(ind, 0, val).length;
@@ -267,13 +279,11 @@
 
             /**
              * @function replace
-             * @param  {any}    val    本元素值 
+             * @param  {any}    val    元素值 
              * @param  {any}    newVal 新元素值
              * @param  {Number} [num]  替换的元素个数，默认替换全部
              * @return {Array} 新数组
-             * @description 替换数组中指定值的元素，并返回新数组。该方法不会改变原数组
-             * @example
-             * [1, 2, 3].replace(1, 2) => [2, 2, 3]
+             * @description 替换数组中指定值的元素，并返回新数组，该方法不会改变原数组。
              */
             Array.prototype.replace = function(val, newVal, num) {
                 var result = [],
@@ -327,9 +337,7 @@
              * @function trim
              * @param  {Number} [num] 删除的空串数量
              * @return {Array}        新数组
-             * @description 数组去空串，并返回新数组。该方法不会改变原数组
-             * @example
-             * [1, 2, '', 3].trim() => [1, 2, 3]
+             * @description 数组去空串，并返回新数组，该方法不会改变原数组。
              */
             Array.prototype.trim = function(num) {
                 return _trim(num, '', this);
@@ -339,9 +347,7 @@
              * @function removeNull
              * @param  {Number} [num] 删除的空串数量
              * @return {Array}        新数组
-             * @description 数组去null值，并返回新数组。该方法不会改变原数组
-             * @example
-             * [1, 2, null, 3, undefined].trim() => [1, 2, 3]
+             * @description 数组去null值，并返回新数组，该方法不会改变原数组。
              */
             Array.prototype.removeNull = function(num) {
                 return _trim(num, null, this);
@@ -386,7 +392,7 @@
     }]);
 
     module.exports.array = array;
-})()
+})();
 
 /***/ }),
 /* 2 */
@@ -394,10 +400,20 @@
 
 "use strict";
 /**
- * @module 浏览器-Bom
- * @description 该模块提供了浏览器交互相关api
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
+
+
+stDefine('BOM', function(st) {
+    /**
+     * 该模块提供了浏览器交互相关API
+     * 
+     * @class BOM
+     */
+})
 
 (function() {
     var bom = {
@@ -408,8 +424,6 @@
          *                      android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; 
          *                      iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;
          * @description 判断终端的类型
-         * @example
-         * $.browserVersion.trident => ture/false
          */
         browser: function() {
             var u = navigator.userAgent;
@@ -434,9 +448,6 @@
          * @param {String} name URL后缀的参数名
          * @return {String} 对应的值
          * @description 获取请求url的参数
-         * @example
-         * https://www.baidu.com?name=test
-         * $.getQueryString('name') => 'test'
          */
         getQueryString: function(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -452,7 +463,7 @@
         browserVersion: bom.browser,
         getQueryString: bom.getQueryString
     }
-})()
+})();
 
 /***/ }),
 /* 3 */
@@ -460,12 +471,20 @@
 
 "use strict";
 /**
- * @module 节点选择器－Dom
- * @description 该方法关注DOM查询，并将查询到的结果包装成tool节点对象并返回。
- *              调用方式同jQuery，eg: $('.class'); $('#id'); $('~name'); $('tagName');
- *              Members代表tool对象的属性，Method为tool对象的方法。
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
  */
 
+
+
+stDefine('DOM', function(st) {
+    /**
+     * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
+     * 
+     * @class DOM
+     */
+})
 
 (function() {
     var util = __webpack_require__(0);
@@ -842,6 +861,7 @@
         };
 
         /**
+         * @function text
          * @param  {String} [str] 要修改成的text
          * @description 获取/修改当前节点text
          * @example
@@ -874,10 +894,20 @@
 
 "use strict";
 /**
- * @module 本地存储－Storage
- * @description 该模块提供了本地存储相关api，调用时直接在命名空间下使用，eg：$.getCookie(); 如果$不可用则tool.getCookie();
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
  */
 
+
+
+stDefine('Storage', function(st) {
+    /**
+     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+     * 
+     * @class Storage
+     */
+})
 
 (function() {
     var ls = localStorage;
@@ -888,8 +918,6 @@
          * @param  {String} cname Cookie的key
          * @return {String} Cookie的value
          * @description 读取Cookie
-         * @example
-         * $.getCookie('name')
          */
         getCookie: function(cname) {
             var cvalue = "",
@@ -915,8 +943,6 @@
          * @param {String} cvalue Cookie的value
          * @param {String} days   Cookie的存活天数
          * @description 写入Cookie
-         * @example
-         * $.setCookie('name', 'haha', 3)
          */
         setCookie: function(cname, cvalue, days) {
             var date = new Date();
@@ -930,8 +956,6 @@
          * @param  {String} key 本地数据的key
          * @return {String}     本地数据的value
          * @description 获取本地存储中对应的值
-         * @example
-         * $.getStorage('name')
          */
         getStorage: function(key) {
             var val = '';
@@ -946,8 +970,6 @@
          * @param {String} key 本地数据的key
          * @param {String} val 本地数据的value   
          * @description 设置本地存储数据
-         * @example
-         * $.setStorage('name', 'haha')
          */
         setStorage: function(key, val) {
             _checkStorageSupport(function() {
@@ -959,8 +981,6 @@
          * @function removeStorage
          * @param  {String} key 本地数据的key
          * @description 移除指定的本地数据
-         * @example
-         * $.removeStorage('name')
          */
         removeStorage: function(key) {
             _checkStorageSupport(function() {
@@ -971,8 +991,6 @@
         /**
          * @function clearStorage
          * @description 清除本地存储的所有数据   
-         * @example
-         * $.clearStorage()   
          */
         clearStorage: function() {
             _checkStorageSupport(function() {
@@ -1001,7 +1019,7 @@
         removeStorage: storage.removeStorage,
         clearStorage: storage.clearStorage
     };
-})()
+})();
 
 /***/ }),
 /* 5 */

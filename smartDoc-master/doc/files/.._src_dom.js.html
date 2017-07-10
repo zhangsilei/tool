@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>../src/dom.js - SmartDoc</title>
+  
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart" _assetsPath="../assets">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/zhh77/smartdoc">
+             
+            <img alt="SmartDoc" src="../assets/css/logo.png" title="SmartDoc">
+            
+                SmartDoc
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">Home</a>
+                    </li>
+                    
+                    <li><a href="/">Document</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/zhh77/smartdoc">About</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="Search for API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl id="sidebar_list">
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/API 增强.html">API 增强</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/Array.html">Array</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Storage.html">Storage</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/工具方法.html">工具方法</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/BOM.html">BOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/DOM.html">DOM</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/ToolElement.html">ToolElement</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                       <li>
+                            
+                           <a href="../classes/Util.html">Util</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+   
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>../src/dom.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+/**
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
+ *
+ * @module 工具方法
+ */
+
+&#x27;use strict&#x27;;
+
+stDefine(&#x27;DOM&#x27;, function(st) {
+    /**
+     * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
+     * 
+     * @class DOM
+     */
+})
+
+(function() {
+    var util = require(&#x27;./util&#x27;);
+
+    // 所有html标签    
+    var htmlTagNames = [
+        &#x27;a&#x27;, &#x27;abbr&#x27;, &#x27;acronym&#x27;, &#x27;address&#x27;, &#x27;applet&#x27;, &#x27;area&#x27;, &#x27;article&#x27;, &#x27;aside&#x27;, &#x27;audio&#x27;,
+        &#x27;b&#x27;, &#x27;base&#x27;, &#x27;basefont&#x27;, &#x27;bdi&#x27;, &#x27;bdo&#x27;, &#x27;big&#x27;, &#x27;blockquote&#x27;, &#x27;body&#x27;, &#x27;br&#x27;, &#x27;button&#x27;,
+        &#x27;canvas&#x27;, &#x27;caption&#x27;, &#x27;center&#x27;, &#x27;cite&#x27;, &#x27;code&#x27;, &#x27;col&#x27;, &#x27;colgroup&#x27;, &#x27;command&#x27;,
+        &#x27;datalist&#x27;, &#x27;dd&#x27;, &#x27;del&#x27;, &#x27;details&#x27;, &#x27;dfn&#x27;, &#x27;dialog&#x27;, &#x27;dir&#x27;, &#x27;div&#x27;, &#x27;dl&#x27;, &#x27;dt&#x27;,
+        &#x27;em&#x27;, &#x27;embed&#x27;,
+        &#x27;fieldset&#x27;, &#x27;figcaption&#x27;, &#x27;figure&#x27;, &#x27;font&#x27;, &#x27;footer&#x27;, &#x27;form&#x27;, &#x27;frame&#x27;, &#x27;frameset&#x27;,
+        &#x27;h1&#x27;, &#x27;h2&#x27;, &#x27;h3&#x27;, &#x27;h4&#x27;, &#x27;h5&#x27;, &#x27;h6&#x27;, &#x27;head&#x27;, &#x27;header&#x27;, &#x27;hr&#x27;, &#x27;html&#x27;,
+        &#x27;i&#x27;, &#x27;iframe&#x27;, &#x27;img&#x27;, &#x27;input&#x27;, &#x27;ins&#x27;,
+        &#x27;kbd&#x27;, &#x27;keygen&#x27;,
+        &#x27;label&#x27;, &#x27;legend&#x27;, &#x27;li&#x27;, &#x27;link&#x27;,
+        &#x27;main&#x27;, &#x27;map&#x27;, &#x27;mark&#x27;, &#x27;menu&#x27;, &#x27;menuitem&#x27;, &#x27;meta&#x27;, &#x27;meter&#x27;,
+        &#x27;nav&#x27;, &#x27;noframes&#x27;, &#x27;noscript&#x27;,
+        &#x27;object&#x27;, &#x27;ol&#x27;, &#x27;optgroup&#x27;, &#x27;option&#x27;, &#x27;output&#x27;,
+        &#x27;p&#x27;, &#x27;param&#x27;, &#x27;pre&#x27;, &#x27;progress&#x27;,
+        &#x27;q&#x27;,
+        &#x27;rp&#x27;, &#x27;rt&#x27;, &#x27;ruby&#x27;,
+        &#x27;s&#x27;, &#x27;samp&#x27;, &#x27;script&#x27;, &#x27;section&#x27;, &#x27;select&#x27;, &#x27;small&#x27;, &#x27;source&#x27;, &#x27;span&#x27;, &#x27;strike&#x27;, &#x27;strong&#x27;, &#x27;style&#x27;, &#x27;sub&#x27;, &#x27;summary&#x27;, &#x27;sup&#x27;,
+        &#x27;table&#x27;, &#x27;tbody&#x27;, &#x27;td&#x27;, &#x27;textarea&#x27;, &#x27;tfoot&#x27;, &#x27;th&#x27;, &#x27;thead&#x27;, &#x27;time&#x27;, &#x27;title&#x27;, &#x27;tr&#x27;, &#x27;track&#x27;, &#x27;tt&#x27;,
+        &#x27;u&#x27;, &#x27;ul&#x27;,
+        &#x27;var&#x27;, &#x27;video&#x27;,
+        &#x27;wbr&#x27;
+    ];
+
+    /**
+     * @function $
+     * @param  {String} eleKey 节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。
+     * @return {ToolElement}   tool节点对象   
+     * @description 节点选择器
+     */
+    function ele(eleKey) {
+        /***
+         * 遍历查询节点   
+         * @param  {String} queryKey  根据哪种方式查询节点：class/name/tag
+         * @return {ToolElement}  tool对象    
+         * @description 目前查询器的效率低于jQuery3~4倍左右(10w级的节点数查询)，暂时无优化思路。。瓶颈。。   
+         */
+        function _traverse(queryKey) {
+            var allEles = document.getElementsByTagName(&#x27;*&#x27;),
+                elesArr = [];
+            for (var i = 0, len = allEles.length; i &lt; len; i++) {
+                var temp = allEles[i];
+                if (queryKey == &#x27;class&#x27; || queryKey == &#x27;name&#x27;) {
+                    var attrValue = temp.getAttribute(queryKey);
+                    if (attrValue) {
+                        if (String(attrValue).indexOf(eleKeySub) != -1) {
+                            elesArr[elesArr.length] = temp;
+                        }
+                    }
+                } else if (queryKey == &#x27;tag&#x27;) {
+                    if (temp.nodeName == eleKey.toUpperCase()) {
+                        elesArr[elesArr.length] = temp;
+                    }
+                }
+            }
+            return _pack(elesArr);
+        }
+        if (eleKey &amp;&amp; typeof eleKey == &#x27;string&#x27;) {
+            if (util.trim(eleKey)) { // 选择器
+                var eleKeySub = eleKey.slice(1),
+                    sign = eleKey[0];
+
+                if (sign == &#x27;#&#x27;) { // id
+
+                    var result = document.getElementById(eleKeySub);
+                    return result ? _pack([result]) : null;
+
+                } else if (sign == &#x27;.&#x27;) { //class 
+
+                    return _traverse(&#x27;class&#x27;);
+
+                } else if (sign == &#x27;~&#x27;) { // name
+
+                    return _traverse(&#x27;name&#x27;);
+
+                } else { // tag 
+
+                    return _traverse(&#x27;tag&#x27;);
+
+                }
+            } else { // 节点
+                return null;
+            }
+        } else if (eleKey &amp;&amp; typeof eleKey == &#x27;object&#x27;) {
+            return _pack(eleKey);
+        }
+    }
+
+
+    /*************************************************************
+     *
+     * dom.js内部公共方法，只在dom.js内使用。
+     * 
+     *************************************************************/
+
+    /***
+     * 将原生节点封装成ToolElement
+     * @param  {Array} nodes 原生节点集，可以为空数组。
+     * @return {ToolElement} tool对象
+     */
+    function _pack(nodes) {
+        if (typeof nodes == &#x27;object&#x27; &amp;&amp; nodes instanceof Array) {
+            return new ToolElement(nodes);
+        } else {
+            console.warn(&#x27;_pack()方法入参必须为数组&#x27;);
+        }
+    }
+
+    /***
+     * 插入节点
+     * @param {Element} parent 当前节点的原生父节点
+     * @param  {String}  str    新节点名称
+     * @param  {Element}  ele    新元素添加在该元素前  
+     */
+    function _insertBefore(parent, str, ele) {
+        parent.insertBefore(document.createTextNode(str), ele);
+    }
+
+    /***
+     * 追加节点
+     * @param  {Element} parent 当前节点的原生父节点
+     * @param  {String} str    新节点的名称
+     */
+    function _appendChild(parent, str) {
+        parent.appendChild(document.createTextNode(str));
+    }
+
+    /***
+     * 获得/设置节点的html/text 
+     * @param  {String} type 操作类型：html：操作元素的html，text：操作元素的text
+     * @param  {String} str  要设置的内容值
+     * @param  {Array} nodes 原生节点集
+     * @return {Array/ToolElement}      get操作时返回字符串数组，set时返回tool对象
+     */
+    function _htmlAndText(type, str, nodes) {
+        var result = [];
+        for (var i = 0, len = nodes.length; i &lt; len; i++) {
+            if (!str &amp;&amp; str != &#x27;&#x27;) {
+                result[result.length] = type == &#x27;html&#x27; ? nodes[i].innerHTML : nodes[i].innerText;
+            } else {
+                type == &#x27;html&#x27; ? nodes[i].innerHTML = str : nodes[i].innerText = str;
+                result.push(nodes[i]);
+            }
+        }
+        return (typeof result[0] == &#x27;object&#x27;) ? _pack(result) : result; // 是节点才包装成对象 
+    }
+
+    /***
+     * 在当前节点的前/后插入新的内容
+     * @param  {String} type 操作类型：before：在之前插入，after：在之后插入
+     * @param  {String} str  要插入的内容
+     * @param  {Element} node 原生节点
+     * @return {ToolElement}      tool对象
+     */
+    function _beforeAndAfter(type, str, node) {
+        var parent = node.parentNode,
+            charStart = -1,
+            charEnd = -1,
+            nextNode = _pack([node]).next();
+        if (!str &amp;&amp; typeof str == &#x27;undefined&#x27;) {
+            return;
+        } else {
+            if (util.trim(str) == &#x27;&#x27;) {
+                return;
+            } else {
+                if (str.indexOf(&#x27;&lt;&#x27;) != -1 &amp;&amp; str.indexOf(&#x27;&gt;&#x27;) != -1) { // str is a text
+                    for (var i = 0, len = str.length; i &lt; len; i++) {
+                        var tempChar = str[i];
+                        if (tempChar == &#x27;&lt;&#x27;) {
+                            // create newText    
+                            type == &#x27;before&#x27; ? _insertBefore(parent, str.slice(0, i), node) : !nextNode ? _appendChild(parent, str.slice(0, i)) : _insertBefore(parent, str.slice(0, i), nextNode.node[0]);
+                            charStart = i;
+                        } else if (tempChar == &#x27;&gt;&#x27;) {
+                            charEnd = i;
+                            // create newNode        
+                            var tagName = str.slice(charStart + 1, charEnd),
+                                tagEnd = str.indexOf(&#x27;&lt;/&#x27; + tagName + &#x27;&gt;&#x27;),
+                                newNode = document.createElement(tagName);
+                            newNode.innerHTML = str.slice(charEnd + 1, tagEnd);
+                            type == &#x27;before&#x27; ? parent.insertBefore(newNode, node) : !nextNode ? parent.appendChild(newNode) : parent.insertBefore(newNode, nextNode.node[0]);
+                            // reset str
+                            str = str.slice(tagEnd + tagName.length + 3, str.length);
+                            i = 0;
+                            len = str.length;
+                            // create last newText    
+                            if (str.indexOf(&#x27;&lt;&#x27;) == -1) {
+                                type == &#x27;before&#x27; ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
+                            }
+                        }
+                    }
+                } else { // str has tag
+                    type == &#x27;before&#x27; ? _insertBefore(parent, str, node) : !nextNode ? _appendChild(parent, str) : _insertBefore(parent, str, nextNode.node[0]);
+                }
+            }
+        }
+    }
+
+    function _prevAndNext(type, nodes) {
+        var result = [];
+        for (var i = 0, len = nodes.length; i &lt; len; i++) {
+            var node = nodes[i];
+            while (node = type == &#x27;prev&#x27; ? node.previousSibling : node.nextSibling) {
+                if (node.nodeType == 1) {
+                    result.push(node);
+                    break;
+                }
+            }
+        }
+        return _pack(result);
+    }
+
+    /*************************************************************
+     *
+     * ToolElement节点对象封装 
+     * 
+     *************************************************************/
+
+    /***
+     * @class ToolElement
+     * @param {Array} nodes  原生节点集，可以为空数组。
+     * @return {ToolElement} tool对象
+     * @description tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。
+     *              无需手动封装，直接调用$()即可。
+     */
+    function ToolElement(nodes) {
+        /**
+         * @type Array
+         * @description 原生节点集
+         * @example
+         * &lt;div&gt;It&#x27;s a test.&lt;/div&gt;  
+         * $(&#x27;div&#x27;).node 等价于 document.getElementsByTagId(&#x27;div&#x27;)[0]
+         */
+        this.node = nodes;
+
+        /************************************************************
+         * 节点相关操作
+         ***********************************************************/
+
+        /**
+         * @param  {Number} ind 索引
+         * @return {Element}    原生节点
+         * @description 根据索引获取原生节点 
+         * @example
+         * &lt;div class=&quot;wrap&quot;&gt;one&lt;/div&gt;  
+         * &lt;div class=&quot;wrap&quot;&gt;two&lt;/div&gt;  
+         * $(&#x27;.wrap&#x27;).get(0) 等价于 document.getElementsByTagId(&#x27;div&#x27;)[0]
+         */
+        this.get = function(ind) {
+            return nodes[ind];
+        };
+
+        /**
+         * @param  {Function} cb 回调函数
+         * @description 遍历节点集
+         * @example
+         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
+         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
+         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
+         * $(&#x27;.wrap&#x27;).each(function(){});
+         */
+        this.each = function(cb) {
+            var nodes = this.node;
+            for (var i = 0, len = nodes.length; i &lt; len; i++) {
+                cb.call(nodes[i], i, nodes[i]);
+            }
+        };
+
+        /**
+         * @return {ToolElement} tool对象
+         * @description 获取上一个节点
+         * @example
+         * &lt;div class=&quot;prev-ele&quot;&gt;prev&lt;/div&gt;
+         * &lt;div class=&quot;current-ele&quot;&gt;current&lt;/div&gt;  
+         * $(&#x27;.current-ele&#x27;).prev() =&gt; $(&#x27;.prev-ele&#x27;)
+         */
+        this.prev = function() {
+            return _prevAndNext(&#x27;prev&#x27;, nodes);
+        };
+
+        /**
+         * @return {ToolElement} tool对象
+         * @description 获取下一个节点
+         * @example
+         * &lt;div class=&quot;current-ele&quot;&gt;current&lt;/div&gt;
+         * &lt;div class=&quot;next-ele&quot;&gt;next&lt;/div&gt;  
+         * $(&#x27;.current-ele&#x27;).next() =&gt; $(&#x27;.next-ele&#x27;)
+         */
+        this.next = function() {
+            return _prevAndNext(&#x27;next&#x27;, nodes);
+        };
+
+        /**
+         * @param  {Number} ind  索引
+         * @return {ToolElement} tool对象
+         * @description 获取指定节点
+         * @example
+         * &lt;div class=&quot;one&quot;&gt;test1&lt;/div&gt;
+         * &lt;div class=&quot;two&quot;&gt;test2&lt;/div&gt;
+         * $(&#x27;div&#x27;).eq(0) =&gt; $(&#x27;.one&#x27;)
+         */
+        this.eq = function(ind) {
+            return _pack([nodes[ind]]);
+        };
+
+        /**
+         * @description 删除当前节点
+         * @example
+         * &lt;div&gt;content..&lt;/div&gt;
+         * $(&#x27;div&#x27;).remove()
+         */
+        this.remove = function() {
+            for (var i = 0, len = nodes.length; i &lt; len; i++) {
+                var node = nodes[i];
+                node.parentNode.removeChild(node);
+            }
+        };
+
+        /**
+         * @return {ToolElement} tool对象
+         * @description 清空当前节点
+         * @example
+         * &lt;div&gt;content...&lt;/div&gt;
+         * $(&#x27;div&#x27;).empty()
+         */
+        this.empty = function() {
+            return this.html(&#x27;&#x27;);
+        };
+
+        /**
+         * @param {String}       插入的内容
+         * @return {ToolElement} tool对象
+         * @description 在当前节点之前插入内容，支持传入标签。
+         * @example
+         * &lt;div&gt;test&lt;/div&gt;
+         * $(&#x27;div&#x27;).before(&#x27;&lt;div&gt;content...&lt;/div&gt;&#x27;) =&gt; &lt;div&gt;&lt;content/div&gt;&lt;div&gt;test&lt;/div&gt;
+         */
+        this.before = function(str) {
+            this.each(function(ind, node) {
+                _beforeAndAfter(&#x27;before&#x27;, str, node);
+            });
+            return _pack(nodes);
+        };
+
+        /**
+         * @param  {String} str  插入的内容   
+         * @return {ToolElement} tool对象 
+         * @description 在当前节点之后插入内容，支持传入标签。
+         * @example
+         * &lt;div&gt;test&lt;/div&gt;
+         * $(&#x27;div&#x27;).before(&#x27;&lt;div&gt;content...&lt;/div&gt;&#x27;) =&gt; &lt;div&gt;test&lt;/div&gt;&lt;div&gt;&lt;content&gt;/div&gt;
+         */
+        this.after = function(str) {
+            this.each(function(ind, node) {
+                _beforeAndAfter(&#x27;after&#x27;, str, node);
+            });
+            return _pack(nodes);
+        };
+
+        /**
+         * @param  {String} [str] 要修改成的html
+         * @description 获取/修改当前节点的html
+         * @example
+         * &lt;div&gt;test&lt;/div&gt;
+         * $(&#x27;div&#x27;).html() =&gt; &#x27;&lt;div&gt;test&lt;/div&gt;&#x27;
+         * $(&#x27;div&#x27;).html(&#x27;hi&#x27;) =&gt; &#x27;&lt;div&gt;hi&lt;/div&gt;&#x27;
+         */
+        this.html = function(str) {
+            return _htmlAndText(&#x27;html&#x27;, str, nodes);
+        };
+
+        /**
+         * @function text
+         * @param  {String} [str] 要修改成的text
+         * @description 获取/修改当前节点text
+         * @example
+         * &lt;div&gt;test&lt;/div&gt;
+         * $(&#x27;div&#x27;).text() =&gt; &#x27;&lt;div&gt;test&lt;/div&gt;&#x27;
+         * $(&#x27;div&#x27;).text(&#x27;hi&#x27;) =&gt; &#x27;&lt;div&gt;hi&lt;/div&gt;&#x27;
+         */
+        this.text = function(str) {
+            return _htmlAndText(&#x27;text&#x27;, str, nodes);
+        };
+
+        /************************************************************
+         * 属性相关操作
+         ***********************************************************/
+
+        this.attr = function() {
+
+        };
+    }
+
+    module.exports = {
+        ele: ele,
+        ToolElement: ToolElement
+    };
+})()
+    </pre>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

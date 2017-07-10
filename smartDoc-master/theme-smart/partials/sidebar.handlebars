@@ -1,0 +1,34 @@
+<div id="sidebar">
+    <h3>Modules/Classes</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="Type to filter Modules/Classes">
+        </div>
+        <dl id="sidebar_list">
+             {{#modules}}
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="{{../projectRoot}}modules/{{name}}.html">{{displayName}}</a>
+                </dt>
+                <dd>
+                    <ul>
+                   {{#classes}}
+                       <li>
+                            {{#if classitems}}
+                            <span class="glyphicon glyphicon-plus"></span>
+                            {{/if}}
+                           <a href="{{../../projectRoot}}classes/{{name}}.html">{{name}}</a>
+                           <ul>
+                                {{#classitems}}
+                                <li>
+                                    <a href="{{../../projectRoot}}classes/{{name}}.html#{{name}}">{{name}}</a>
+                                </li>
+                                {{/classitems}}
+                           </ul>
+                       </li>
+                    {{/classes}}
+                    </ul>
+                </dd>
+             {{/modules}}
+        </dl>
+</div>
+   
