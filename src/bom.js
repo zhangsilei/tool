@@ -6,13 +6,11 @@
 
 'use strict';
 
-stDefine('BOM', function(st) {
-    /**
-     * 该模块提供了浏览器交互相关API
-     * 
-     * @class BOM
-     */
-})
+/**
+ * 该模块提供了浏览器交互相关API
+ * 
+ * @class BOM
+ */
 
 (function() {
     var bom = {

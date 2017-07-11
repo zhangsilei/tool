@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Array - SmartDoc</title>
+    <title>DOM - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,10 +121,10 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>Array <small>Class</small></h1>
+    <h1>DOM <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <div class="stdoc-code"><p>此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。</p>
+      <div class="stdoc-code"><p>此模块提供了DOM查询功能，大部分API调用对标jQuery。</p>
 </div>
  </div>
 
@@ -145,49 +137,84 @@
             <ul class="index-list methods">
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_deleteOf" data-tablink="deleteOf">deleteOf</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_$" data-tablink="$">$</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_deleteVal" data-tablink="deleteVal">deleteVal</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_after" data-tablink="after">after</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_pushOf" data-tablink="pushOf">pushOf</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_before" data-tablink="before">before</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_removeDuplicate" data-tablink="removeDuplicate">removeDuplicate</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_each" data-tablink="each">each</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_removeNull" data-tablink="removeNull">removeNull</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_empty" data-tablink="empty">empty</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_replace" data-tablink="replace">replace</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_eq" data-tablink="eq">eq</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_trim" data-tablink="trim">trim</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_get" data-tablink="get">get</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_html" data-tablink="html">html</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_next" data-tablink="next">next</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_prev" data-tablink="prev">prev</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_remove" data-tablink="remove">remove</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_text" data-tablink="text">text</a>
 
                         
                         
@@ -199,6 +226,17 @@
     
         <div class="index-section properties col-sm-4">
             <h3>Properties</h3>
+            
+            <ul class="index-list properties">
+                
+                    <li class="index-item property">
+                        <a href="#" data-tabid="#property" data-anchor="#property_node" data-tablink="node">node</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
             
         </div>
     
@@ -216,6 +254,8 @@
             <li><a data-toggle="tab" href="#method">Methods</a></li>
         
         
+            <li><a data-toggle="tab" href="#property">Properties</a></li>
+        
         
     </ul>
 
@@ -228,13 +268,13 @@
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/.._src_array.js.html#l10"><code>..&#x2F;src&#x2F;array.js:10</code></a>
+                    Defined in: <a href="../files/.._src_dom.js.html#l9"><code>..&#x2F;src&#x2F;dom.js:9</code></a>
                 </div>
             
 
             
                 
-                    Module: <a href="../modules/API 增强.html">API 增强</a>
+                    Module: <a href="../modules/工具方法.html">工具方法</a>
                 
             
 
@@ -250,17 +290,17 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_deleteOf" class="method item">
-    <h3 class="name">deleteOf</h3>
+                    <div id="method_$" class="method item">
+    <h3 class="name">$</h3>
     <code>
-    deleteOf
+    $
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        ind
+                        eleKey
                     
                 </li>
             
@@ -271,7 +311,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Any</span>
+            <span class="type">ToolElement</span>
         </span>
     
 
@@ -298,7 +338,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l27"><code>..&#x2F;src&#x2F;array.js:27</code></a>
+        <a href="../files/.._src_dom.js.html#l43"><code>..&#x2F;src&#x2F;dom.js:43</code></a>
         
         </p>
 
@@ -309,7 +349,508 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>删除并返回数组的指定位置元素，该方法会改变原数组</p>
+        <div class="stdoc-code"><p>节点选择器</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">eleKey</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">ToolElement</span>]
+                    
+                    <p>tool节点对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_after" class="method item">
+    <h3 class="name">after</h3>
+    <code>
+    after
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        str
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">ToolElement</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l336"><code>..&#x2F;src&#x2F;dom.js:336</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>在当前节点之后插入内容，支持传入标签。</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">str</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>插入的内容</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">ToolElement</span>]
+                    
+                    <p>tool对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_before" class="method item">
+    <h3 class="name">before</h3>
+    <code>
+    before
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        str
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">ToolElement</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l323"><code>..&#x2F;src&#x2F;dom.js:323</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>在当前节点之前插入内容，支持传入标签。</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">str</code>
+                       <td> <span class="type">String</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>插入的内容</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">ToolElement</span>]
+                    
+                    <p>tool对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_each" class="method item">
+    <h3 class="name">each</h3>
+    <code>
+    each
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        cb
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l263"><code>..&#x2F;src&#x2F;dom.js:263</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>遍历节点集</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">cb</code>
+                       <td> <span class="type">Function</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>回调函数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_empty" class="method item">
+    <h3 class="name">empty</h3>
+    <code>
+    empty
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">ToolElement</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l314"><code>..&#x2F;src&#x2F;dom.js:314</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>清空当前节点</p>
+</div>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">ToolElement</span>]
+                    
+                    <p>tool对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_eq" class="method item">
+    <h3 class="name">eq</h3>
+    <code>
+    eq
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        ind
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">ToolElement</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l293"><code>..&#x2F;src&#x2F;dom.js:293</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>获取指定节点</p>
 </div>
     </div>
 
@@ -330,7 +871,7 @@
                     
                     </td>
                     <td><div class="param-description">
-                        <p>数组元素索引</p>
+                        <p>索引</p>
 
                     </div>
 
@@ -348,9 +889,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">Any</span>]
+                        [<span class="type">ToolElement</span>]
                     
-                    <p>被删除的数组元素</p>
+                    <p>tool对象</p>
 
                 
             </div>
@@ -361,145 +902,10 @@
 </div>
 
                 
-                    <div id="method_deleteVal" class="method item">
-    <h3 class="name">deleteVal</h3>
+                    <div id="method_get" class="method item">
+    <h3 class="name">get</h3>
     <code>
-    deleteVal
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        val
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [num]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-        <span class="returns-inline">
-            <span class="type">Any</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/.._src_array.js.html#l39"><code>..&#x2F;src&#x2F;array.js:39</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>删除并返数组的指定值元素，该方法会改变原数组</p>
-</div>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">val</code>
-                       <td> <span class="type">Any</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>数组元素的值</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[num]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>删除的元素个数，默认全部删除</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        [<span class="type">Any</span>]
-                    
-                    <p>被删除的数组元素</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_pushOf" class="method item">
-    <h3 class="name">pushOf</h3>
-    <code>
-    pushOf
+    get
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -510,12 +916,6 @@
                     
                 </li>
             
-                <li class="arg">
-                    
-                        val
-                    
-                </li>
-            
             </ul><span class="paren">)</span>
         </div>
     
@@ -523,7 +923,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Number</span>
+            <span class="type">Element</span>
         </span>
     
 
@@ -550,7 +950,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l65"><code>..&#x2F;src&#x2F;array.js:65</code></a>
+        <a href="../files/.._src_dom.js.html#l253"><code>..&#x2F;src&#x2F;dom.js:253</code></a>
         
         </p>
 
@@ -561,7 +961,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。</p>
+        <div class="stdoc-code"><p>根据索引获取原生节点</p>
 </div>
     </div>
 
@@ -582,24 +982,7 @@
                     
                     </td>
                     <td><div class="param-description">
-                        <p>索引值</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">val</code>
-                       <td> <span class="type">Number</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>元素值</p>
+                        <p>索引</p>
 
                     </div>
 
@@ -617,9 +1000,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">Number</span>]
+                        [<span class="type">Element</span>]
                     
-                    <p>新数组长度</p>
+                    <p>原生节点</p>
 
                 
             </div>
@@ -630,23 +1013,17 @@
 </div>
 
                 
-                    <div id="method_removeDuplicate" class="method item">
-    <h3 class="name">removeDuplicate</h3>
+                    <div id="method_html" class="method item">
+    <h3 class="name">html</h3>
     <code>
-    removeDuplicate
+    html
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        ind
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [num]
+                        [str]
                     
                 </li>
             
@@ -680,7 +1057,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l103"><code>..&#x2F;src&#x2F;array.js:103</code></a>
+        <a href="../files/.._src_dom.js.html#l349"><code>..&#x2F;src&#x2F;dom.js:349</code></a>
         
         </p>
 
@@ -691,8 +1068,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>数组去重，并返回新数组。该方法不改变原数组
-             暂时未开放，测试中有问题。xxxxxxxxx</p>
+        <div class="stdoc-code"><p>获取/修改当前节点的html</p>
 </div>
     </div>
 
@@ -705,33 +1081,16 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">ind</code>
-                       <td> <span class="type">Number</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>从第几个重复元素开始删除</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
                     <td>
-                        <code class="param-name optional">[num]</code></td>
-                    <td><span class="type">Number</span></td>
+                        <code class="param-name optional">[str]</code></td>
+                    <td><span class="type">String</span></td>
                     <td><span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>删除的元素数量，默认全部删除</p>
+                        <p>要修改成的html</p>
 
                     </div>
 
@@ -748,28 +1107,18 @@
 </div>
 
                 
-                    <div id="method_removeNull" class="method item">
-    <h3 class="name">removeNull</h3>
+                    <div id="method_next" class="method item">
+    <h3 class="name">next</h3>
     <code>
-    removeNull
+    next
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        [num]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
     </code>
 
     
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">ToolElement</span>
         </span>
     
 
@@ -796,7 +1145,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l143"><code>..&#x2F;src&#x2F;array.js:143</code></a>
+        <a href="../files/.._src_dom.js.html#l284"><code>..&#x2F;src&#x2F;dom.js:284</code></a>
         
         </p>
 
@@ -807,37 +1156,10 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>数组去null值，并返回新数组，该方法不会改变原数组。</p>
+        <div class="stdoc-code"><p>获取下一个节点</p>
 </div>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[num]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>删除的空串数量</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
     
 
     
@@ -847,9 +1169,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">Array</span>]
+                        [<span class="type">ToolElement</span>]
                     
-                    <p>新数组</p>
+                    <p>tool对象</p>
 
                 
             </div>
@@ -860,40 +1182,18 @@
 </div>
 
                 
-                    <div id="method_replace" class="method item">
-    <h3 class="name">replace</h3>
+                    <div id="method_prev" class="method item">
+    <h3 class="name">prev</h3>
     <code>
-    replace
+    prev
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        val
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        newVal
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        [num]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
     </code>
 
     
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">ToolElement</span>
         </span>
     
 
@@ -920,7 +1220,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l77"><code>..&#x2F;src&#x2F;array.js:77</code></a>
+        <a href="../files/.._src_dom.js.html#l275"><code>..&#x2F;src&#x2F;dom.js:275</code></a>
         
         </p>
 
@@ -931,71 +1231,10 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>替换数组中指定值的元素，并返回新数组，该方法不会改变原数组。</p>
+        <div class="stdoc-code"><p>获取上一个节点</p>
 </div>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">val</code>
-                       <td> <span class="type">Any</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>元素值</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">newVal</code>
-                       <td> <span class="type">Any</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>新元素值</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                    <td>
-                        <code class="param-name optional">[num]</code></td>
-                    <td><span class="type">Number</span></td>
-                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>替换的元素个数，默认替换全部</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
     
 
     
@@ -1005,9 +1244,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">Array</span>]
+                        [<span class="type">ToolElement</span>]
                     
-                    <p>新数组</p>
+                    <p>tool对象</p>
 
                 
             </div>
@@ -1018,29 +1257,15 @@
 </div>
 
                 
-                    <div id="method_trim" class="method item">
-    <h3 class="name">trim</h3>
+                    <div id="method_remove" class="method item">
+    <h3 class="name">remove</h3>
     <code>
-    trim
+    remove
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        [num]
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
     </code>
 
-    
-        <span class="returns-inline">
-            <span class="type">Array</span>
-        </span>
     
 
     
@@ -1066,7 +1291,7 @@
             
         
         
-        <a href="../files/.._src_array.js.html#l133"><code>..&#x2F;src&#x2F;array.js:133</code></a>
+        <a href="../files/.._src_dom.js.html#l303"><code>..&#x2F;src&#x2F;dom.js:303</code></a>
         
         </p>
 
@@ -1077,7 +1302,74 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>数组去空串，并返回新数组，该方法不会改变原数组。</p>
+        <div class="stdoc-code"><p>删除当前节点</p>
+</div>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_text" class="method item">
+    <h3 class="name">text</h3>
+    <code>
+    text
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [str]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l358"><code>..&#x2F;src&#x2F;dom.js:358</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>获取/修改当前节点text</p>
 </div>
     </div>
 
@@ -1091,15 +1383,15 @@
                 <tr class="param">
                     
                     <td>
-                        <code class="param-name optional">[num]</code></td>
-                    <td><span class="type">Number</span></td>
+                        <code class="param-name optional">[str]</code></td>
+                    <td><span class="type">String</span></td>
                     <td><span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>删除的空串数量</p>
+                        <p>要修改成的text</p>
 
                     </div>
 
@@ -1111,20 +1403,6 @@
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        [<span class="type">Array</span>]
-                    
-                    <p>新数组</p>
-
-                
-            </div>
-        </div>
-    
 
     
 </div>
@@ -1133,6 +1411,57 @@
             </div>
         
 
+        
+            <div id="property" class="tab-pane">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_node" class="property item">
+    <h3 class="name"><code>node</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_dom.js.html#l243"><code>..&#x2F;src&#x2F;dom.js:243</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <div class="stdoc-code"><p>原生节点集</p>
+</div>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

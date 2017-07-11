@@ -6,13 +6,11 @@
 
 'use strict';
 
-stDefine('Util', function(st) {
-    /**
-     * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
-     * 
-     * @class Util
-     */
-})
+/**
+ * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
+ * 
+ * @class Util
+ */
 
 (function() {
 	var validate = {

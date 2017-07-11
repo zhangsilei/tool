@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>../src/storage.js - SmartDoc</title>
+    <title>../src/bom.js - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,137 +121,73 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>../src/storage.js <small>File</small></h1>
+    <h1>../src/bom.js <small>File</small></h1>
 </div>
 
 <div class="file">
     <pre class="prettyprint linenums" id='src_code'>
 /**
- * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ * 增加常用业务工具方法，以提高通用业务的开发效率。
  *
- * @module API 增强
+ * @module 工具方法
  */
 
 &#x27;use strict&#x27;;
 
-stDefine(&#x27;Storage&#x27;, function(st) {
-    /**
-     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
-     * 
-     * @class Storage
-     */
-})
+/**
+ * 该模块提供了浏览器交互相关API
+ * 
+ * @class BOM
+ */
 
 (function() {
-    var ls = localStorage;
-
-    var storage = {
+    var bom = {
         /**
-         * @function getCookie
-         * @param  {String} cname Cookie的key
-         * @return {String} Cookie的value
-         * @description 读取Cookie
+         * @function browserVersion
+         * @return {Object} 终端类型：trident = IE内核; presto = opera内核; webKit = 苹果、谷歌内核;
+         *                      gecko = 火狐内核; mobile = 移动终端; ios = ios终端; 
+         *                      android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; 
+         *                      iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;
+         * @description 判断终端的类型
          */
-        getCookie: function(cname) {
-            var cvalue = &quot;&quot;,
-                cookies = document.cookie;
-            if (cookies.length &gt; 0) {
-                var search = cname + &quot;=&quot;,
-                    start = cookies.indexOf(search);
-                if (start != -1) {
-                    start += search.length;
-                    var end = cookies.indexOf(&quot;;&quot;, start);
-                    if (end == -1) {
-                        end = cookies.length;
-                    }
-                    cvalue = unescape(cookies.substring(start, end));
-                }
-            }
-            return cvalue;
+        browser: function() {
+            var u = navigator.userAgent;
+            return {
+                trident: u.indexOf(&#x27;Trident&#x27;) &gt; -1, //IE内核
+                presto: u.indexOf(&#x27;Presto&#x27;) &gt; -1, //opera内核
+                webKit: u.indexOf(&#x27;AppleWebKit&#x27;) &gt; -1, //苹果、谷歌内核 
+                gecko: u.indexOf(&#x27;Gecko&#x27;) &gt; -1 &amp;&amp; u.indexOf(&#x27;KHTML&#x27;) == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Linux&#x27;) &gt; -1, //android终端或者uc浏览器
+                iPhone: u.indexOf(&#x27;iPhone&#x27;) &gt; -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf(&#x27;iPad&#x27;) &gt; -1, //是否iPad
+                webApp: u.indexOf(&#x27;Safari&#x27;) == -1, //是否web应用程序，没有头部与底部
+                wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
+                alipay: !!u.match(/AliApp/i) // 是否支付宝打开
+            };
         },
 
         /**
-         * @function setCookie
-         * @param {String} cname  Cookie的key
-         * @param {String} cvalue Cookie的value
-         * @param {String} days   Cookie的存活天数
-         * @description 写入Cookie
+         * @function getQueryString
+         * @param {String} name URL后缀的参数名
+         * @return {String} 对应的值
+         * @description 获取请求url的参数
          */
-        setCookie: function(cname, cvalue, days) {
-            var date = new Date();
-            date.setDate(date.getDate() + days);
-            var exdate = &quot;; expires=&quot; + date.toGMTString();
-            document.cookie = cname + &quot;=&quot; + escape(cvalue) + exdate;
-        },
-
-        /**
-         * @function getStorage
-         * @param  {String} key 本地数据的key
-         * @return {String}     本地数据的value
-         * @description 获取本地存储中对应的值
-         */
-        getStorage: function(key) {
-            var val = &#x27;&#x27;;
-            _checkStorageSupport(function() {
-                val = ls.getItem(key);
-            });
-            return val;
-        },
-
-        /**
-         * @function setStorage
-         * @param {String} key 本地数据的key
-         * @param {String} val 本地数据的value   
-         * @description 设置本地存储数据
-         */
-        setStorage: function(key, val) {
-            _checkStorageSupport(function() {
-                ls.setItem(key, val);
-            });
-        },
-
-        /**
-         * @function removeStorage
-         * @param  {String} key 本地数据的key
-         * @description 移除指定的本地数据
-         */
-        removeStorage: function(key) {
-            _checkStorageSupport(function() {
-                ls.removeItem(key);
-            });
-        },
-
-        /**
-         * @function clearStorage
-         * @description 清除本地存储的所有数据   
-         */
-        clearStorage: function() {
-            _checkStorageSupport(function() {
-                ls.clear();
-            });
-        }
-    }
-
-    /***
-     * 监测浏览器是否支持localStorage
-     * @param  {Function} func 普通方法
-     */
-    function _checkStorageSupport(func) {
-        if (!ls) {
-            alert(&#x27;浏览器不支持localStorage！或者开启了隐私模式！&#x27;);
-        } else {
-            func();
+        getQueryString: function(name) {
+            var reg = new RegExp(&quot;(^|&amp;)&quot; + name + &quot;=([^&amp;]*)(&amp;|$)&quot;);
+            var r = window.location.search.substr(1).match(reg);
+            // if (r != null) return unescape(r[2]);
+            // return null;
+            if (r != null) return r[2];
+            return null;
         }
     }
 
     module.exports = {
-        getCookie: storage.getCookie,
-        setCookie: storage.setCookie,
-        getStorage: storage.getStorage,
-        setStorage: storage.setStorage,
-        removeStorage: storage.removeStorage,
-        clearStorage: storage.clearStorage
-    };
+        browserVersion: bom.browser,
+        getQueryString: bom.getQueryString
+    }
 })();
     </pre>
 </div>

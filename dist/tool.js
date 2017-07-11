@@ -79,13 +79,11 @@
 
 
 
-stDefine('Util', function(st) {
-    /**
-     * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
-     * 
-     * @class Util
-     */
-})
+/**
+ * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
+ * 
+ * @class Util
+ */
 
 (function() {
 	var validate = {
@@ -209,13 +207,11 @@ stDefine('Util', function(st) {
 
 
 
-stDefine('Array', function(st) {
-    /**
-     * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
-     * 
-     * @class Array
-     */
-})
+/**
+ * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+ * 
+ * @class Array
+ */
 
 (function() {
     var util = __webpack_require__(0);
@@ -407,13 +403,11 @@ stDefine('Array', function(st) {
 
 
 
-stDefine('BOM', function(st) {
-    /**
-     * 该模块提供了浏览器交互相关API
-     * 
-     * @class BOM
-     */
-})
+/**
+ * 该模块提供了浏览器交互相关API
+ * 
+ * @class BOM
+ */
 
 (function() {
     var bom = {
@@ -478,13 +472,11 @@ stDefine('BOM', function(st) {
 
 
 
-stDefine('DOM', function(st) {
-    /**
-     * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
-     * 
-     * @class DOM
-     */
-})
+/**
+ * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
+ * 
+ * @class DOM
+ */
 
 (function() {
     var util = __webpack_require__(0);
@@ -708,7 +700,6 @@ stDefine('DOM', function(st) {
      *************************************************************/
 
     /***
-     * @class ToolElement
      * @param {Array} nodes  原生节点集，可以为空数组。
      * @return {ToolElement} tool对象
      * @description tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。
@@ -716,11 +707,8 @@ stDefine('DOM', function(st) {
      */
     function ToolElement(nodes) {
         /**
-         * @type Array
+         * @property {Array} node 
          * @description 原生节点集
-         * @example
-         * <div>It's a test.</div>  
-         * $('div').node 等价于 document.getElementsByTagId('div')[0]
          */
         this.node = nodes;
 
@@ -729,26 +717,19 @@ stDefine('DOM', function(st) {
          ***********************************************************/
 
         /**
+         * @function get
          * @param  {Number} ind 索引
          * @return {Element}    原生节点
          * @description 根据索引获取原生节点 
-         * @example
-         * <div class="wrap">one</div>  
-         * <div class="wrap">two</div>  
-         * $('.wrap').get(0) 等价于 document.getElementsByTagId('div')[0]
          */
         this.get = function(ind) {
             return nodes[ind];
         };
 
         /**
+         * @function each
          * @param  {Function} cb 回调函数
          * @description 遍历节点集
-         * @example
-         * <div class="wrap">test</div>  
-         * <div class="wrap">test</div>  
-         * <div class="wrap">test</div>  
-         * $('.wrap').each(function(){});
          */
         this.each = function(cb) {
             var nodes = this.node;
@@ -758,47 +739,36 @@ stDefine('DOM', function(st) {
         };
 
         /**
+         * @function prev
          * @return {ToolElement} tool对象
          * @description 获取上一个节点
-         * @example
-         * <div class="prev-ele">prev</div>
-         * <div class="current-ele">current</div>  
-         * $('.current-ele').prev() => $('.prev-ele')
          */
         this.prev = function() {
             return _prevAndNext('prev', nodes);
         };
 
         /**
+         * @function next
          * @return {ToolElement} tool对象
          * @description 获取下一个节点
-         * @example
-         * <div class="current-ele">current</div>
-         * <div class="next-ele">next</div>  
-         * $('.current-ele').next() => $('.next-ele')
          */
         this.next = function() {
             return _prevAndNext('next', nodes);
         };
 
         /**
+         * @function eq
          * @param  {Number} ind  索引
          * @return {ToolElement} tool对象
          * @description 获取指定节点
-         * @example
-         * <div class="one">test1</div>
-         * <div class="two">test2</div>
-         * $('div').eq(0) => $('.one')
          */
         this.eq = function(ind) {
             return _pack([nodes[ind]]);
         };
 
         /**
+         * @function remove
          * @description 删除当前节点
-         * @example
-         * <div>content..</div>
-         * $('div').remove()
          */
         this.remove = function() {
             for (var i = 0, len = nodes.length; i < len; i++) {
@@ -808,23 +778,19 @@ stDefine('DOM', function(st) {
         };
 
         /**
+         * @function empty
          * @return {ToolElement} tool对象
          * @description 清空当前节点
-         * @example
-         * <div>content...</div>
-         * $('div').empty()
          */
         this.empty = function() {
             return this.html('');
         };
 
         /**
-         * @param {String}       插入的内容
+         * @function before
+         * @param {String} str  插入的内容
          * @return {ToolElement} tool对象
          * @description 在当前节点之前插入内容，支持传入标签。
-         * @example
-         * <div>test</div>
-         * $('div').before('<div>content...</div>') => <div><content/div><div>test</div>
          */
         this.before = function(str) {
             this.each(function(ind, node) {
@@ -834,12 +800,10 @@ stDefine('DOM', function(st) {
         };
 
         /**
+         * @function after
          * @param  {String} str  插入的内容   
          * @return {ToolElement} tool对象 
          * @description 在当前节点之后插入内容，支持传入标签。
-         * @example
-         * <div>test</div>
-         * $('div').before('<div>content...</div>') => <div>test</div><div><content>/div>
          */
         this.after = function(str) {
             this.each(function(ind, node) {
@@ -849,12 +813,9 @@ stDefine('DOM', function(st) {
         };
 
         /**
+         * @function html
          * @param  {String} [str] 要修改成的html
          * @description 获取/修改当前节点的html
-         * @example
-         * <div>test</div>
-         * $('div').html() => '<div>test</div>'
-         * $('div').html('hi') => '<div>hi</div>'
          */
         this.html = function(str) {
             return _htmlAndText('html', str, nodes);
@@ -864,10 +825,6 @@ stDefine('DOM', function(st) {
          * @function text
          * @param  {String} [str] 要修改成的text
          * @description 获取/修改当前节点text
-         * @example
-         * <div>test</div>
-         * $('div').text() => '<div>test</div>'
-         * $('div').text('hi') => '<div>hi</div>'
          */
         this.text = function(str) {
             return _htmlAndText('text', str, nodes);
@@ -901,13 +858,11 @@ stDefine('DOM', function(st) {
 
 
 
-stDefine('Storage', function(st) {
-    /**
-     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
-     * 
-     * @class Storage
-     */
-})
+/**
+ * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+ * 
+ * @class Storage
+ */
 
 (function() {
     var ls = localStorage;

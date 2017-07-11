@@ -6,13 +6,11 @@
 
 'use strict';
 
-stDefine('Array', function(st) {
-    /**
-     * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
-     * 
-     * @class Array
-     */
-})
+/**
+ * 此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。
+ * 
+ * @class Array
+ */
 
 (function() {
     var util = require('./util');

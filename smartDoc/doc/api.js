@@ -5,7 +5,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "BOM",
         "DOM",
         "Storage",
-        "ToolElement",
         "Util"
     ],
     "modules": [
@@ -36,9 +35,6 @@ YUI.add("yuidoc-meta", function(Y) {
                 },
                 {
                     "name": "DOM"
-                },
-                {
-                    "name": "ToolElement"
                 },
                 {
                     "name": "Util"

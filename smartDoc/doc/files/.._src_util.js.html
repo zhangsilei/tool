@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>../src/bom.js - SmartDoc</title>
+    <title>../src/util.js - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,7 +121,7 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>../src/bom.js <small>File</small></h1>
+    <h1>../src/util.js <small>File</small></h1>
 </div>
 
 <div class="file">
@@ -142,63 +134,120 @@
 
 &#x27;use strict&#x27;;
 
-stDefine(&#x27;BOM&#x27;, function(st) {
-    /**
-     * 该模块提供了浏览器交互相关API
-     * 
-     * @class BOM
-     */
-})
+/**
+ * 该模块提供了常用的工具方法，如数据校验、日期格式化等，直接通过命名空间调用即可：eg: $.trim(str);
+ * 
+ * @class Util
+ */
 
 (function() {
-    var bom = {
-        /**
-         * @function browserVersion
-         * @return {Object} 终端类型：trident = IE内核; presto = opera内核; webKit = 苹果、谷歌内核;
-         *                      gecko = 火狐内核; mobile = 移动终端; ios = ios终端; 
-         *                      android = android终端或者uc浏览器; iPhone = iPhone或者QQHD浏览器; 
-         *                      iPad = iPad终端; webApp = web应用程序; wechat = 微信; alipay = 支付宝;
-         * @description 判断终端的类型
-         */
-        browser: function() {
-            var u = navigator.userAgent;
-            return {
-                trident: u.indexOf(&#x27;Trident&#x27;) &gt; -1, //IE内核
-                presto: u.indexOf(&#x27;Presto&#x27;) &gt; -1, //opera内核
-                webKit: u.indexOf(&#x27;AppleWebKit&#x27;) &gt; -1, //苹果、谷歌内核 
-                gecko: u.indexOf(&#x27;Gecko&#x27;) &gt; -1 &amp;&amp; u.indexOf(&#x27;KHTML&#x27;) == -1, //火狐内核
-                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-                android: u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Linux&#x27;) &gt; -1, //android终端或者uc浏览器
-                iPhone: u.indexOf(&#x27;iPhone&#x27;) &gt; -1, //是否为iPhone或者QQHD浏览器
-                iPad: u.indexOf(&#x27;iPad&#x27;) &gt; -1, //是否iPad
-                webApp: u.indexOf(&#x27;Safari&#x27;) == -1, //是否web应用程序，没有头部与底部
-                wechat: !!u.match(/MicroMessenger/i), // 是否微信打开
-                alipay: !!u.match(/AliApp/i) // 是否支付宝打开
-            };
-        },
+	var validate = {
+		/**
+		 * @function input
+		 * @param  {String} str 需要校验的字符串
+		 * @return {Boolean}    
+		 * @description 是否满足：只有中文、数字、字母和下划线，且位置不限。
+		 * @example $.validate.input(str)
+		 */
+		input: function(str) {
+			return /^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(str);
+		},
 
-        /**
-         * @function getQueryString
-         * @param {String} name URL后缀的参数名
-         * @return {String} 对应的值
-         * @description 获取请求url的参数
-         */
-        getQueryString: function(name) {
-            var reg = new RegExp(&quot;(^|&amp;)&quot; + name + &quot;=([^&amp;]*)(&amp;|$)&quot;);
-            var r = window.location.search.substr(1).match(reg);
-            // if (r != null) return unescape(r[2]);
-            // return null;
-            if (r != null) return r[2];
-            return null;
-        }
-    }
+		/**
+		 * @function mobile
+		 * @param  {String} str 需要校验的字符串
+		 * @return {Boolean}    
+		 * @description 是否为手机号
+		 * @example $.validata.mobile(str);
+		 */
+		mobile: function(str) {
+			return /^0?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/.test(str);
+		},
 
-    module.exports = {
-        browserVersion: bom.browser,
-        getQueryString: bom.getQueryString
-    }
-})();
+		/**
+		 * @function code
+		 * @param  {String} str   需要校验的字符串
+		 * @param  {Number} [num] 验证码的个数，默认四位数
+		 * @return {Boolean}      
+		 * @description 是否为数字验证码
+		 * @example $.validata.code(str, [num]);
+		 */
+		code: function(str, num) {
+			if (num &amp;&amp; typeof num == &#x27;number&#x27;) {
+				return new RegExp(&#x27;^\\d{&#x27; + num + &#x27;}$&#x27;).test(str);
+			} else {
+				return /^\d{4}$/.test(str);
+			}
+		},
+
+		/**
+		 * @function email
+		 * @param  {String} str 需要校验的字符串
+		 * @return {Boolean}    
+		 * @description 是否为邮箱
+		 * @example $.validata.email(str);
+		 */
+		email: function(str) {
+			return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(str);
+		}
+	}
+
+	/**
+	 * @function trim
+	 * @param  {String} str 要过滤的字符串
+	 * @return {String}     过滤后的字符串
+	 * @description 过滤空串
+	 * @example $.trim(str);
+	 */
+	function trim(str) {
+		return str.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);
+	}
+
+	/**
+	 * @function dateFormat
+	 * @param  {String} format  时间格式：年=yyyy，月=MM，日=dd，时=HH，分=mm，秒=ss
+	 * @param  {Number} [timestamp] 时间戳，默认当前时间
+	 * @return {String} 格式化后的时间字符串
+	 * @description 时间格式化，format可以随意组合。eg: yyyy-MM-dd HH:mm:ss =&gt; 2017-01-01 13:13:13
+	 * @example $.dateFormat(format, [timestamp]);
+	 */
+	function dateFormat(format, timestamp) {
+		if (format &amp;&amp; typeof format == &#x27;string&#x27;) {
+			var date = timestamp &amp;&amp; typeof timestamp == &#x27;number&#x27; ? new Date(timestamp) : new Date(),
+				year = date.getFullYear(),
+				month = date.getMonth() + 1,
+				day = date.getDate(),
+				hour = date.getHours(),
+				min = date.getMinutes(),
+				sec = date.getSeconds();
+			if (format.match(/y{4}/g)) { // 年
+				format = format.replace(/y{4}/g, year);
+			}
+			if (format.match(/M{2}/g)) { // 月
+				format = format.replace(/M{2}/g, month &lt; 10 ? &#x27;0&#x27; + month : month);
+			}
+			if (format.match(/d{2}/g)) { // 日
+				format = format.replace(/d{2}/g, day &lt; 10 ? &#x27;0&#x27; + day : day);
+			}
+			if (format.match(/H{2}/g)) { // 时
+				format = format.replace(/H{2}/g, hour &lt; 10 ? &#x27;0&#x27; + hour : hour);
+			}
+			if (format.match(/m{2}/g)) { // 分
+				format = format.replace(/m{2}/g, min &lt; 10 ? &#x27;0&#x27; + min : min);
+			}
+			if (format.match(/s{2}/g)) { // 秒
+				format = format.replace(/s{2}/g, sec &lt; 10 ? &#x27;0&#x27; + sec : sec);
+			}
+		}
+		return format;
+	}
+
+	module.exports = {
+		dateFormat: dateFormat,
+		validate: validate,
+		trim: trim
+	};
+})()
     </pre>
 </div>
 

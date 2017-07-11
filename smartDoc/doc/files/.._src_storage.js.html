@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>DOM - SmartDoc</title>
+    <title>../src/storage.js - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,203 +121,137 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>DOM <small>Class</small></h1>
-</div>
- <div class="well well-small sign-left3">
-      <div class="stdoc-code"><p>此模块提供了DOM查询功能，大部分API调用对标jQuery。</p>
-</div>
- </div>
-
-<div class="well well-small sign-left2 container-fluid" id="classesItems">
-    <div class="row">
-    
-        <div class="index-section methods col-sm-4">
-            <h3>Methods</h3>
-            
-            <ul class="index-list methods">
-                
-                    <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_$" data-tablink="$">$</a>
-
-                        
-                        
-                    </li>
-                
-            </ul>
-            
-        </div>
-    
-        <div class="index-section properties col-sm-4">
-            <h3>Properties</h3>
-            
-        </div>
-    
-        <div class="index-section events col-sm-4">
-            <h3>Events</h3>
-            
-        </div>
-    </div>
+    <h1>../src/storage.js <small>File</small></h1>
 </div>
 
-<div>
-    <ul id="itemTab" class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#class">Detail</a></li>
-        
-            <li><a data-toggle="tab" href="#method">Methods</a></li>
-        
-        
-        
-    </ul>
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+/**
+ * 增加常用方法挂载到JS原型链上，以拓展原生JS功能。
+ *
+ * @module API 增强
+ */
 
-    <div class="tab-content">
-        <div id="class" class="tab-pane active">
-            <div class="well well-small classDetail sign-left1">
-            
+&#x27;use strict&#x27;;
 
-            
+/**
+ * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+ * 
+ * @class Storage
+ */
 
-            
-                <div class="foundat">
-                    Defined in: <a href="../files/.._src_dom.js.html#l10"><code>..&#x2F;src&#x2F;dom.js:10</code></a>
-                </div>
-            
+(function() {
+    var ls = localStorage;
 
-            
-                
-                    Module: <a href="../modules/工具方法.html">工具方法</a>
-                
-            
+    var storage = {
+        /**
+         * @function getCookie
+         * @param  {String} cname Cookie的key
+         * @return {String} Cookie的value
+         * @description 读取Cookie
+         */
+        getCookie: function(cname) {
+            var cvalue = &quot;&quot;,
+                cookies = document.cookie;
+            if (cookies.length &gt; 0) {
+                var search = cname + &quot;=&quot;,
+                    start = cookies.indexOf(search);
+                if (start != -1) {
+                    start += search.length;
+                    var end = cookies.indexOf(&quot;;&quot;, start);
+                    if (end == -1) {
+                        end = cookies.length;
+                    }
+                    cvalue = unescape(cookies.substring(start, end));
+                }
+            }
+            return cvalue;
+        },
 
-            
-        </div>
+        /**
+         * @function setCookie
+         * @param {String} cname  Cookie的key
+         * @param {String} cvalue Cookie的value
+         * @param {String} days   Cookie的存活天数
+         * @description 写入Cookie
+         */
+        setCookie: function(cname, cvalue, days) {
+            var date = new Date();
+            date.setDate(date.getDate() + days);
+            var exdate = &quot;; expires=&quot; + date.toGMTString();
+            document.cookie = cname + &quot;=&quot; + escape(cvalue) + exdate;
+        },
 
-        
-            
-        </div>
+        /**
+         * @function getStorage
+         * @param  {String} key 本地数据的key
+         * @return {String}     本地数据的value
+         * @description 获取本地存储中对应的值
+         */
+        getStorage: function(key) {
+            var val = &#x27;&#x27;;
+            _checkStorageSupport(function() {
+                val = ls.getItem(key);
+            });
+            return val;
+        },
 
-        
-            <div id="method" class="tab-pane">
-                <h2 class="off-left">Methods</h2>
+        /**
+         * @function setStorage
+         * @param {String} key 本地数据的key
+         * @param {String} val 本地数据的value   
+         * @description 设置本地存储数据
+         */
+        setStorage: function(key, val) {
+            _checkStorageSupport(function() {
+                ls.setItem(key, val);
+            });
+        },
 
-                
-                    <div id="method_$" class="method item">
-    <h3 class="name">$</h3>
-    <code>
-    $
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        eleKey
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
+        /**
+         * @function removeStorage
+         * @param  {String} key 本地数据的key
+         * @description 移除指定的本地数据
+         */
+        removeStorage: function(key) {
+            _checkStorageSupport(function() {
+                ls.removeItem(key);
+            });
+        },
 
-    
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/ToolElement.html" class="crosslink">ToolElement</a></span>
-        </span>
-    
+        /**
+         * @function clearStorage
+         * @description 清除本地存储的所有数据   
+         */
+        clearStorage: function() {
+            _checkStorageSupport(function() {
+                ls.clear();
+            });
+        }
+    }
 
-    
+    /***
+     * 监测浏览器是否支持localStorage
+     * @param  {Function} func 普通方法
+     */
+    function _checkStorageSupport(func) {
+        if (!ls) {
+            alert(&#x27;浏览器不支持localStorage！或者开启了隐私模式！&#x27;);
+        } else {
+            func();
+        }
+    }
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/.._src_dom.js.html#l45"><code>..&#x2F;src&#x2F;dom.js:45</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>节点选择器</p>
-</div>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">eleKey</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>节点查询的标识符，包括：id, class, name, tag，其中name的标识符为~。</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        [<span class="type"><a href="../classes/ToolElement.html" class="crosslink">ToolElement</a></span>]
-                    
-                    <p>tool节点对象</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-    </div>
+    module.exports = {
+        getCookie: storage.getCookie,
+        setCookie: storage.setCookie,
+        getStorage: storage.getStorage,
+        setStorage: storage.setStorage,
+        removeStorage: storage.removeStorage,
+        clearStorage: storage.clearStorage
+    };
+})();
+    </pre>
 </div>
 
                 </div>

@@ -5,10 +5,16 @@
     <title>test</title>
 </head>
 <body>
-    <script src="./jquery.js"></script>  
+    <div class="title">title</div>
+    <div class="title">title</div>
+    <div class="title">title</div>
+    <div class="title">title</div>
+    <!-- <script src="./jquery.js"></script>   -->
     <script src="../dist/tool.js"></script>
     <script>
-        
+        $('.title').each(function(index, el) {
+            console.log(index, el)
+        });
     </script>
 </body>
 </html>

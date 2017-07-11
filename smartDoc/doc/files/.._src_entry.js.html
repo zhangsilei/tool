@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>工具方法 - SmartDoc</title>
+    <title>../src/entry.js - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,70 +121,56 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>工具方法 <small>Module</small></h1>
+    <h1>../src/entry.js <small>File</small></h1>
 </div>
 
-<div class="clearfix well well-small sign-left1">
-    
+<div class="file">
+    <pre class="prettyprint linenums" id='src_code'>
+// tool.js是个关注DOM的框架，不过度封装，旨在提高性能效率
+// 模块间可以相互调用，以提高效率，但这样的话就要保证每个模块的正确性。
+// DOM modules：DOM、CSS、AJAX、Attribute、Event 
+// 目标：tool.js可以定位成原生JavaScript的加强形式，可以针对原生对象或方法进行拓展。
 
-    
+/*************************************************************
+ *
+ * 打包入口文件，负责各个模块间的整合。
+ * 
+ *************************************************************/
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/.._src_util.js.html#l10"><code>..&#x2F;src&#x2F;util.js:10</code></a>
-        </div>
-    
+&#x27;use strict&#x27;;
 
-    
-</div>
+(function(w) {
+	var dom = require(&#x27;./dom&#x27;);
+	var util = require(&#x27;./util&#x27;);
+	var storage = require(&#x27;./storage&#x27;);
+	var bom = require(&#x27;./bom&#x27;);
+	var array = require(&#x27;./array&#x27;);
 
+	var spaceName = typeof w.$ == &#x27;undefined&#x27; ? &#x27;$&#x27; : &#x27;tool&#x27;;
 
+	spaceName == &#x27;tool&#x27; &amp;&amp; console.warn(&#x27;window.$命名空间已被使用，请用tool代替...&#x27;);
 
-<div class="moduledesc well well-small sign-left3">
-    <div class="stdoc-code"><p>增加常用业务工具方法，以提高通用业务的开发效率。</p>
-</div>
-</div>
+	// 选择器 
+	w[spaceName] = dom.ele;
 
+	// 工具方法
+	w[spaceName].dateFormat = util.dateFormat;
+	w[spaceName].validate = util.validate;
+	w[spaceName].trim = util.trim;
 
+	// 本地存储
+	w[spaceName].getCookie = storage.getCookie;
+	w[spaceName].setCookie = storage.setCookie;
+	w[spaceName].getStorage = storage.getStorage;
+	w[spaceName].setStorage = storage.setStorage;
+	w[spaceName].removeStorage = storage.removeStorage;
+	w[spaceName].clearStorage = storage.clearStorage;
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/BOM.html">
-                        BOM
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/DOM.html">
-                        DOM
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/ToolElement.html">
-                        ToolElement
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Util.html">
-                        Util
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+	// 浏览器处理
+	w[spaceName].browserVersion = bom.browserVersion;
+	w[spaceName].getQueryString = bom.getQueryString;
+})(window);
+    </pre>
 </div>
 
                 </div>

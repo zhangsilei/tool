@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Storage - SmartDoc</title>
+    <title>Array - SmartDoc</title>
   
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -129,10 +121,10 @@
             <div id="docs-main">
                 <div class="content">
                     <div class="page-header">
-    <h1>Storage <small>Class</small></h1>
+    <h1>Array <small>Class</small></h1>
 </div>
  <div class="well well-small sign-left3">
-      <div class="stdoc-code"><p>此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();</p>
+      <div class="stdoc-code"><p>此模块加强了原生数组的功能，增加了部分常用方法，且未对原方法进行改变。</p>
 </div>
  </div>
 
@@ -145,42 +137,49 @@
             <ul class="index-list methods">
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_clearStorage" data-tablink="clearStorage">clearStorage</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_deleteOf" data-tablink="deleteOf">deleteOf</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_getCookie" data-tablink="getCookie">getCookie</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_deleteVal" data-tablink="deleteVal">deleteVal</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_getStorage" data-tablink="getStorage">getStorage</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_pushOf" data-tablink="pushOf">pushOf</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_removeStorage" data-tablink="removeStorage">removeStorage</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_removeDuplicate" data-tablink="removeDuplicate">removeDuplicate</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_setCookie" data-tablink="setCookie">setCookie</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_removeNull" data-tablink="removeNull">removeNull</a>
 
                         
                         
                     </li>
                 
                     <li class="index-item method">
-                        <a href="#" data-tabid="#method" data-anchor="#method_setStorage" data-tablink="setStorage">setStorage</a>
+                        <a href="#" data-tabid="#method" data-anchor="#method_replace" data-tablink="replace">replace</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_trim" data-tablink="trim">trim</a>
 
                         
                         
@@ -221,7 +220,7 @@
 
             
                 <div class="foundat">
-                    Defined in: <a href="../files/.._src_storage.js.html#l10"><code>..&#x2F;src&#x2F;storage.js:10</code></a>
+                    Defined in: <a href="../files/.._src_array.js.html#l9"><code>..&#x2F;src&#x2F;array.js:9</code></a>
                 </div>
             
 
@@ -243,74 +242,17 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_clearStorage" class="method item">
-    <h3 class="name">clearStorage</h3>
+                    <div id="method_deleteOf" class="method item">
+    <h3 class="name">deleteOf</h3>
     <code>
-    clearStorage
-    
-        <span class="paren">()</span>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/.._src_storage.js.html#l96"><code>..&#x2F;src&#x2F;storage.js:96</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>清除本地存储的所有数据</p>
-</div>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_getCookie" class="method item">
-    <h3 class="name">getCookie</h3>
-    <code>
-    getCookie
+    deleteOf
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        cname
+                        ind
                     
                 </li>
             
@@ -321,7 +263,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Any</span>
         </span>
     
 
@@ -348,7 +290,7 @@
             
         
         
-        <a href="../files/.._src_storage.js.html#l21"><code>..&#x2F;src&#x2F;storage.js:21</code></a>
+        <a href="../files/.._src_array.js.html#l25"><code>..&#x2F;src&#x2F;array.js:25</code></a>
         
         </p>
 
@@ -359,7 +301,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>读取Cookie</p>
+        <div class="stdoc-code"><p>删除并返回数组的指定位置元素，该方法会改变原数组</p>
 </div>
     </div>
 
@@ -372,15 +314,15 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">cname</code>
-                       <td> <span class="type">String</span>
+                       <td> <code class="param-name">ind</code>
+                       <td> <span class="type">Number</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>Cookie的key</p>
+                        <p>数组元素索引</p>
 
                     </div>
 
@@ -398,9 +340,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">String</span>]
+                        [<span class="type">Any</span>]
                     
-                    <p>Cookie的value</p>
+                    <p>被删除的数组元素</p>
 
                 
             </div>
@@ -411,17 +353,23 @@
 </div>
 
                 
-                    <div id="method_getStorage" class="method item">
-    <h3 class="name">getStorage</h3>
+                    <div id="method_deleteVal" class="method item">
+    <h3 class="name">deleteVal</h3>
     <code>
-    getStorage
+    deleteVal
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        key
+                        val
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [num]
                     
                 </li>
             
@@ -432,7 +380,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Any</span>
         </span>
     
 
@@ -459,7 +407,7 @@
             
         
         
-        <a href="../files/.._src_storage.js.html#l59"><code>..&#x2F;src&#x2F;storage.js:59</code></a>
+        <a href="../files/.._src_array.js.html#l37"><code>..&#x2F;src&#x2F;array.js:37</code></a>
         
         </p>
 
@@ -470,7 +418,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>获取本地存储中对应的值</p>
+        <div class="stdoc-code"><p>删除并返数组的指定值元素，该方法会改变原数组</p>
 </div>
     </div>
 
@@ -483,15 +431,33 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">key</code>
-                       <td> <span class="type">String</span>
+                       <td> <code class="param-name">val</code>
+                       <td> <span class="type">Any</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>本地数据的key</p>
+                        <p>数组元素的值</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[num]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>删除的元素个数，默认全部删除</p>
 
                     </div>
 
@@ -509,9 +475,9 @@
             <div class="returns-description">
                 
                     
-                        [<span class="type">String</span>]
+                        [<span class="type">Any</span>]
                     
-                    <p>本地数据的value</p>
+                    <p>被删除的数组元素</p>
 
                 
             </div>
@@ -522,249 +488,17 @@
 </div>
 
                 
-                    <div id="method_removeStorage" class="method item">
-    <h3 class="name">removeStorage</h3>
+                    <div id="method_pushOf" class="method item">
+    <h3 class="name">pushOf</h3>
     <code>
-    removeStorage
+    pushOf
     
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
             
                 <li class="arg">
                     
-                        key
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/.._src_storage.js.html#l85"><code>..&#x2F;src&#x2F;storage.js:85</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>移除指定的本地数据</p>
-</div>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">key</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>本地数据的key</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_setCookie" class="method item">
-    <h3 class="name">setCookie</h3>
-    <code>
-    setCookie
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        cname
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        cvalue
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        days
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-    </code>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/.._src_storage.js.html#l45"><code>..&#x2F;src&#x2F;storage.js:45</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>写入Cookie</p>
-</div>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <table class="table table-bordered">
-            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">cname</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>Cookie的key</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">cvalue</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>Cookie的value</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-                <tr class="param">
-                    
-                       <td> <code class="param-name">days</code>
-                       <td> <span class="type">String</span>
-                       <td>
-                    
-
-                    
-                    </td>
-                    <td><div class="param-description">
-                        <p>Cookie的存活天数</p>
-
-                    </div>
-
-                    
-                </tr>
-            
-            </table>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_setStorage" class="method item">
-    <h3 class="name">setStorage</h3>
-    <code>
-    setStorage
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        key
+                        ind
                     
                 </li>
             
@@ -780,6 +514,10 @@
     </code>
 
     
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
 
     
 
@@ -804,7 +542,7 @@
             
         
         
-        <a href="../files/.._src_storage.js.html#l73"><code>..&#x2F;src&#x2F;storage.js:73</code></a>
+        <a href="../files/.._src_array.js.html#l63"><code>..&#x2F;src&#x2F;array.js:63</code></a>
         
         </p>
 
@@ -815,7 +553,7 @@
     </div>
 
     <div class="description well well-small sign-left3">
-        <div class="stdoc-code"><p>设置本地存储数据</p>
+        <div class="stdoc-code"><p>向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。</p>
 </div>
     </div>
 
@@ -828,15 +566,15 @@
             
                 <tr class="param">
                     
-                       <td> <code class="param-name">key</code>
-                       <td> <span class="type">String</span>
+                       <td> <code class="param-name">ind</code>
+                       <td> <span class="type">Number</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>本地数据的key</p>
+                        <p>索引值</p>
 
                     </div>
 
@@ -846,14 +584,14 @@
                 <tr class="param">
                     
                        <td> <code class="param-name">val</code>
-                       <td> <span class="type">String</span>
+                       <td> <span class="type">Number</span>
                        <td>
                     
 
                     
                     </td>
                     <td><div class="param-description">
-                        <p>本地数据的value</p>
+                        <p>元素值</p>
 
                     </div>
 
@@ -864,6 +602,520 @@
         </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Number</span>]
+                    
+                    <p>新数组长度</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_removeDuplicate" class="method item">
+    <h3 class="name">removeDuplicate</h3>
+    <code>
+    removeDuplicate
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        ind
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [num]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_array.js.html#l101"><code>..&#x2F;src&#x2F;array.js:101</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>数组去重，并返回新数组。该方法不改变原数组
+             暂时未开放，测试中有问题。xxxxxxxxx</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">ind</code>
+                       <td> <span class="type">Number</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>从第几个重复元素开始删除</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[num]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>删除的元素数量，默认全部删除</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_removeNull" class="method item">
+    <h3 class="name">removeNull</h3>
+    <code>
+    removeNull
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [num]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_array.js.html#l141"><code>..&#x2F;src&#x2F;array.js:141</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>数组去null值，并返回新数组，该方法不会改变原数组。</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[num]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>删除的空串数量</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Array</span>]
+                    
+                    <p>新数组</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_replace" class="method item">
+    <h3 class="name">replace</h3>
+    <code>
+    replace
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        val
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        newVal
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        [num]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_array.js.html#l75"><code>..&#x2F;src&#x2F;array.js:75</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>替换数组中指定值的元素，并返回新数组，该方法不会改变原数组。</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">val</code>
+                       <td> <span class="type">Any</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>元素值</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">newVal</code>
+                       <td> <span class="type">Any</span>
+                       <td>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>新元素值</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[num]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>替换的元素个数，默认替换全部</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Array</span>]
+                    
+                    <p>新数组</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_trim" class="method item">
+    <h3 class="name">trim</h3>
+    <code>
+    trim
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        [num]
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/.._src_array.js.html#l131"><code>..&#x2F;src&#x2F;array.js:131</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>数组去空串，并返回新数组，该方法不会改变原数组。</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>name</th><th>type</th><th>flag</th><th>description</th></tr>
+            
+                <tr class="param">
+                    
+                    <td>
+                        <code class="param-name optional">[num]</code></td>
+                    <td><span class="type">Number</span></td>
+                    <td><span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+                    </td>
+                    <td><div class="param-description">
+                        <p>删除的空串数量</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Array</span>]
+                    
+                    <p>新数组</p>
+
+                
+            </div>
+        </div>
     
 
     

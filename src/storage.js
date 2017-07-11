@@ -6,13 +6,11 @@
 
 'use strict';
 
-stDefine('Storage', function(st) {
-    /**
-     * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
-     * 
-     * @class Storage
-     */
-})
+/**
+ * 此模块加强了原生存储的功能，增加了部分常用方法，调用时直接在命名空间下使用，eg：$.getCookie();
+ * 
+ * @class Storage
+ */
 
 (function() {
     var ls = localStorage;

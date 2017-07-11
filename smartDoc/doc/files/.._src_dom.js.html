@@ -104,14 +104,6 @@
                     
                        <li>
                             
-                           <a href="../classes/ToolElement.html">ToolElement</a>
-                           <ul>
-                                
-                           </ul>
-                       </li>
-                    
-                       <li>
-                            
                            <a href="../classes/Util.html">Util</a>
                            <ul>
                                 
@@ -142,13 +134,11 @@
 
 &#x27;use strict&#x27;;
 
-stDefine(&#x27;DOM&#x27;, function(st) {
-    /**
-     * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
-     * 
-     * @class DOM
-     */
-})
+/**
+ * 此模块提供了DOM查询功能，大部分API调用对标jQuery。
+ * 
+ * @class DOM
+ */
 
 (function() {
     var util = require(&#x27;./util&#x27;);
@@ -372,7 +362,6 @@ stDefine(&#x27;DOM&#x27;, function(st) {
      *************************************************************/
 
     /***
-     * @class ToolElement
      * @param {Array} nodes  原生节点集，可以为空数组。
      * @return {ToolElement} tool对象
      * @description tool节点对象封装，构造的时候只需传入选择器拿到的原生节点集。
@@ -380,11 +369,8 @@ stDefine(&#x27;DOM&#x27;, function(st) {
      */
     function ToolElement(nodes) {
         /**
-         * @type Array
+         * @property {Array} node 
          * @description 原生节点集
-         * @example
-         * &lt;div&gt;It&#x27;s a test.&lt;/div&gt;  
-         * $(&#x27;div&#x27;).node 等价于 document.getElementsByTagId(&#x27;div&#x27;)[0]
          */
         this.node = nodes;
 
@@ -393,26 +379,19 @@ stDefine(&#x27;DOM&#x27;, function(st) {
          ***********************************************************/
 
         /**
+         * @function get
          * @param  {Number} ind 索引
          * @return {Element}    原生节点
          * @description 根据索引获取原生节点 
-         * @example
-         * &lt;div class=&quot;wrap&quot;&gt;one&lt;/div&gt;  
-         * &lt;div class=&quot;wrap&quot;&gt;two&lt;/div&gt;  
-         * $(&#x27;.wrap&#x27;).get(0) 等价于 document.getElementsByTagId(&#x27;div&#x27;)[0]
          */
         this.get = function(ind) {
             return nodes[ind];
         };
 
         /**
+         * @function each
          * @param  {Function} cb 回调函数
          * @description 遍历节点集
-         * @example
-         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
-         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
-         * &lt;div class=&quot;wrap&quot;&gt;test&lt;/div&gt;  
-         * $(&#x27;.wrap&#x27;).each(function(){});
          */
         this.each = function(cb) {
             var nodes = this.node;
@@ -422,47 +401,36 @@ stDefine(&#x27;DOM&#x27;, function(st) {
         };
 
         /**
+         * @function prev
          * @return {ToolElement} tool对象
          * @description 获取上一个节点
-         * @example
-         * &lt;div class=&quot;prev-ele&quot;&gt;prev&lt;/div&gt;
-         * &lt;div class=&quot;current-ele&quot;&gt;current&lt;/div&gt;  
-         * $(&#x27;.current-ele&#x27;).prev() =&gt; $(&#x27;.prev-ele&#x27;)
          */
         this.prev = function() {
             return _prevAndNext(&#x27;prev&#x27;, nodes);
         };
 
         /**
+         * @function next
          * @return {ToolElement} tool对象
          * @description 获取下一个节点
-         * @example
-         * &lt;div class=&quot;current-ele&quot;&gt;current&lt;/div&gt;
-         * &lt;div class=&quot;next-ele&quot;&gt;next&lt;/div&gt;  
-         * $(&#x27;.current-ele&#x27;).next() =&gt; $(&#x27;.next-ele&#x27;)
          */
         this.next = function() {
             return _prevAndNext(&#x27;next&#x27;, nodes);
         };
 
         /**
+         * @function eq
          * @param  {Number} ind  索引
          * @return {ToolElement} tool对象
          * @description 获取指定节点
-         * @example
-         * &lt;div class=&quot;one&quot;&gt;test1&lt;/div&gt;
-         * &lt;div class=&quot;two&quot;&gt;test2&lt;/div&gt;
-         * $(&#x27;div&#x27;).eq(0) =&gt; $(&#x27;.one&#x27;)
          */
         this.eq = function(ind) {
             return _pack([nodes[ind]]);
         };
 
         /**
+         * @function remove
          * @description 删除当前节点
-         * @example
-         * &lt;div&gt;content..&lt;/div&gt;
-         * $(&#x27;div&#x27;).remove()
          */
         this.remove = function() {
             for (var i = 0, len = nodes.length; i &lt; len; i++) {
@@ -472,23 +440,19 @@ stDefine(&#x27;DOM&#x27;, function(st) {
         };
 
         /**
+         * @function empty
          * @return {ToolElement} tool对象
          * @description 清空当前节点
-         * @example
-         * &lt;div&gt;content...&lt;/div&gt;
-         * $(&#x27;div&#x27;).empty()
          */
         this.empty = function() {
             return this.html(&#x27;&#x27;);
         };
 
         /**
-         * @param {String}       插入的内容
+         * @function before
+         * @param {String} str  插入的内容
          * @return {ToolElement} tool对象
          * @description 在当前节点之前插入内容，支持传入标签。
-         * @example
-         * &lt;div&gt;test&lt;/div&gt;
-         * $(&#x27;div&#x27;).before(&#x27;&lt;div&gt;content...&lt;/div&gt;&#x27;) =&gt; &lt;div&gt;&lt;content/div&gt;&lt;div&gt;test&lt;/div&gt;
          */
         this.before = function(str) {
             this.each(function(ind, node) {
@@ -498,12 +462,10 @@ stDefine(&#x27;DOM&#x27;, function(st) {
         };
 
         /**
+         * @function after
          * @param  {String} str  插入的内容   
          * @return {ToolElement} tool对象 
          * @description 在当前节点之后插入内容，支持传入标签。
-         * @example
-         * &lt;div&gt;test&lt;/div&gt;
-         * $(&#x27;div&#x27;).before(&#x27;&lt;div&gt;content...&lt;/div&gt;&#x27;) =&gt; &lt;div&gt;test&lt;/div&gt;&lt;div&gt;&lt;content&gt;/div&gt;
          */
         this.after = function(str) {
             this.each(function(ind, node) {
@@ -513,12 +475,9 @@ stDefine(&#x27;DOM&#x27;, function(st) {
         };
 
         /**
+         * @function html
          * @param  {String} [str] 要修改成的html
          * @description 获取/修改当前节点的html
-         * @example
-         * &lt;div&gt;test&lt;/div&gt;
-         * $(&#x27;div&#x27;).html() =&gt; &#x27;&lt;div&gt;test&lt;/div&gt;&#x27;
-         * $(&#x27;div&#x27;).html(&#x27;hi&#x27;) =&gt; &#x27;&lt;div&gt;hi&lt;/div&gt;&#x27;
          */
         this.html = function(str) {
             return _htmlAndText(&#x27;html&#x27;, str, nodes);
@@ -528,10 +487,6 @@ stDefine(&#x27;DOM&#x27;, function(st) {
          * @function text
          * @param  {String} [str] 要修改成的text
          * @description 获取/修改当前节点text
-         * @example
-         * &lt;div&gt;test&lt;/div&gt;
-         * $(&#x27;div&#x27;).text() =&gt; &#x27;&lt;div&gt;test&lt;/div&gt;&#x27;
-         * $(&#x27;div&#x27;).text(&#x27;hi&#x27;) =&gt; &#x27;&lt;div&gt;hi&lt;/div&gt;&#x27;
          */
         this.text = function(str) {
             return _htmlAndText(&#x27;text&#x27;, str, nodes);
