@@ -36,28 +36,30 @@
 
             /**
              * @function deleteVal
-             * @param  {any}    val   数组元素的值
+             * @param  {any}    val   被删元素的值
              * @param  {Number} [num] 删除的元素个数，默认全部删除
              * @return {any}          被删除的数组元素
-             * @description 删除并返数组的指定值元素，该方法会改变原数组
+             * @description 删除并返回数组的指定值元素，该方法会改变原数组
              */
             Array.prototype.deleteVal = function(val, num) {
                 var count = 0,
-                    num = num || this.length;
+                    deletedEle = [];
+                if (num === 0) return;
+                num = num || this.length;
                 for (var i = 0, len = this.length; i < len; i++) {
                     var temp = this[i];
                     if (count < num) {
                         if (temp == val) {
-                            if (i == len - 1) {
-                                return this.deleteOf(i);
-                            } else {
-                                this.deleteOf(i);
-                                count++;
-                                continue;
-                            }
+                            deletedEle.push(this.deleteOf(i));
+                            count++;
+                            continue;
                         }
                     }
                 }
+                if (deletedEle.length === 1) {
+                    deletedEle = deletedEle[0];
+                }
+                return deletedEle;
             };
 
             /**
@@ -65,7 +67,7 @@
              * @param {Number} ind 索引值
              * @param {Number} val 元素值
              * @return {Number} 新数组长度
-             * @description 向数组中的指定位置插入元素，并返回新的长度，该方法会改变原数组。
+             * @description 向数组中的指定位置插入元素，并返回新数组的长度，该方法会改变原数组。
              */
             Array.prototype.pushOf = function(ind, val) {
                 this.splice(ind, 0, val).length;
@@ -74,7 +76,7 @@
 
             /**
              * @function replace
-             * @param  {any}    val    元素值 
+             * @param  {any}    val    当前元素值 
              * @param  {any}    newVal 新元素值
              * @param  {Number} [num]  替换的元素个数，默认替换全部
              * @return {Array} 新数组
@@ -82,8 +84,9 @@
              */
             Array.prototype.replace = function(val, newVal, num) {
                 var result = [],
-                    count = 0,
-                    num = num || this.length;
+                    count = 0;
+                if (num === 0) return;
+                num = num || this.length;           
                 for (var i = 0, len = this.length; i < len; i++) {
                     var temp = this[i];
                     if (count < num) {
@@ -100,29 +103,22 @@
 
             /***
              * @function removeDuplicate
-             * @param  {Number} ind   从第几个重复元素开始删除
+             * @param  {any} val 被删元素的值
              * @param  {Number} [num] 删除的元素数量，默认全部删除
-             * @description 数组去重，并返回新数组。该方法不改变原数组
-             *              暂时未开放，测试中有问题。xxxxxxxxx
+             * @description 数组去重，并返回新数组,该方法会改变原数组。
+             *              该方法会保留的第一个元素值。
              */
-            Array.prototype.removeDuplicate = function(num) {
-                var obj = {},
-                    count = 0,
-                    indexs = [],
-                    num = num || this.length;
+            Array.prototype.removeDuplicate = function(val, num) {
+                var count = 0;
+                if (num === 0) return;
+                num = num || this.length;
                 for (var i = 0, len = this.length; i < len; i++) {
                     var temp = this[i];
-                    if (!obj[temp]) {
-                        obj[temp] = i;
-                    } else {
-                        indexs.push(obj[temp]);
-                        indexs.push(i);
-                    }
-                }
-                for (var j = 0, len = indexs.length; j < len; j++) {
                     if (count < num) {
-                        this.deleteOf(indexs[j] - count);
-                        count++;
+                        if (temp === val) {
+                            count && this.deleteOf(i);
+                            count++;
+                        }
                     }
                 }
                 return this;
@@ -130,7 +126,7 @@
 
             /**
              * @function trim
-             * @param  {Number} [num] 删除的空串数量
+             * @param  {Number} [num] 需要删除空串的数量
              * @return {Array}        新数组
              * @description 数组去空串，并返回新数组，该方法不会改变原数组。
              */
@@ -140,7 +136,7 @@
 
             /**
              * @function removeNull
-             * @param  {Number} [num] 删除的空串数量
+             * @param  {Number} [num] 需要删除null值的数量
              * @return {Array}        新数组
              * @description 数组去null值，并返回新数组，该方法不会改变原数组。
              */
@@ -166,7 +162,7 @@
         }
         for (var i = 0, len = that.length; i < len; i++) {
             var temp = that[i];
-            if (isStr ? string.trim(temp) : temp != str) {
+            if (isStr ? util.trim(new String(temp)) : temp != str) {
                 result.push(temp);
             } else {
                 if (count < num) {
@@ -180,11 +176,6 @@
     }
 
     array.init();
-    // 添加测试中的方法
-    test.init([{
-        targetObj: 'Array',
-        funcName: 'removeDuplicate'
-    }]);
 
     module.exports.array = array;
 })();
