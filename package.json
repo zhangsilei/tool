@@ -1,30 +1,27 @@
 {
-  "name": "tool",
-  "version": "1.0.0",
-  "description": "",
-  "main": "jquery.js",
-  "scripts": {
-    "start": "webpack --config webpack.config.js",
-    "dev": "webpack --config webpack.dev.config.js",
-    "watch": "webpack --config webpack.dev.config.js --watch --progress",
-    "jsdoc": "jsdoc ./dist/tool.js -d doc",
-    "smartdoc": "node test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zhangsilei/tool.git"
-  },
-  "author": "zhangsilei",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zhangsilei/tool/issues"
-  },
-  "homepage": "https://github.com/zhangsilei/tool#readme",
-  "devDependencies": {},
-  "dependencies": {
-    "jsdoc": "^3.4.3",
-    "smartdoc": "0.0.7",
-    "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.5.0"
-  }
+    "name": "tool",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "dev": "webpack-dev-server --hot --inline --config webpack.dev.config.js --watch --progress --open",
+        "build": "webpack -d --config webpack.config.js --progress",
+        "jsdoc": "jsdoc ./dist/tool.js -d doc",
+        "smartdoc": "node test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhangsilei/tool.git"
+    },
+    "author": "zhangsilei",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/zhangsilei/tool/issues"
+    },
+    "homepage": "https://github.com/zhangsilei/tool#readme",
+    "devDependencies": {
+        "smartdoc": "0.0.7",
+        "webpack": "^2.7.0",
+        "webpack-dev-server": "^2.9.2"
+    },
+    "dependencies": {}
 }

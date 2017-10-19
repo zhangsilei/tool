@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试Array模块</title>
+</head>
+<body>
+	<script src="../dist/tool.js"></script>
+	<script>
+		var arr = [0, 1, 2, 3];
+		var el = 0;
+		document.write('测试Array.deleteOf: <br />');
+		document.write('原数组：' + arr + '<br />');
+		arr.deleteOf(el);
+		document.write('入参('+ el +')运行结果：' + arr + '<br /><br />');
+
+		var arr = [0, 1, 2, 3];
+		var el = 1;
+		document.write('测试Array.deleteVal: <br />');
+		document.write('原数组：' + arr + '<br />');
+		arr.deleteOf(el);
+		document.write('入参('+ el +')运行结果：' + arr + '<br /><br />');
+	</script>
+</body>
+</html>
